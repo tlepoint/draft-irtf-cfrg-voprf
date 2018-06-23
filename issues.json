@@ -41,9 +41,9 @@
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 3,
     "created_at": "2018-06-22T07:36:00Z",
-    "updated_at": "2018-06-22T07:36:01Z",
+    "updated_at": "2018-06-23T14:14:36Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -52,7 +52,7 @@
       "diff_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/11.diff",
       "patch_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/11.patch"
     },
-    "body": "#10 "
+    "body": "#10 \r\n(also updated the .txt file)"
   },
   {
     "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/10",
