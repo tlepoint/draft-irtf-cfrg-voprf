@@ -308,7 +308,7 @@ ul.toc li {
   <meta name="generator" content="xml2rfc version 2.9.8 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Sullivan, N., Wood, C., and A. Davidson" />
+  <meta name="dct.creator" content="Davidson, A., Sullivan, N., and C. Wood" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-sullivan-cfrg-ecvoprf-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2018-06-23" />
   <meta name="dct.abstract" content="A Verifiable Oblivious Pseudorandom Function (VOPRF) is a two-party protocol for computing the output of a PRF that is symmetrically verifiable.  In summary, the PRF key holder learns nothing of the input while simultaneously providing proof that its private key was used during execution. VOPRFs are useful for computing one-time unlinkable tokens that are verifiable by secret key holders. This document specifies a VOPRF construction based on Elliptic Curves." />
@@ -323,27 +323,27 @@ ul.toc li {
     
     	<tr>
 <td class="left">Network Working Group</td>
-<td class="right">N. Sullivan</td>
-</tr>
-<tr>
-<td class="left">Internet-Draft</td>
-<td class="right">Cloudflare</td>
-</tr>
-<tr>
-<td class="left">Intended status: Informational</td>
-<td class="right">C. Wood</td>
-</tr>
-<tr>
-<td class="left">Expires: December 25, 2018</td>
-<td class="right">Apple Inc.</td>
-</tr>
-<tr>
-<td class="left"></td>
 <td class="right">A. Davidson</td>
 </tr>
 <tr>
-<td class="left"></td>
+<td class="left">Internet-Draft</td>
 <td class="right">ISG, Royal Holloway, University of London</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">N. Sullivan</td>
+</tr>
+<tr>
+<td class="left">Expires: December 25, 2018</td>
+<td class="right">Cloudflare</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">C. Wood</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Apple Inc.</td>
 </tr>
 <tr>
 <td class="left"></td>
@@ -802,9 +802,21 @@ Steps:
 <td class="top">"<a href="https://chaum.com/publications/Wallet_Databases.pdf">Wallet Databases with Observers</a>", n.d..</td>
 </tr>
 <tr>
+<td class="reference"><b id="DGSTV18">[DGSTV18]</b></td>
+<td class="top">"<a href="https://www.degruyter.com/view/j/popets.2018.2018.issue-3/popets-2018-0026/popets-2018-0026.xml">Privacy Pass, Bypassing Internet Challenges Anonymously</a>", n.d..</td>
+</tr>
+<tr>
 <td class="reference"><b id="I-D.irtf-cfrg-hash-to-curve">[I-D.irtf-cfrg-hash-to-curve]</b></td>
 <td class="top">
 <a>Sullivan, N.</a> and <a>C. Wood</a>, "<a href="https://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-00">Hashing to Elliptic Curves</a>", Internet-Draft draft-irtf-cfrg-hash-to-curve-00, March 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="JKK14">[JKK14]</b></td>
+<td class="top">"<a href="https://eprint.iacr.org/2014/650.pdf">Round-Optimal Password-Protected Secret Sharing and T-PAKE in the Password-Only model</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="JKKX16">[JKKX16]</b></td>
+<td class="top">"<a href="https://eprint.iacr.org/2016/144">Highly-Efficient and Composable Password-Protected Secret Sharing (Or, How to Protect Your Bitcoin Wallet Online)</a>", n.d..</td>
 </tr>
 <tr>
 <td class="reference"><b id="PrivacyPass">[PrivacyPass]</b></td>
@@ -824,6 +836,10 @@ Steps:
 <td class="reference"><b id="RFC8032">[RFC8032]</b></td>
 <td class="top">
 <a>Josefsson, S.</a> and <a>I. Liusvaara</a>, "<a href="https://tools.ietf.org/html/rfc8032">Edwards-Curve Digital Signature Algorithm (EdDSA)</a>", RFC 8032, DOI 10.17487/RFC8032, January 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="SJKS17">[SJKS17]</b></td>
+<td class="top">"<a href="http://webee.technion.ac.il/%7Ehugo/sphinx.pdf">SPHINX, A Password Store that Perfectly Hides from Itself</a>", n.d..</td>
 </tr>
 </tbody></table>
 <h1 id="rfc.appendix.A">
@@ -968,16 +984,40 @@ Y: 04006b0413e2686c4bb62340706de7723471080093422f02dd125c3e72f3507b9200d11481468
 <a href="#rfc.appendix.B.1">B.1.</a> <a href="#privacy-pass" id="privacy-pass">Privacy Pass</a>
 </h1>
 <p id="rfc.section.B.1.p.1">This VOPRF protocol is used by Privacy Pass system to help Tor users bypass CAPTCHA challenges. Their system works as follows. Client C connects &#8211; through Tor &#8211; to an edge server E serving content. Upon receipt, E serves a CAPTCHA to C, who then solves the CAPTCHA and supplies, in response, n blinded points. E verifies the CAPTCHA response and, if valid, signs (at most) n blinded points, which are then returned to C. When C attempts to connect to E again and is prompted with a CAPTCHA, C uses one of the unblinded and signed points, or tokens, to derive a shared symmetric key sk used to MAC the CAPTCHA challenge. C sends the CAPTCHA, MAC, and token input x to E, who can use x to derive sk and verify the CAPTCHA MAC. Thus, each token is used at most once by the system.</p>
+<p id="rfc.section.B.1.p.2">For more details, see <a href="#DGSTV18" class="xref">[DGSTV18]</a>.</p>
 <h1 id="rfc.appendix.B.2">
 <a href="#rfc.appendix.B.2">B.2.</a> <a href="#private-password-checker" id="private-password-checker">Private Password Checker</a>
 </h1>
 <p id="rfc.section.B.2.p.1">In this application, let D be a collection of cleartext passwords obtained by prover P.  For each password p in D, P computes ECVOPRF_Sign(H_1(p)), where H_1 is as described above, and stores the result in a separate collection D&#8217;. P then publishes D&#8217; with Y, its public key. If a client C wishes to query D&#8217; for a password p&#8217;, it runs the ECVOPRF protocol using p as input x to obtain output y. By construction, y will be the signature of p hashed onto the curve. C can then search D&#8217; for y to determine if there is a match.</p>
+<p id="rfc.section.B.2.p.2">Examples of such password checkers already exist, for example: <a href="#JKKX16" class="xref">[JKKX16]</a>, <a href="#JKK14" class="xref">[JKK14]</a> and <a href="#SJKS17" class="xref">[SJKS17]</a>.</p>
 <h1 id="rfc.appendix.B.2.1">
 <a href="#rfc.appendix.B.2.1">B.2.1.</a> <a href="#parameter-commitments" id="parameter-commitments">Parameter Commitments</a>
 </h1>
 <p id="rfc.section.B.2.1.p.1">For some applications, it may be desirable for P to bind tokens to certain parameters, e.g., protocol versions, ciphersuites, etc. To accomplish this, P should use a distinct scalar for each parameter combination. Upon redemption of a token T from V, P can later verify that T was generated using the scalar associated with the corresponding parameters.</p>
 <h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
 <div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Alex Davidson</span> 
+	  <span class="n hidden">
+		<span class="family-name">Davidson</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ISG, Royal Holloway, University of London</span>
+	<span class="adr">
+	  <span class="vcardline">Egham Hill</span>
+
+	  <span class="vcardline">
+		<span class="locality">Twickenham, TW20 0EX</span>,  
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline">United Kingdom</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:alex.davidson.2014@rhul.ac.uk">alex.davidson.2014@rhul.ac.uk</a></span>
+
+  </address>
+</div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
 	  <span class="fn">Nick Sullivan</span> 
@@ -1019,28 +1059,6 @@ Y: 04006b0413e2686c4bb62340706de7723471080093422f02dd125c3e72f3507b9200d11481468
 	  <span class="country-name vcardline">United States of America</span>
 	</span>
 	<span class="vcardline">EMail: <a href="mailto:cawood@apple.com">cawood@apple.com</a></span>
-
-  </address>
-</div><div class="avoidbreak">
-  <address class="vcard">
-	<span class="vcardline">
-	  <span class="fn">Alex Davidson</span> 
-	  <span class="n hidden">
-		<span class="family-name">Davidson</span>
-	  </span>
-	</span>
-	<span class="org vcardline">ISG, Royal Holloway, University of London</span>
-	<span class="adr">
-	  <span class="vcardline">Egham Hill</span>
-
-	  <span class="vcardline">
-		<span class="locality">Twickenham, TW20 0EX</span>,  
-		<span class="region"></span>
-		<span class="code"></span>
-	  </span>
-	  <span class="country-name vcardline">United Kingdom</span>
-	</span>
-	<span class="vcardline">EMail: <a href="mailto:alex.davidson.2014@rhul.ac.uk">alex.davidson.2014@rhul.ac.uk</a></span>
 
   </address>
 </div>
