@@ -88,7 +88,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -135,8 +135,8 @@
     "milestone": null,
     "comments": 2,
     "created_at": "2018-06-17T23:41:39Z",
-    "updated_at": "2018-06-18T00:45:57Z",
-    "closed_at": null,
+    "updated_at": "2018-09-25T00:26:52Z",
+    "closed_at": "2018-09-25T00:26:52Z",
     "author_association": "OWNER",
     "body": "https://eprint.iacr.org/2016/144\r\nhttp://webee.technion.ac.il/~hugo/sphinx.pdf"
   },
@@ -332,14 +332,52 @@
     ],
     "state": "open",
     "locked": false,
-    "assignee": null,
+    "assignee": {
+      "login": "chris-wood",
+      "id": 2172048,
+      "node_id": "MDQ6VXNlcjIxNzIwNDg=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2172048?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/chris-wood",
+      "html_url": "https://github.com/chris-wood",
+      "followers_url": "https://api.github.com/users/chris-wood/followers",
+      "following_url": "https://api.github.com/users/chris-wood/following{/other_user}",
+      "gists_url": "https://api.github.com/users/chris-wood/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/chris-wood/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/chris-wood/subscriptions",
+      "organizations_url": "https://api.github.com/users/chris-wood/orgs",
+      "repos_url": "https://api.github.com/users/chris-wood/repos",
+      "events_url": "https://api.github.com/users/chris-wood/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/chris-wood/received_events",
+      "type": "User",
+      "site_admin": false
+    },
     "assignees": [
-
+      {
+        "login": "chris-wood",
+        "id": 2172048,
+        "node_id": "MDQ6VXNlcjIxNzIwNDg=",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/2172048?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/chris-wood",
+        "html_url": "https://github.com/chris-wood",
+        "followers_url": "https://api.github.com/users/chris-wood/followers",
+        "following_url": "https://api.github.com/users/chris-wood/following{/other_user}",
+        "gists_url": "https://api.github.com/users/chris-wood/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/chris-wood/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/chris-wood/subscriptions",
+        "organizations_url": "https://api.github.com/users/chris-wood/orgs",
+        "repos_url": "https://api.github.com/users/chris-wood/repos",
+        "events_url": "https://api.github.com/users/chris-wood/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/chris-wood/received_events",
+        "type": "User",
+        "site_admin": false
+      }
     ],
     "milestone": null,
     "comments": 0,
     "created_at": "2018-06-16T16:21:39Z",
-    "updated_at": "2018-06-16T16:21:39Z",
+    "updated_at": "2018-09-25T00:26:58Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": ""
