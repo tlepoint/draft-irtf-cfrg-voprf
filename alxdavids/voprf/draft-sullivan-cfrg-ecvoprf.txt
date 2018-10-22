@@ -5,10 +5,10 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: April 24, 2019                                       Cloudflare
+Expires: April 25, 2019                                       Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                        October 21, 2018
+                                                        October 22, 2018
 
 
   Verifiable Oblivious Pseudorandom Functions (VOPRFs) in Prime-Order
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 24, 2019.
+   This Internet-Draft will expire on April 25, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 1]
+Davidson, et al.         Expires April 25, 2019                 [Page 1]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 2]
+Davidson, et al.         Expires April 25, 2019                 [Page 2]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -165,7 +165,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 3]
+Davidson, et al.         Expires April 25, 2019                 [Page 3]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -221,7 +221,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 4]
+Davidson, et al.         Expires April 25, 2019                 [Page 4]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -277,7 +277,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 5]
+Davidson, et al.         Expires April 25, 2019                 [Page 5]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -333,7 +333,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 6]
+Davidson, et al.         Expires April 25, 2019                 [Page 6]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -389,7 +389,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 7]
+Davidson, et al.         Expires April 25, 2019                 [Page 7]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -445,7 +445,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 8]
+Davidson, et al.         Expires April 25, 2019                 [Page 8]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -501,7 +501,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                 [Page 9]
+Davidson, et al.         Expires April 25, 2019                 [Page 9]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -550,14 +550,14 @@ Steps:
 5.3.  Elliptic Curve Group and Hash Function Instantiations
 
    This section specifies supported ECVOPRF group and hash function
-   instantiations.  We focus on the instantiations of our VOPRF in the
+   instantiations.  We focus on the instantiations of the VOPRF in the
    elliptic curve setting for now.  Eventually, we would like to provide
    instantiations based on curves over non-prime-order base fields.
 
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 10]
+Davidson, et al.         Expires April 25, 2019                [Page 10]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -613,7 +613,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 11]
+Davidson, et al.         Expires April 25, 2019                [Page 11]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -669,7 +669,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 12]
+Davidson, et al.         Expires April 25, 2019                [Page 12]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -725,7 +725,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 13]
+Davidson, et al.         Expires April 25, 2019                [Page 13]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -781,7 +781,7 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 14]
+Davidson, et al.         Expires April 25, 2019                [Page 14]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -837,7 +837,7 @@ M: 04ec894e496d0297756a17365f866d9449e6ebc51852ab1ffa57bc29c843ef003b116f5ef1f60
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 15]
+Davidson, et al.         Expires April 25, 2019                [Page 15]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -893,7 +893,7 @@ X: 040039d290b20c604b5c59cb85dfacd90cbf9f5e275ee8c38a8ff80df0872e8e1dd214a9ec3b2
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 16]
+Davidson, et al.         Expires April 25, 2019                [Page 16]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -939,7 +939,7 @@ Y: 04006b0413e2686c4bb62340706de7723471080093422f02dd125c3e72f3507b9200d11481468
 
 Appendix B.  Applications
 
-   This section describes various applications of our VOPRF protocol.
+   This section describes various applications of the VOPRF protocol.
 
 B.1.  Privacy Pass
 
@@ -949,7 +949,7 @@ B.1.  Privacy Pass
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 17]
+Davidson, et al.         Expires April 25, 2019                [Page 17]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -1005,7 +1005,7 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 18]
+Davidson, et al.         Expires April 25, 2019                [Page 18]
 
 Internet-Draft                   VOPRFs                     October 2018
 
@@ -1061,4 +1061,4 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 24, 2019                [Page 19]
+Davidson, et al.         Expires April 25, 2019                [Page 19]
