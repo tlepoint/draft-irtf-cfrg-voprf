@@ -34,17 +34,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2018-10-21T11:58:41Z",
-    "updated_at": "2018-10-21T19:49:18Z",
-    "closed_at": null,
+    "updated_at": "2018-10-22T13:03:28Z",
+    "closed_at": "2018-10-22T13:03:28Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
       "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/pulls/14",
@@ -88,7 +88,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -133,10 +133,10 @@
       }
     ],
     "milestone": null,
-    "comments": 1,
+    "comments": 2,
     "created_at": "2018-10-19T08:36:58Z",
-    "updated_at": "2018-10-20T01:46:18Z",
-    "closed_at": null,
+    "updated_at": "2018-10-22T13:27:16Z",
+    "closed_at": "2018-10-22T13:27:16Z",
     "author_association": "COLLABORATOR",
     "body": "The VOPRF is generic and can be designed in any prime-order group so we should probably refer to it as such. We can then talk specifically about the various instantiations of prime-order groups including elliptic curves.\r\n\r\n@chris-wood If you're happy with this, then I am happy to make the change."
   },
