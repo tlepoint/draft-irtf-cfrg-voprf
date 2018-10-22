@@ -13,7 +13,7 @@ Expires: April 25, 2019                                       Cloudflare
 
   Verifiable Oblivious Pseudorandom Functions (VOPRFs) in Prime-Order
                                  Groups
-                   draft-sullivan-cfrg-ecvoprf-latest
+                    draft-sullivan-cfrg-voprf-latest
 
 Abstract
 
