@@ -263,13 +263,13 @@ Internet-Draft                   VOPRFs                    February 2019
                       M
                    ------->
                               Z = kM
-                              D = DLEQ_Generate(G,Y,M,Z)
+                              D = DLEQ_Generate(G,k,Y,M,Z)
                       Z,D
                    <-------
        b = DLEQ_Verify(G,Y,M,Z,D)
        Output H_2(x, Zr^(-1)) if b=1, else "error"
 
-   DLEQ_Generate(G,Y,M,Z) and DLEQ_Verify(G,Y,M,Z,D) are described in
+   DLEQ_Generate(G,k,Y,M,Z) and DLEQ_Verify(G,Y,M,Z,D) are described in
    Section Section 5.  Intuitively, the DLEQ proof allows P to prove to
    V in NIZK that the same key k is the exponent of both Y and M.  In
    other words, computing the discrete logarithm of Y and Z (with
@@ -299,7 +299,7 @@ Internet-Draft                   VOPRFs                    February 2019
       representation of x, denoted M.
 
    o  VOPRF_Sign(M): Sign input M using secret key k to produce Z,
-      generate a proof D = DLEQ_Generate(G,Y,M,Z), and output (Z, D).
+      generate a proof D = DLEQ_Generate(G,k,Y,M,Z), and output (Z, D).
 
    o  VOPRF_Unblind((Z, D), r, Y, G, M): Unblind blinded signature Z
       with blind r, yielding N.  Output N if 1 = DLEQ_Verify(G,Y,M,Z,D).
@@ -357,7 +357,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    2.  V sends M to P.
 
-   3.  P computes Z = kM = rkX, and D = DLEQ_Generate(G,Y,M,Z).
+   3.  P computes Z = kM = rkX, and D = DLEQ_Generate(G,k,Y,M,Z).
 
    4.  P sends (Z, D) to V.
 

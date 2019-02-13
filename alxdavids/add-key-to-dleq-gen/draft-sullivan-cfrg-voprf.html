@@ -519,13 +519,13 @@ ul.toc li {
                    M
                 -------&gt;
                            Z = kM
-                           D = DLEQ_Generate(G,Y,M,Z)
+                           D = DLEQ_Generate(G,k,Y,M,Z)
                    Z,D
                 &lt;-------
     b = DLEQ_Verify(G,Y,M,Z,D)
     Output H_2(x, Zr^(-1)) if b=1, else "error"
 </pre>
-<p id="rfc.section.4.p.2">DLEQ_Generate(G,Y,M,Z) and DLEQ_Verify(G,Y,M,Z,D) are described in Section <a href="#dleq" class="xref">Section 5</a>. Intuitively, the DLEQ proof allows P to prove to V in NIZK that the same key k is the exponent of both Y and M. In other words, computing the discrete logarithm of Y and Z (with respect to G and M, respectively) results in the same value. The committed value Y should be public before the protocol is initiated.</p>
+<p id="rfc.section.4.p.2">DLEQ_Generate(G,k,Y,M,Z) and DLEQ_Verify(G,Y,M,Z,D) are described in Section <a href="#dleq" class="xref">Section 5</a>. Intuitively, the DLEQ proof allows P to prove to V in NIZK that the same key k is the exponent of both Y and M. In other words, computing the discrete logarithm of Y and Z (with respect to G and M, respectively) results in the same value. The committed value Y should be public before the protocol is initiated.</p>
 <p id="rfc.section.4.p.3">The actual PRF function computed is as follows:</p>
 <pre>
 F(k, x) = H_2(x, N) = H_2(x, kH_1(x))
@@ -536,7 +536,7 @@ F(k, x) = H_2(x, N) = H_2(x, kH_1(x))
 
 <ul>
 <li>VOPRF_Blind(x): Compute and return a blind, r, and blinded representation of x, denoted M.</li>
-<li>VOPRF_Sign(M): Sign input M using secret key k to produce Z, generate a proof D = DLEQ_Generate(G,Y,M,Z), and output (Z, D).</li>
+<li>VOPRF_Sign(M): Sign input M using secret key k to produce Z, generate a proof D = DLEQ_Generate(G,k,Y,M,Z), and output (Z, D).</li>
 <li>VOPRF_Unblind((Z, D), r, Y, G, M): Unblind blinded signature Z with blind r, yielding N. Output N if 1 = DLEQ_Verify(G,Y,M,Z,D). Otherwise, output &#8220;error&#8221;.</li>
 <li>VOPRF_Finalize(N): Finalize N to produce PRF output F(k, x).</li>
 </ul>
@@ -560,7 +560,7 @@ VOPRF_Finalize(x, VOPRF_Unblind(VOPRF_Sign(M), M, r)) = F(k, x)
 <ol>
 <li>V computes X = H_1(x) and a random element r (blinding factor) from GF(p), and computes M = rX.</li>
 <li>V sends M to P.</li>
-<li>P computes Z = kM = rkX, and D = DLEQ_Generate(G,Y,M,Z).</li>
+<li>P computes Z = kM = rkX, and D = DLEQ_Generate(G,k,Y,M,Z).</li>
 <li>P sends (Z, D) to V.</li>
 <li>V ensures that 1 = DLEQ_Verify(G,Y,M,Z,D). If not, V outputs an error.</li>
 <li>V unblinds Z to compute N = r^(-1)Z = kX.</li>
