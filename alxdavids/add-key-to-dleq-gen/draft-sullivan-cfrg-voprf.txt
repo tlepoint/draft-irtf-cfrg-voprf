@@ -5,15 +5,15 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: April 25, 2019                                       Cloudflare
+Expires: August 17, 2019                                      Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                        October 22, 2018
+                                                       February 13, 2019
 
 
   Verifiable Oblivious Pseudorandom Functions (VOPRFs) in Prime-Order
                                  Groups
-                   draft-sullivan-cfrg-ecvoprf-latest
+                    draft-sullivan-cfrg-voprf-latest
 
 Abstract
 
@@ -41,11 +41,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 25, 2019.
+   This Internet-Draft will expire on August 17, 2019.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 1]
+Davidson, et al.         Expires August 17, 2019                [Page 1]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    (https://trustee.ietf.org/license-info) in effect on the date of
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 2]
+Davidson, et al.         Expires August 17, 2019                [Page 2]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    allows both parties to cooperate in computing F(k, x) with P's secret
@@ -165,9 +165,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 3]
+Davidson, et al.         Expires August 17, 2019                [Page 3]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    o  Prover (P): Holder of secret key k.
@@ -221,9 +221,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 4]
+Davidson, et al.         Expires August 17, 2019                [Page 4]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    o  Non-malleable: Given (x, y = F(k, x)), V must not be able to
@@ -277,9 +277,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 5]
+Davidson, et al.         Expires August 17, 2019                [Page 5]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    respect to G and M, respectively) results in the same value.  The
@@ -333,9 +333,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 6]
+Davidson, et al.         Expires August 17, 2019                [Page 6]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    elliptic curve over base field GF(p) for prime p.  There are also
@@ -372,12 +372,12 @@ Internet-Draft                   VOPRFs                     October 2018
 
    Input:
 
-    x - V's PRF input.
+    x: V's PRF input.
 
    Output:
 
-    r - Random scalar in [1, p - 1].
-    M - Blinded representation of x using blind r, a point in GG.
+    r: Random scalar in [1, p - 1].
+    M: Blinded representation of x using blind r, a point in GG.
 
    Steps:
 
@@ -389,9 +389,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 7]
+Davidson, et al.         Expires August 17, 2019                [Page 7]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
 4.2.2.  VOPRF_Sign
@@ -399,18 +399,19 @@ Internet-Draft                   VOPRFs                     October 2018
    Input:
 
     G: Public generator of group GG.
-    Y: Signer public key.
-    M - Point in GG.
+    k: Signer secret key.
+    Y: Signer public key (= kG).
+    M: Point in GG.
 
    Output:
 
-    Z - Scalar multiplication of k and M, point in GG.
-    D - DLEQ proof that log_G(Y) == log_M(Z).
+    Z: Scalar multiplication of the point M by k, point in GG.
+    D: DLEQ proof that log_G(Y) == log_M(Z).
 
    Steps:
 
     1. Z := kM
-    2. D = DLEQ_Generate(G,Y,M,Z)
+    2. D = DLEQ_Generate(G,k,Y,M,Z)
     2. Output (Z, D)
 
 4.2.3.  VOPRF_Unblind
@@ -419,14 +420,14 @@ Internet-Draft                   VOPRFs                     October 2018
 
     G: Public generator of group GG.
     Y: Signer public key.
-    M - Blinded representation of x using blind r, a point in GG.
-    Z - Point in GG.
-    D - D = DLEQ_Generate(G,Y,M,Z).
-    r - Random scalar in [1, p - 1].
+    M: Blinded representation of x using blind r, a point in GG.
+    Z: Point in GG.
+    D: D = DLEQ_Generate(G,k,Y,M,Z).
+    r: Random scalar in [1, p - 1].
 
    Output:
 
-    N - Unblinded signature, point in GG.
+    N: Unblinded signature, point in GG.
 
    Steps:
 
@@ -444,20 +445,19 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-
-Davidson, et al.         Expires April 25, 2019                 [Page 8]
+Davidson, et al.         Expires August 17, 2019                [Page 8]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    Input:
 
-    x - PRF input string.
-    N - Point in GG, or "error".
+    x: PRF input string.
+    N: Point in GG, or "error".
 
    Output:
 
-    y - Random element in {0,1}^L, or "error"
+    y: Random element in {0,1}^L, or "error"
 
    Steps:
 
@@ -501,15 +501,16 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                 [Page 9]
+Davidson, et al.         Expires August 17, 2019                [Page 9]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
 Input:
 
   G: Public generator of group GG.
-  Y: Signer public key.
+  k: Signer secret key.
+  Y: Signer public key (= kG).
   M: Point in GG.
   Z: Point in GG.
   H_3: A hash function from GG to a bitstring of length L modeled as a random oracle.
@@ -556,10 +557,9 @@ Steps:
 
 
 
-
-Davidson, et al.         Expires April 25, 2019                [Page 10]
+Davidson, et al.         Expires August 17, 2019               [Page 10]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    ECVOPRF-P256-SHA256:
@@ -613,9 +613,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 11]
+Davidson, et al.         Expires August 17, 2019               [Page 11]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    o  H_3: SHA256
@@ -669,9 +669,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 12]
+Davidson, et al.         Expires August 17, 2019               [Page 12]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
 6.1.  Timing Leaks
@@ -725,9 +725,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 13]
+Davidson, et al.         Expires August 17, 2019               [Page 13]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    [DECAF]    "Decaf, Eliminating cofactors through point compression",
@@ -740,8 +740,8 @@ Internet-Draft                   VOPRFs                     October 2018
 
    [I-D.irtf-cfrg-hash-to-curve]
               Scott, S., Sullivan, N., and C. Wood, "Hashing to Elliptic
-              Curves", draft-irtf-cfrg-hash-to-curve-01 (work in
-              progress), July 2018.
+              Curves", draft-irtf-cfrg-hash-to-curve-02 (work in
+              progress), October 2018.
 
    [JKK14]    "Round-Optimal Password-Protected Secret Sharing and
               T-PAKE in the Password-Only model", n.d.,
@@ -781,9 +781,9 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 14]
+Davidson, et al.         Expires August 17, 2019               [Page 14]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
 Appendix A.  Test Vectors
@@ -837,9 +837,9 @@ M: 04ec894e496d0297756a17365f866d9449e6ebc51852ab1ffa57bc29c843ef003b116f5ef1f60
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 15]
+Davidson, et al.         Expires August 17, 2019               [Page 15]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    M: 04ec894e496d0297756a17365f866d9449e6ebc51852ab1ffa57bc29c843ef003b116f5ef1f60
@@ -893,9 +893,9 @@ X: 040039d290b20c604b5c59cb85dfacd90cbf9f5e275ee8c38a8ff80df0872e8e1dd214a9ec3b2
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 16]
+Davidson, et al.         Expires August 17, 2019               [Page 16]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
 r: 010606612666705556ac3c28dde30f134e930b0c31bfc9715f0812e0b99f0212dc427e344cb97 \
@@ -949,9 +949,9 @@ B.1.  Privacy Pass
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 17]
+Davidson, et al.         Expires August 17, 2019               [Page 17]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    receipt, E serves a CAPTCHA to C, who then solves the CAPTCHA and
@@ -1005,9 +1005,9 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 18]
+Davidson, et al.         Expires August 17, 2019               [Page 18]
 
-Internet-Draft                   VOPRFs                     October 2018
+Internet-Draft                   VOPRFs                    February 2019
 
 
    Nick Sullivan
@@ -1061,4 +1061,4 @@ Internet-Draft                   VOPRFs                     October 2018
 
 
 
-Davidson, et al.         Expires April 25, 2019                [Page 19]
+Davidson, et al.         Expires August 17, 2019               [Page 19]
