@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18",
+    "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18/labels{/name}",
+    "comments_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18/comments",
+    "events_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18/events",
+    "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/18",
+    "id": 409811718,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MjUyNjk5MDgz",
+    "number": 18,
+    "title": "Add secret key to DLEQ_Generate and rewrap main body lines",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-02-13T13:44:20Z",
+    "updated_at": "2019-02-13T14:26:19Z",
+    "closed_at": "2019-02-13T14:26:19Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/pulls/18",
+      "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/18",
+      "diff_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/18.diff",
+      "patch_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/18.patch"
+    },
+    "body": "For #17 "
+  },
+  {
     "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/17",
     "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/17/labels{/name}",
@@ -34,17 +88,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-02-12T16:57:16Z",
-    "updated_at": "2019-02-12T16:57:16Z",
-    "closed_at": null,
+    "updated_at": "2019-02-13T14:26:29Z",
+    "closed_at": "2019-02-13T14:26:29Z",
     "author_association": "COLLABORATOR",
     "body": ""
   },
@@ -137,9 +191,9 @@
 
     ],
     "milestone": null,
-    "comments": 2,
+    "comments": 4,
     "created_at": "2019-02-12T16:51:44Z",
-    "updated_at": "2019-02-12T19:52:01Z",
+    "updated_at": "2019-02-13T14:30:55Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "body": "@chris-wood I spoke to Hugo Krawczyk at RWC and he mentioned being more general in this draft so that we cover OPRFs as well as VOPRFs (i.e. make verifiability optional). This would allow us to cover additional use-cases such as that of OPAQUE (https://eprint.iacr.org/2018/163.pdf) and SPHINCS (https://eprint.iacr.org/2018/695.pdf). It may also help to differentiate the techniques that we use from VRFs without obliviousness.\r\n\r\nWhat do you think? I would be happy to write up the necessary changes."
