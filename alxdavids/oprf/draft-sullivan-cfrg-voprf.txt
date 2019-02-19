@@ -265,7 +265,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 3.  Security Properties
 
-   The security properties of am OPRF protocol with functionality y =
+   The security properties of an OPRF protocol with functionality y =
    F(k, x) include those of a standard PRF.  Specifically:
 
    o  Given value x, it is infeasible to compute y = F(k, x) without
