@@ -5,10 +5,10 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: August 23, 2019                                      Cloudflare
+Expires: August 30, 2019                                      Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                       February 19, 2019
+                                                       February 26, 2019
 
 
      Oblivious Pseudorandom Functions (OPRFs) in Prime-Order Groups
@@ -19,14 +19,14 @@ Abstract
    An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for
    computing the output of a PRF.  One party (the server) holds the PRF
    secret key, and the other (the client) holds the PRF input.  The
-   'obliviousness' property ensures that the client does not reveal
-   their input to the server, during the evaluation.  The client should
-   also not learn the server's secret PRF key.  Optionally, OPRFs can
-   also satisfy a notion 'verifiability' (VOPRF).  In this setting, the
-   client can verify that the server's output is indeed the result of
-   evaluating the underlying PRF.  This document specifies OPRF and
-   VOPRF constructions instantiated within prime-order subgroups,
-   including elliptic curves.
+   'obliviousness' property ensures that the server does not learn
+   anything about the client's input during the evaluation.  The client
+   should also not learn anything about the server's secret PRF key.
+   Optionally, OPRFs can also satisfy a notion 'verifiability' (VOPRF).
+   In this setting, the client can verify that the server's output is
+   indeed the result of evaluating the underlying PRF with just a public
+   key.  This document specifies OPRF and VOPRF constructions
+   instantiated within prime-order subgroups, including elliptic curves.
 
 Status of This Memo
 
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 23, 2019.
+   This Internet-Draft will expire on August 30, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 1]
+Davidson, et al.         Expires August 30, 2019                [Page 1]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -87,7 +87,7 @@ Table of Contents
      4.4.  VOPRF algorithms  . . . . . . . . . . . . . . . . . . . .  11
        4.4.1.  VOPRF_Setup . . . . . . . . . . . . . . . . . . . . .  12
        4.4.2.  VOPRF_Blind . . . . . . . . . . . . . . . . . . . . .  12
-       4.4.3.  VOPRF_Sign  . . . . . . . . . . . . . . . . . . . . .  13
+       4.4.3.  VOPRF_Sign  . . . . . . . . . . . . . . . . . . . . .  12
        4.4.4.  VOPRF_Unblind . . . . . . . . . . . . . . . . . . . .  13
        4.4.5.  VOPRF_Finalize  . . . . . . . . . . . . . . . . . . .  13
    5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  14
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 2]
+Davidson, et al.         Expires August 30, 2019                [Page 2]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -153,22 +153,27 @@ Internet-Draft                   VOPRFs                    February 2019
    groups, applying to finite fields of prime-order and also elliptic
    curve (EC) settings.  The protocol has the option of being extended
    to a VOPRF with the addition of a NIZK proof for proving discrete log
-   equality relations.  In the EC setting, we will refer to the protocol
-   as ECVOPRF.  The document describes the protocol, its security
-   properties, and provides preliminary test vectors for
-   experimentation.  The rest of the document is structured as follows:
+   equality relations.  This proof demonstrates correctness of the
+   computation using a known public key that serves as a commitment to
+   the server's secret key.  In the EC setting, we will refer to the
+   protocol as ECOPRF (or ECVOPRF if verifiability is concerned).  The
+   document describes the protocol, its security properties, and
+   provides preliminary test vectors for experimentation.  The rest of
+   the document is structured as follows:
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019                [Page 3]
+
+Internet-Draft                   VOPRFs                    February 2019
+
 
    o  Section Section 2: Describe background, related work, and use
       cases of OPRF/VOPRF protocols.
 
    o  Section Section 3: Discuss security properties of OPRFs/VOPRFs.
-
-
-
-Davidson, et al.         Expires August 23, 2019                [Page 3]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
    o  Section Section 4: Specify an authentication protocol from OPRF
       functionality, based in prime-order groups (with an optional
@@ -216,12 +221,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-
-
-
-
-
-Davidson, et al.         Expires August 23, 2019                [Page 4]
+Davidson, et al.         Expires August 30, 2019                [Page 4]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -277,7 +277,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 5]
+Davidson, et al.         Expires August 30, 2019                [Page 5]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -333,7 +333,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 6]
+Davidson, et al.         Expires August 30, 2019                [Page 6]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -389,7 +389,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 7]
+Davidson, et al.         Expires August 30, 2019                [Page 7]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -408,8 +408,9 @@ Internet-Draft                   VOPRFs                    February 2019
       blind r, yielding N.  Output N if 1 = DLEQ_Verify(G,Y,M,Z,D).
       Otherwise, output "error".
 
-   When referring explicitly to VOPRF execution, we replace 'OPRF' in
-   all method names with 'VOPRF'.
+   We leave the rest of the OPRF algorithms unmodified.  When referring
+   explicitly to VOPRF execution, we replace 'OPRF' in all method names
+   with 'VOPRF'.
 
 4.1.  Protocol correctness
 
@@ -441,15 +442,15 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
    For practicality of the protocol, it is preferable to focus on the
    cases where GG is an additive subgroup so that we can instantiate the
    OPRF in the elliptic curve setting.  This amounts to choosing GG to
-   be a prime-order subgroup of an elliptic curve over base field GF(p)
 
 
 
-Davidson, et al.         Expires August 23, 2019                [Page 8]
+Davidson, et al.         Expires August 30, 2019                [Page 8]
 
 Internet-Draft                   VOPRFs                    February 2019
 
 
+   be a prime-order subgroup of an elliptic curve over base field GF(p)
    for prime p.  There are also other settings where GG is a prime-order
    subgroup of an elliptic curve over a base field of non-prime order,
    these include the work of Ristretto [RISTRETTO] and Decaf [DECAF].
@@ -474,11 +475,14 @@ Internet-Draft                   VOPRFs                    February 2019
 
    4.  P computes Z = kM = rkX.
 
-   5.  P sends Z to V.
+   5.  In the elliptic curve setting, P multiplies Z by the cofactor of
+       the elliptic curve.
 
-   6.  V unblinds Z to compute N = r^(-1)Z = kX.
+   6.  P sends Z to V.
 
-   7.  V outputs the pair H_2(x, N).
+   7.  V unblinds Z to compute N = r^(-1)Z = kX.
+
+   8.  V outputs the pair H_2(x, N).
 
 4.3.1.  OPRF_Setup
 
@@ -497,11 +501,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-
-
-
-
-Davidson, et al.         Expires August 23, 2019                [Page 9]
+Davidson, et al.         Expires August 30, 2019                [Page 9]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -537,6 +537,7 @@ Internet-Draft                   VOPRFs                    February 2019
    Steps:
 
     1. Z := kM
+    2. Z <- qZ (q is elliptic curve cofactor)
     2. Output Z
 
 4.3.4.  OPRF_Unblind
@@ -556,8 +557,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-
-Davidson, et al.         Expires August 23, 2019               [Page 10]
+Davidson, et al.         Expires August 30, 2019               [Page 10]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -613,7 +613,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 11]
+Davidson, et al.         Expires August 30, 2019               [Page 11]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -640,10 +640,9 @@ Output:
 
 Steps:
 
-  1. k_bin <-$ {0,1}^l.
-  2. k <- (int)k_bin.
-  3. Y := kG.
-  4. Output (k, (G,Y))
+  1. k <- OPRF_SETUP(l)
+  2. Y := kG.
+  3. Output (k, (G,Y))
 
 4.4.2.  VOPRF_Blind
 
@@ -662,6 +661,7 @@ Steps:
     2.  M := rH_1(x)
     3.  Output (r, M)
 
+4.4.3.  VOPRF_Sign
 
 
 
@@ -669,12 +669,10 @@ Steps:
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 12]
+Davidson, et al.         Expires August 30, 2019               [Page 12]
 
 Internet-Draft                   VOPRFs                    February 2019
 
-
-4.4.3.  VOPRF_Sign
 
    Input:
 
@@ -725,7 +723,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 13]
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 13]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -781,7 +781,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 14]
+Davidson, et al.         Expires August 30, 2019               [Page 14]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -837,7 +837,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 15]
+Davidson, et al.         Expires August 30, 2019               [Page 15]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -893,7 +893,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 16]
+Davidson, et al.         Expires August 30, 2019               [Page 16]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -949,7 +949,7 @@ Steps:
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 17]
+Davidson, et al.         Expires August 30, 2019               [Page 17]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 18]
+Davidson, et al.         Expires August 30, 2019               [Page 18]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 19]
+Davidson, et al.         Expires August 30, 2019               [Page 19]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1117,7 +1117,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 20]
+Davidson, et al.         Expires August 30, 2019               [Page 20]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1168,12 +1168,12 @@ Internet-Draft                   VOPRFs                    February 2019
 
    This document resulted from the work of the Privacy Pass team
    [PrivacyPass].  The authors would also like to acknowledge the
-   helpful conversations that they had with Hugo Krawczyk.
+   helpful conversations with Hugo Krawczyk.
 
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 21]
+Davidson, et al.         Expires August 30, 2019               [Page 21]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1229,7 +1229,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 22]
+Davidson, et al.         Expires August 30, 2019               [Page 22]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1285,7 +1285,7 @@ Y: 046e83dff2c9b6f9e88f1091f355ad6fa637bdbd829072411ea2d74a5bf3501ccf3bcc2789d48
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 23]
+Davidson, et al.         Expires August 30, 2019               [Page 23]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1341,7 +1341,7 @@ r: e514ef9b3ea87eafdb78da48e642daa79f036ac00228997ab8da6ac198fb888cd2fec84d52010
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 24]
+Davidson, et al.         Expires August 30, 2019               [Page 24]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1397,7 +1397,7 @@ Z: 04016825ea754324d5761ada130a1b87b03b5e2a6b0f403343925c67df39bbf85bc782909124d
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 25]
+Davidson, et al.         Expires August 30, 2019               [Page 25]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1453,4 +1453,4 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires August 23, 2019               [Page 26]
+Davidson, et al.         Expires August 30, 2019               [Page 26]
