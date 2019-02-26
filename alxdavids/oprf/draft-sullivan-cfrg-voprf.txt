@@ -78,34 +78,34 @@ Table of Contents
    4.  OPRF Protocol . . . . . . . . . . . . . . . . . . . . . . . .   6
      4.1.  Protocol correctness  . . . . . . . . . . . . . . . . . .   8
      4.2.  Instantiations of GG  . . . . . . . . . . . . . . . . . .   8
-     4.3.  OPRF algorithms . . . . . . . . . . . . . . . . . . . . .   9
-       4.3.1.  OPRF_Setup  . . . . . . . . . . . . . . . . . . . . .   9
-       4.3.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  10
-       4.3.3.  OPRF_Sign . . . . . . . . . . . . . . . . . . . . . .  10
-       4.3.4.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  10
-       4.3.5.  OPRF_Finalize . . . . . . . . . . . . . . . . . . . .  11
-     4.4.  VOPRF algorithms  . . . . . . . . . . . . . . . . . . . .  11
-       4.4.1.  VOPRF_Setup . . . . . . . . . . . . . . . . . . . . .  12
-       4.4.2.  VOPRF_Blind . . . . . . . . . . . . . . . . . . . . .  12
-       4.4.3.  VOPRF_Sign  . . . . . . . . . . . . . . . . . . . . .  12
-       4.4.4.  VOPRF_Unblind . . . . . . . . . . . . . . . . . . . .  13
-       4.4.5.  VOPRF_Finalize  . . . . . . . . . . . . . . . . . . .  13
+     4.3.  Utility algorithms  . . . . . . . . . . . . . . . . . . .   9
+     4.4.  bin2scalar  . . . . . . . . . . . . . . . . . . . . . . .   9
+     4.5.  OPRF algorithms . . . . . . . . . . . . . . . . . . . . .   9
+       4.5.1.  OPRF_Setup  . . . . . . . . . . . . . . . . . . . . .  10
+       4.5.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  10
+       4.5.3.  OPRF_Sign . . . . . . . . . . . . . . . . . . . . . .  10
+       4.5.4.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  11
+       4.5.5.  OPRF_Finalize . . . . . . . . . . . . . . . . . . . .  11
+     4.6.  VOPRF algorithms  . . . . . . . . . . . . . . . . . . . .  12
+       4.6.1.  VOPRF_Setup . . . . . . . . . . . . . . . . . . . . .  12
+       4.6.2.  VOPRF_Blind . . . . . . . . . . . . . . . . . . . . .  12
+       4.6.3.  VOPRF_Sign  . . . . . . . . . . . . . . . . . . . . .  13
+       4.6.4.  VOPRF_Unblind . . . . . . . . . . . . . . . . . . . .  13
+       4.6.5.  VOPRF_Finalize  . . . . . . . . . . . . . . . . . . .  14
    5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  14
-     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  14
+     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  15
      5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  15
-   6.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . . . .  15
-     6.1.  Batched DLEQ algorithms . . . . . . . . . . . . . . . . .  16
-       6.1.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  16
+   6.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . . . .  16
+     6.1.  Batched DLEQ algorithms . . . . . . . . . . . . . . . . .  17
+       6.1.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  17
        6.1.2.  Batched_DLEQ_Verify . . . . . . . . . . . . . . . . .  17
      6.2.  Modified protocol execution . . . . . . . . . . . . . . .  18
    7.  Elliptic Curve Group and Hash Function Instantiations . . . .  18
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  20
      8.1.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  20
      8.2.  Hashing to curves . . . . . . . . . . . . . . . . . . . .  20
-     8.3.  Verifiability (key consistency) . . . . . . . . . . . . .  20
-   9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  20
-     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  21
-     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  21
+     8.3.  Verifiability (key consistency) . . . . . . . . . . . . .  21
+   9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  21
 
 
 
@@ -114,8 +114,10 @@ Davidson, et al.         Expires August 30, 2019                [Page 2]
 Internet-Draft                   VOPRFs                    February 2019
 
 
-       9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  21
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  21
+     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  21
+     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  21
+       9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  22
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
    11. Normative References  . . . . . . . . . . . . . . . . . . . .  22
    Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  23
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
@@ -163,8 +165,6 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-
-
 Davidson, et al.         Expires August 30, 2019                [Page 3]
 
 Internet-Draft                   VOPRFs                    February 2019
@@ -178,7 +178,7 @@ Internet-Draft                   VOPRFs                    February 2019
    o  Section Section 4: Specify an authentication protocol from OPRF
       functionality, based in prime-order groups (with an optional
       verifiable mode).  Algorithms are stated formally for OPRFs in
-      Section 4.3 and for VOPRFs in Section 4.4.
+      Section 4.5 and for VOPRFs in Section 4.6.
 
    o  Section Section 5: Specify the NIZK discrete logarithm equality
       (DLEQ) construction used for constructing the VOPRF protocol.
@@ -460,10 +460,32 @@ Internet-Draft                   VOPRFs                    February 2019
    additive case, and so we focus only on the cases where GF(p) is
    indeed the base field.
 
-4.3.  OPRF algorithms
+4.3.  Utility algorithms
+
+4.4.  bin2scalar
+
+   This algorithm converts a binary string to an integer.
+
+   Input:
+
+    s: binary string (little-endian)
+    l: length of binary string
+
+   Output:
+
+    z: An integer
+
+   Steps:
+
+    1. s_vec <- vec(s) (converts s to a column vector of dimension l)
+    2. p2vec <- (2^0, 2^1, ..., 2^{l-1}) (row vector of dimension l)
+    2. z <- p2vec * s_vec
+    3. Output z
+
+4.5.  OPRF algorithms
 
    This section provides algorithms for each step in the OPRF protocol.
-   We describe the VOPRF analogues in Section 4.4
+   We describe the VOPRF analogues in Section 4.6
 
    1.  P samples a uniformly random key k <- {0,1}^l for sufficient
        length l, and interprets it as an integer.
@@ -475,6 +497,15 @@ Internet-Draft                   VOPRFs                    February 2019
 
    4.  P computes Z = kM = rkX.
 
+
+
+
+
+Davidson, et al.         Expires August 30, 2019                [Page 9]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    5.  In the elliptic curve setting, P multiplies Z by the cofactor of
        the elliptic curve.
 
@@ -484,7 +515,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    8.  V outputs the pair H_2(x, N).
 
-4.3.1.  OPRF_Setup
+4.5.1.  OPRF_Setup
 
  Input:
 
@@ -497,16 +528,9 @@ Internet-Draft                   VOPRFs                    February 2019
  Steps:
 
   1. Sample k_bin <-$ {0,1}^l
-  2. Output k <- (int)k_bin
+  2. Output k <- bin2scalar(k_bin, l)
 
-
-
-Davidson, et al.         Expires August 30, 2019                [Page 9]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
-4.3.2.  OPRF_Blind
+4.5.2.  OPRF_Blind
 
    Input:
 
@@ -523,31 +547,7 @@ Internet-Draft                   VOPRFs                    February 2019
     2.  M := rH_1(x)
     3.  Output (r, M)
 
-4.3.3.  OPRF_Sign
-
-   Input:
-
-    k: Signer secret key.
-    M: Point in GG.
-
-   Output:
-
-    Z: Scalar multiplication of the point M by k, point in GG.
-
-   Steps:
-
-    1. Z := kM
-    2. Z <- qZ (q is elliptic curve cofactor)
-    2. Output Z
-
-4.3.4.  OPRF_Unblind
-
-
-
-
-
-
-
+4.5.3.  OPRF_Sign
 
 
 
@@ -564,6 +564,23 @@ Internet-Draft                   VOPRFs                    February 2019
 
    Input:
 
+    k: Signer secret key.
+    M: Point in GG.
+
+   Output:
+
+    Z: Scalar multiplication of the point M by k, point in GG.
+
+   Steps:
+
+    1. Z := kM
+    2. Z <- qZ (q is elliptic curve cofactor)
+    2. Output Z
+
+4.5.4.  OPRF_Unblind
+
+   Input:
+
     r: Random scalar in [1, p - 1].
     M: Blinded representation of x using blind r, a point in GG.
     Z: Point in GG.
@@ -577,7 +594,7 @@ Internet-Draft                   VOPRFs                    February 2019
     1. N := (-r)Z
     2. Output N
 
-4.3.5.  OPRF_Finalize
+4.5.5.  OPRF_Finalize
 
    Input:
 
@@ -593,7 +610,15 @@ Internet-Draft                   VOPRFs                    February 2019
     1. y := H_2(x, N)
     2. Output y
 
-4.4.  VOPRF algorithms
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 11]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
+4.6.  VOPRF algorithms
 
    The steps in the VOPRF setting are written as:
 
@@ -610,14 +635,6 @@ Internet-Draft                   VOPRFs                    February 2019
 
    5.  P computes Z = kM = rkX, and D = DLEQ_Generate(k,G,Y,M,Z).
 
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 11]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
    6.  P sends (Z, D) to V.
 
    7.  V ensures that 1 = DLEQ_Verify(G,Y,M,Z,D).  If not, V outputs an
@@ -627,7 +644,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    9.  V outputs the pair H_2(x, N).
 
-4.4.1.  VOPRF_Setup
+4.6.1.  VOPRF_Setup
 
 Input:
 
@@ -640,11 +657,22 @@ Output:
 
 Steps:
 
-  1. k <- OPRF_SETUP(l)
-  2. Y := kG.
+  1. k <- OPRF_Setup(l)
+  2. Y := kG
   3. Output (k, (G,Y))
 
-4.4.2.  VOPRF_Blind
+4.6.2.  VOPRF_Blind
+
+
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 12]
+
+Internet-Draft                   VOPRFs                    February 2019
+
 
    Input:
 
@@ -661,18 +689,7 @@ Steps:
     2.  M := rH_1(x)
     3.  Output (r, M)
 
-4.4.3.  VOPRF_Sign
-
-
-
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 12]
-
-Internet-Draft                   VOPRFs                    February 2019
-
+4.6.3.  VOPRF_Sign
 
    Input:
 
@@ -692,7 +709,26 @@ Internet-Draft                   VOPRFs                    February 2019
     2. D = DLEQ_Generate(k,G,Y,M,Z)
     3. Output (Z, D)
 
-4.4.4.  VOPRF_Unblind
+4.6.4.  VOPRF_Unblind
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 13]
+
+Internet-Draft                   VOPRFs                    February 2019
+
 
    Input:
 
@@ -713,22 +749,7 @@ Internet-Draft                   VOPRFs                    February 2019
     2. If 1 = DLEQ_Verify(G,Y,M,Z,D), output N
     3. Output "error"
 
-4.4.5.  VOPRF_Finalize
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 13]
-
-Internet-Draft                   VOPRFs                    February 2019
-
+4.6.5.  VOPRF_Finalize
 
    Input:
 
@@ -758,6 +779,13 @@ Internet-Draft                   VOPRFs                    February 2019
    individual verifiers with select keys.  This proof must not reveal
    the P's long-term private key to V.
 
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 14]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    Consequently, this allows extending the OPRF protocol with a (non-
    interactive) discrete logarithm equality (DLEQ) algorithm built on a
    Chaum-Pedersen [ChaumPedersen] proof.  This proof is divided into two
@@ -765,26 +793,6 @@ Internet-Draft                   VOPRFs                    February 2019
    below.
 
 5.1.  DLEQ_Generate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 14]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
   Input:
 
@@ -808,6 +816,31 @@ Internet-Draft                   VOPRFs                    February 2019
    5. Output D := (c, s)
 
 5.2.  DLEQ_Verify
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 15]
+
+Internet-Draft                   VOPRFs                    February 2019
+
 
    Input:
 
@@ -834,14 +867,6 @@ Internet-Draft                   VOPRFs                    February 2019
    multiple PRF evaluations from P.  In the VOPRF case, this would also
    require generation and verification of a DLEQ proof for each Zi
    received by V.  This is costly, both in terms of computation and
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 15]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
    communication.  To get around this, applications use a 'batching'
    procedure for generating and verifying DLEQ proofs for a finite
    number of PRF evaluation pairs (Mi,Zi).  For n PRF evaluations:
@@ -864,31 +889,6 @@ Internet-Draft                   VOPRFs                    February 2019
    that takes a seed of length a and an integer n as input, and outputs
    n elements in {0,1}^b.
 
-6.1.  Batched DLEQ algorithms
-
-6.1.1.  Batched_DLEQ_Generate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -897,6 +897,10 @@ Davidson, et al.         Expires August 30, 2019               [Page 16]
 
 Internet-Draft                   VOPRFs                    February 2019
 
+
+6.1.  Batched DLEQ algorithms
+
+6.1.1.  Batched_DLEQ_Generate
 
 Input:
 
@@ -924,6 +928,32 @@ Steps:
 
 6.1.2.  Batched_DLEQ_Verify
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 17]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
  Input:
 
   G: Public generator of group GG.
@@ -944,15 +974,6 @@ Steps:
   4. M := c1M1 + ... + cnMn
   5. Z := c1Z1 + ... + cnZn
   6. Output DLEQ_Verify(G,Y,M,Z,D)
-
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 17]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
 6.2.  Modified protocol execution
 
@@ -982,6 +1003,13 @@ Internet-Draft                   VOPRFs                    February 2019
 
    ECVOPRF-P256-SHA512:
 
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 18]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    o  G: P-256
 
    o  H_1: Simplified SWU encoding [I-D.irtf-cfrg-hash-to-curve]
@@ -1001,14 +1029,6 @@ Internet-Draft                   VOPRFs                    February 2019
    o  H_3: SHA256
 
    ECVOPRF-P384-SHA512:
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 18]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
    o  G: P-384
 
@@ -1038,6 +1058,14 @@ Internet-Draft                   VOPRFs                    February 2019
 
    o  H_3: SHA512
 
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 19]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    ECVOPRF-CURVE448-SHA256:
 
    o  G: Curve448 [RFC7748]
@@ -1057,14 +1085,6 @@ Internet-Draft                   VOPRFs                    February 2019
    o  H_2: SHA512
 
    o  H_3: SHA512
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 19]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
 8.  Security Considerations
 
@@ -1094,6 +1114,14 @@ Internet-Draft                   VOPRFs                    February 2019
    [I-D.irtf-cfrg-hash-to-curve].  In summary, we use the simplified
    Shallue-Woestijne-Ulas algorithm for hashing binary strings to the
    P-256 curve; the Icart algorithm for hashing binary strings to P384;
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 20]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    the Elligator2 algorithm for hashing binary strings to CURVE25519 and
    CURVE448.
 
@@ -1110,17 +1138,6 @@ Internet-Draft                   VOPRFs                    February 2019
 9.  Applications
 
    This section describes various applications of the VOPRF protocol.
-
-
-
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 20]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
 9.1.  Privacy Pass
 
@@ -1152,6 +1169,15 @@ Internet-Draft                   VOPRFs                    February 2019
    construction, y will be the signature of p hashed onto the curve.  C
    can then search D' for y to determine if there is a match.
 
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 21]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    Examples of such password checkers already exist, for example:
    [JKKX16], [JKK14] and [SJKS17].
 
@@ -1169,14 +1195,6 @@ Internet-Draft                   VOPRFs                    February 2019
    This document resulted from the work of the Privacy Pass team
    [PrivacyPass].  The authors would also like to acknowledge the
    helpful conversations with Hugo Krawczyk.
-
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 21]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
 11.  Normative References
 
@@ -1206,6 +1224,16 @@ Internet-Draft                   VOPRFs                    February 2019
               T-PAKE in the Password-Only model", n.d.,
               <https://eprint.iacr.org/2014/650.pdf>.
 
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 22]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    [JKKX16]   "Highly-Efficient and Composable Password-Protected Secret
               Sharing (Or, How to Protect Your Bitcoin Wallet Online)",
               n.d., <https://eprint.iacr.org/2016/144>.
@@ -1226,13 +1254,6 @@ Internet-Draft                   VOPRFs                    February 2019
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 22]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
    [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
               for Security", RFC 7748, DOI 10.17487/RFC7748, January
@@ -1261,6 +1282,14 @@ Appendix A.  Test Vectors
 
 P-224
 X: 0403cd8bc2f2f3c4c647e063627ca9c9ac246e3e3ec74ab76d32d3e999c522d60ff7aa1c8b0e4 \
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 23]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    X: 0403cd8bc2f2f3c4c647e063627ca9c9ac246e3e3ec74ab76d32d3e999c522d60ff7aa1c8b0e4
 r: c4cf3c0b3a334f805d3ce3c3b4d007fbbdaf078a42a8cbdc833e54a9
 M: 046b2b8482c36e65f87528415e210cff8561c1c8e07600a159893973365617ee2c1c33eb0662d \
@@ -1282,13 +1311,6 @@ Z: 048ac9722189b596ffe5cb986332e89008361e68f77f12a931543f63eaa01fabf6f63d5d4b3b6
    Z: 048ac9722189b596ffe5cb986332e89008361e68f77f12a931543f63eaa01fabf6f63d5d4b3b6
 Y: 046e83dff2c9b6f9e88f1091f355ad6fa637bdbd829072411ea2d74a5bf3501ccf3bcc2789d48 \
    Y: 046e83dff2c9b6f9e88f1091f355ad6fa637bdbd829072411ea2d74a5bf3501ccf3bcc2789d48
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 23]
-
-Internet-Draft                   VOPRFs                    February 2019
-
 
 P-256
 X: 041b0e84c521f8dcd530d59a692d4ffa1ca05b8ba7ce22a884a511f93919ac121cc91dd588228 \
@@ -1316,6 +1338,14 @@ Y: 04ffe55e2a95a21e1605c1ed11ac6bea93f00fa15a6b27e90adad470ad27f0e0fe5b8607b4689
 
 P-384
 X: 04c0b51e5dcd6a309c77bb5720bf9850279e8142b6127952595ab9092578de810a13795bceff3 \
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 24]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    d358f0480a61469f17ad62ebaecd0f817c1e9c7d41d536ab410e7a2b5d7a7905d1bef5499b654b0e \
    d358f0480a61469f17ad62ebaecd0f817c1e9c7d41d536ab410e7a2b5d7a7905d1bef5499b654b0e
 r: 889b5e4812d683c4df735971240741ff869ccf77e10c2e97bef67d6fe6b8350abe59ec8fe2bfa \
@@ -1338,14 +1368,6 @@ X: 047511a846277a2009f37b3583f14c8ea3af17e3a146e0e737fdc1260b6d4a18ff01f21ec3bbc
    e39e1cade76d455feadc1bb16f65cd54042e1bc5aba1dee2434f59d00698a963b902148750240f8f
 r: e514ef9b3ea87eafdb78da48e642daa79f036ac00228997ab8da6ac198fb888cd2fec84d52010 \
    r: e514ef9b3ea87eafdb78da48e642daa79f036ac00228997ab8da6ac198fb888cd2fec84d52010
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 24]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
 M: 04fd9b68973b0fcefcf4458b4faa1c3815bdad8975b7fb0bfc4c1db7e3f169fb3a26ddabe1b25 \
    c4a23cf8a2faeb12c18f06f2227e87ede6039f55a61ef0c89ca3c582e2864fe130ea0c709f92519d \
    c4a23cf8a2faeb12c18f06f2227e87ede6039f55a61ef0c89ca3c582e2864fe130ea0c709f92519d
@@ -1372,6 +1394,14 @@ M: 040065366112a0598e4e5997e79e42f287f7202e5d956bef29890e963169d9eaab8d21501283c
 k: 01297d92cfe6895269aa5406f2ba6cbfffbba66a11ab0db34655213624fa238c50e27177aea5d \
    k: 01297d92cfe6895269aa5406f2ba6cbfffbba66a11ab0db34655213624fa238c50e27177aea5d
 Z: 040151d2dc5290ebd47065680dcb4db350c4d81346680c5589f94acfb1e28418585e7f2cbfa11 \
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 25]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    5945d9f7b98157ea8c2ab190c6a47b939502c2f793b77ceff671f5e60086fdd1ebf960f29bf5d590 \
    f8f7511d248df22d964637e2286adab4654991d338691f4673a006ff116e61afe65c914b27c3ef4c \
    f8f7511d248df22d964637e2286adab4654991d338691f4673a006ff116e61afe65c914b27c3ef4c
@@ -1394,14 +1424,6 @@ M: 040066e3d0b5b9758c9288a725ce6724fdc3bd797a8222f07233897a5916dc167531ebc6a4710
 k: 018eeea896de104bf1e772155836f6ceddab0b4c2e3e4c33ba08a6fd6db0291cfb15faff0b3c7 \
    k: 018eeea896de104bf1e772155836f6ceddab0b4c2e3e4c33ba08a6fd6db0291cfb15faff0b3c7
 Z: 04016825ea754324d5761ada130a1b87b03b5e2a6b0f403343925c67df39bbf85bc782909124d \
-
-
-
-Davidson, et al.         Expires August 30, 2019               [Page 25]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
    d297a1edfb049efa7ce61c626c0ad99d8cf462abcce1ee1967d8a355011e2c5a7ce621fc822a7d95 \
    bf7359d938ee4a5c3431e7dd270b7fb6e95fda29cf460d89454763bb0db9b8b705503170a9ac1c7a \
    bf7359d938ee4a5c3431e7dd270b7fb6e95fda29cf460d89454763bb0db9b8b705503170a9ac1c7a
@@ -1430,6 +1452,12 @@ Authors' Addresses
    Email: nick@cloudflare.com
 
 
+
+Davidson, et al.         Expires August 30, 2019               [Page 26]
+
+Internet-Draft                   VOPRFs                    February 2019
+
+
    Christopher A. Wood
    Apple Inc.
    One Apple Park Way
@@ -1453,4 +1481,32 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 26]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.         Expires August 30, 2019               [Page 27]

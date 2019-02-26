@@ -289,18 +289,20 @@ ul.toc li {
 <link href="#rfc.section.4" rel="Chapter" title="4 OPRF Protocol">
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 Protocol correctness">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 Instantiations of GG">
-<link href="#rfc.section.4.3" rel="Chapter" title="4.3 OPRF algorithms">
-<link href="#rfc.section.4.3.1" rel="Chapter" title="4.3.1 OPRF_Setup">
-<link href="#rfc.section.4.3.2" rel="Chapter" title="4.3.2 OPRF_Blind">
-<link href="#rfc.section.4.3.3" rel="Chapter" title="4.3.3 OPRF_Sign">
-<link href="#rfc.section.4.3.4" rel="Chapter" title="4.3.4 OPRF_Unblind">
-<link href="#rfc.section.4.3.5" rel="Chapter" title="4.3.5 OPRF_Finalize">
-<link href="#rfc.section.4.4" rel="Chapter" title="4.4 VOPRF algorithms">
-<link href="#rfc.section.4.4.1" rel="Chapter" title="4.4.1 VOPRF_Setup">
-<link href="#rfc.section.4.4.2" rel="Chapter" title="4.4.2 VOPRF_Blind">
-<link href="#rfc.section.4.4.3" rel="Chapter" title="4.4.3 VOPRF_Sign">
-<link href="#rfc.section.4.4.4" rel="Chapter" title="4.4.4 VOPRF_Unblind">
-<link href="#rfc.section.4.4.5" rel="Chapter" title="4.4.5 VOPRF_Finalize">
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Utility algorithms">
+<link href="#rfc.section.4.4" rel="Chapter" title="4.4 bin2scalar">
+<link href="#rfc.section.4.5" rel="Chapter" title="4.5 OPRF algorithms">
+<link href="#rfc.section.4.5.1" rel="Chapter" title="4.5.1 OPRF_Setup">
+<link href="#rfc.section.4.5.2" rel="Chapter" title="4.5.2 OPRF_Blind">
+<link href="#rfc.section.4.5.3" rel="Chapter" title="4.5.3 OPRF_Sign">
+<link href="#rfc.section.4.5.4" rel="Chapter" title="4.5.4 OPRF_Unblind">
+<link href="#rfc.section.4.5.5" rel="Chapter" title="4.5.5 OPRF_Finalize">
+<link href="#rfc.section.4.6" rel="Chapter" title="4.6 VOPRF algorithms">
+<link href="#rfc.section.4.6.1" rel="Chapter" title="4.6.1 VOPRF_Setup">
+<link href="#rfc.section.4.6.2" rel="Chapter" title="4.6.2 VOPRF_Blind">
+<link href="#rfc.section.4.6.3" rel="Chapter" title="4.6.3 VOPRF_Sign">
+<link href="#rfc.section.4.6.4" rel="Chapter" title="4.6.4 VOPRF_Unblind">
+<link href="#rfc.section.4.6.5" rel="Chapter" title="4.6.5 VOPRF_Finalize">
 <link href="#rfc.section.5" rel="Chapter" title="5 NIZK Discrete Logarithm Equality Proof">
 <link href="#rfc.section.5.1" rel="Chapter" title="5.1 DLEQ_Generate">
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 DLEQ_Verify">
@@ -408,29 +410,33 @@ ul.toc li {
 </li>
 <li>4.2.   <a href="#rfc.section.4.2">Instantiations of GG</a>
 </li>
-<li>4.3.   <a href="#rfc.section.4.3">OPRF algorithms</a>
+<li>4.3.   <a href="#rfc.section.4.3">Utility algorithms</a>
 </li>
-<ul><li>4.3.1.   <a href="#rfc.section.4.3.1">OPRF_Setup</a>
+<li>4.4.   <a href="#rfc.section.4.4">bin2scalar</a>
 </li>
-<li>4.3.2.   <a href="#rfc.section.4.3.2">OPRF_Blind</a>
+<li>4.5.   <a href="#rfc.section.4.5">OPRF algorithms</a>
 </li>
-<li>4.3.3.   <a href="#rfc.section.4.3.3">OPRF_Sign</a>
+<ul><li>4.5.1.   <a href="#rfc.section.4.5.1">OPRF_Setup</a>
 </li>
-<li>4.3.4.   <a href="#rfc.section.4.3.4">OPRF_Unblind</a>
+<li>4.5.2.   <a href="#rfc.section.4.5.2">OPRF_Blind</a>
 </li>
-<li>4.3.5.   <a href="#rfc.section.4.3.5">OPRF_Finalize</a>
+<li>4.5.3.   <a href="#rfc.section.4.5.3">OPRF_Sign</a>
 </li>
-</ul><li>4.4.   <a href="#rfc.section.4.4">VOPRF algorithms</a>
+<li>4.5.4.   <a href="#rfc.section.4.5.4">OPRF_Unblind</a>
 </li>
-<ul><li>4.4.1.   <a href="#rfc.section.4.4.1">VOPRF_Setup</a>
+<li>4.5.5.   <a href="#rfc.section.4.5.5">OPRF_Finalize</a>
 </li>
-<li>4.4.2.   <a href="#rfc.section.4.4.2">VOPRF_Blind</a>
+</ul><li>4.6.   <a href="#rfc.section.4.6">VOPRF algorithms</a>
 </li>
-<li>4.4.3.   <a href="#rfc.section.4.4.3">VOPRF_Sign</a>
+<ul><li>4.6.1.   <a href="#rfc.section.4.6.1">VOPRF_Setup</a>
 </li>
-<li>4.4.4.   <a href="#rfc.section.4.4.4">VOPRF_Unblind</a>
+<li>4.6.2.   <a href="#rfc.section.4.6.2">VOPRF_Blind</a>
 </li>
-<li>4.4.5.   <a href="#rfc.section.4.4.5">VOPRF_Finalize</a>
+<li>4.6.3.   <a href="#rfc.section.4.6.3">VOPRF_Sign</a>
+</li>
+<li>4.6.4.   <a href="#rfc.section.4.6.4">VOPRF_Unblind</a>
+</li>
+<li>4.6.5.   <a href="#rfc.section.4.6.5">VOPRF_Finalize</a>
 </li>
 </ul></ul><li>5.   <a href="#rfc.section.5">NIZK Discrete Logarithm Equality Proof</a>
 </li>
@@ -489,7 +495,7 @@ ul.toc li {
 <ul>
 <li>Section <a href="#background" class="xref">Section 2</a>: Describe background, related work, and use cases of OPRF/VOPRF protocols.</li>
 <li>Section <a href="#properties" class="xref">Section 3</a>: Discuss security properties of OPRFs/VOPRFs.</li>
-<li>Section <a href="#protocol" class="xref">Section 4</a>: Specify an authentication protocol from OPRF functionality, based in prime-order groups (with an optional verifiable mode).  Algorithms are stated formally for OPRFs in <a href="#oprf" class="xref">Section 4.3</a> and for VOPRFs in <a href="#voprf" class="xref">Section 4.4</a>.</li>
+<li>Section <a href="#protocol" class="xref">Section 4</a>: Specify an authentication protocol from OPRF functionality, based in prime-order groups (with an optional verifiable mode).  Algorithms are stated formally for OPRFs in <a href="#oprf" class="xref">Section 4.5</a> and for VOPRFs in <a href="#voprf" class="xref">Section 4.6</a>.</li>
 <li>Section <a href="#dleq" class="xref">Section 5</a>: Specify the NIZK discrete logarithm equality (DLEQ) construction used for constructing the VOPRF protocol.</li>
 <li>Section <a href="#batch" class="xref">Section 6</a>: Specifies how the DLEQ proof mechanism can be batched for multiple VOPRF invocations, and how this changes the protocol execution.</li>
 <li>Section <a href="#ecinstantiation" class="xref">Section 7</a>: Considers explicit instantiations of the protocol in the elliptic curve setting.</li>
@@ -617,9 +623,33 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 <p id="rfc.section.4.2.p.2">For practicality of the protocol, it is preferable to focus on the cases where GG is an additive subgroup so that we can instantiate the OPRF in the elliptic curve setting. This amounts to choosing GG to be a prime-order subgroup of an elliptic curve over base field GF(p) for prime p. There are also other settings where GG is a prime-order subgroup of an elliptic curve over a base field of non-prime order, these include the work of Ristretto <a href="#RISTRETTO" class="xref">[RISTRETTO]</a> and Decaf <a href="#DECAF" class="xref">[DECAF]</a>.</p>
 <p id="rfc.section.4.2.p.3">We will use p &gt; 0 generally for constructing the base field GF(p), not just those where p is prime. To reiterate, we focus only on the additive case, and so we focus only on the cases where GF(p) is indeed the base field.</p>
 <h1 id="rfc.section.4.3">
-<a href="#rfc.section.4.3">4.3.</a> <a href="#oprf" id="oprf">OPRF algorithms</a>
+<a href="#rfc.section.4.3">4.3.</a> <a href="#utility-algorithms" id="utility-algorithms">Utility algorithms</a>
 </h1>
-<p id="rfc.section.4.3.p.1">This section provides algorithms for each step in the OPRF protocol. We describe the VOPRF analogues in <a href="#voprf" class="xref">Section 4.4</a></p>
+<h1 id="rfc.section.4.4">
+<a href="#rfc.section.4.4">4.4.</a> <a href="#bin2scalar" id="bin2scalar">bin2scalar</a>
+</h1>
+<p id="rfc.section.4.4.p.1">This algorithm converts a binary string to an integer.</p>
+<pre>
+Input:
+
+ s: binary string (little-endian)
+ l: length of binary string
+
+Output:
+
+ z: An integer
+
+Steps:
+
+ 1. s_vec &lt;- vec(s) (converts s to a column vector of dimension l)
+ 2. p2vec &lt;- (2^0, 2^1, ..., 2^{l-1}) (row vector of dimension l)
+ 2. z &lt;- p2vec * s_vec
+ 3. Output z
+</pre>
+<h1 id="rfc.section.4.5">
+<a href="#rfc.section.4.5">4.5.</a> <a href="#oprf" id="oprf">OPRF algorithms</a>
+</h1>
+<p id="rfc.section.4.5.p.1">This section provides algorithms for each step in the OPRF protocol. We describe the VOPRF analogues in <a href="#voprf" class="xref">Section 4.6</a></p>
 <p></p>
 
 <ol>
@@ -632,8 +662,8 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 <li>V unblinds Z to compute N = r^(-1)Z = kX.</li>
 <li>V outputs the pair H_2(x, N).</li>
 </ol>
-<h1 id="rfc.section.4.3.1">
-<a href="#rfc.section.4.3.1">4.3.1.</a> <a href="#oprfsetup" id="oprfsetup">OPRF_Setup</a>
+<h1 id="rfc.section.4.5.1">
+<a href="#rfc.section.4.5.1">4.5.1.</a> <a href="#oprfsetup" id="oprfsetup">OPRF_Setup</a>
 </h1>
 <pre>
 Input:
@@ -647,10 +677,10 @@ k: A key chosen from {0,1}^l and interpreted as an integer value.
 Steps:
 
  1. Sample k_bin &lt;-$ {0,1}^l
- 2. Output k &lt;- (int)k_bin
+ 2. Output k &lt;- bin2scalar(k_bin, l)
 </pre>
-<h1 id="rfc.section.4.3.2">
-<a href="#rfc.section.4.3.2">4.3.2.</a> <a href="#oprfblind" id="oprfblind">OPRF_Blind</a>
+<h1 id="rfc.section.4.5.2">
+<a href="#rfc.section.4.5.2">4.5.2.</a> <a href="#oprfblind" id="oprfblind">OPRF_Blind</a>
 </h1>
 <pre>
 Input:
@@ -668,8 +698,8 @@ Steps:
  2.  M := rH_1(x)
  3.  Output (r, M)
 </pre>
-<h1 id="rfc.section.4.3.3">
-<a href="#rfc.section.4.3.3">4.3.3.</a> <a href="#oprfsign" id="oprfsign">OPRF_Sign</a>
+<h1 id="rfc.section.4.5.3">
+<a href="#rfc.section.4.5.3">4.5.3.</a> <a href="#oprfsign" id="oprfsign">OPRF_Sign</a>
 </h1>
 <pre>
 Input:
@@ -687,8 +717,8 @@ Steps:
  2. Z &lt;- qZ (q is elliptic curve cofactor)
  2. Output Z
 </pre>
-<h1 id="rfc.section.4.3.4">
-<a href="#rfc.section.4.3.4">4.3.4.</a> <a href="#oprfunblind" id="oprfunblind">OPRF_Unblind</a>
+<h1 id="rfc.section.4.5.4">
+<a href="#rfc.section.4.5.4">4.5.4.</a> <a href="#oprfunblind" id="oprfunblind">OPRF_Unblind</a>
 </h1>
 <pre>
 Input:
@@ -706,8 +736,8 @@ Steps:
  1. N := (-r)Z
  2. Output N
 </pre>
-<h1 id="rfc.section.4.3.5">
-<a href="#rfc.section.4.3.5">4.3.5.</a> <a href="#oprffinalize" id="oprffinalize">OPRF_Finalize</a>
+<h1 id="rfc.section.4.5.5">
+<a href="#rfc.section.4.5.5">4.5.5.</a> <a href="#oprffinalize" id="oprffinalize">OPRF_Finalize</a>
 </h1>
 <pre>
 Input:
@@ -724,10 +754,10 @@ Steps:
  1. y := H_2(x, N)
  2. Output y
 </pre>
-<h1 id="rfc.section.4.4">
-<a href="#rfc.section.4.4">4.4.</a> <a href="#voprf" id="voprf">VOPRF algorithms</a>
+<h1 id="rfc.section.4.6">
+<a href="#rfc.section.4.6">4.6.</a> <a href="#voprf" id="voprf">VOPRF algorithms</a>
 </h1>
-<p id="rfc.section.4.4.p.1">The steps in the VOPRF setting are written as:</p>
+<p id="rfc.section.4.6.p.1">The steps in the VOPRF setting are written as:</p>
 <p></p>
 
 <ol>
@@ -741,8 +771,8 @@ Steps:
 <li>V unblinds Z to compute N = r^(-1)Z = kX.</li>
 <li>V outputs the pair H_2(x, N).</li>
 </ol>
-<h1 id="rfc.section.4.4.1">
-<a href="#rfc.section.4.4.1">4.4.1.</a> <a href="#voprfsetup" id="voprfsetup">VOPRF_Setup</a>
+<h1 id="rfc.section.4.6.1">
+<a href="#rfc.section.4.6.1">4.6.1.</a> <a href="#voprfsetup" id="voprfsetup">VOPRF_Setup</a>
 </h1>
 <pre>
 Input:
@@ -756,12 +786,12 @@ Output:
 
 Steps:
 
-  1. k &lt;- OPRF_SETUP(l)
-  2. Y := kG.
+  1. k &lt;- OPRF_Setup(l)
+  2. Y := kG
   3. Output (k, (G,Y))
 </pre>
-<h1 id="rfc.section.4.4.2">
-<a href="#rfc.section.4.4.2">4.4.2.</a> <a href="#voprfblind" id="voprfblind">VOPRF_Blind</a>
+<h1 id="rfc.section.4.6.2">
+<a href="#rfc.section.4.6.2">4.6.2.</a> <a href="#voprfblind" id="voprfblind">VOPRF_Blind</a>
 </h1>
 <pre>
 Input:
@@ -779,8 +809,8 @@ Steps:
  2.  M := rH_1(x)
  3.  Output (r, M)
 </pre>
-<h1 id="rfc.section.4.4.3">
-<a href="#rfc.section.4.4.3">4.4.3.</a> <a href="#voprfsign" id="voprfsign">VOPRF_Sign</a>
+<h1 id="rfc.section.4.6.3">
+<a href="#rfc.section.4.6.3">4.6.3.</a> <a href="#voprfsign" id="voprfsign">VOPRF_Sign</a>
 </h1>
 <pre>
 Input:
@@ -801,8 +831,8 @@ Steps:
  2. D = DLEQ_Generate(k,G,Y,M,Z)
  3. Output (Z, D)
 </pre>
-<h1 id="rfc.section.4.4.4">
-<a href="#rfc.section.4.4.4">4.4.4.</a> <a href="#voprfunblind" id="voprfunblind">VOPRF_Unblind</a>
+<h1 id="rfc.section.4.6.4">
+<a href="#rfc.section.4.6.4">4.6.4.</a> <a href="#voprfunblind" id="voprfunblind">VOPRF_Unblind</a>
 </h1>
 <pre>
 Input:
@@ -824,8 +854,8 @@ Steps:
  2. If 1 = DLEQ_Verify(G,Y,M,Z,D), output N
  3. Output "error"
 </pre>
-<h1 id="rfc.section.4.4.5">
-<a href="#rfc.section.4.4.5">4.4.5.</a> <a href="#voprffinalize" id="voprffinalize">VOPRF_Finalize</a>
+<h1 id="rfc.section.4.6.5">
+<a href="#rfc.section.4.6.5">4.6.5.</a> <a href="#voprffinalize" id="voprffinalize">VOPRF_Finalize</a>
 </h1>
 <pre>
 Input:
