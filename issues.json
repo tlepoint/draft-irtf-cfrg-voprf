@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/19",
+    "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/19/labels{/name}",
+    "comments_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/19/comments",
+    "events_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/19/events",
+    "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/19",
+    "id": 411904206,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MjU0MjM3NDY5",
+    "number": 19,
+    "title": "Make verifiability optional and add batched DLEQ case",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-02-19T12:40:38Z",
+    "updated_at": "2019-02-26T09:59:08Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/pulls/19",
+      "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/19",
+      "diff_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/19.diff",
+      "patch_url": "https://github.com/chris-wood/draft-sullivan-cfrg-voprf/pull/19.patch"
+    },
+    "body": "For #15 and #16, big change so I'm happy to iterate on this.\r\n"
+  },
+  {
     "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18",
     "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-voprf/issues/18/labels{/name}",
@@ -767,9 +821,9 @@
       }
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2018-06-16T16:21:39Z",
-    "updated_at": "2018-09-25T00:26:58Z",
+    "updated_at": "2019-02-22T16:41:57Z",
     "closed_at": null,
     "author_association": "OWNER",
     "body": ""
