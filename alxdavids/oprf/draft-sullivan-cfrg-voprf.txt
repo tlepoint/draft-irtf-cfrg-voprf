@@ -193,8 +193,8 @@ Internet-Draft                   VOPRFs                    February 2019
    o  Section Section 8: Discusses the security considerations for the
       OPRF and VOPRF protocol.
 
-   o  Section Section 9: Discusses some existing applications of the
-      OPRF/VOPRF protocol.
+   o  Section Section 9: Discusses some existing applications of OPRF
+      and VOPRF protocols.
 
    o  Section Appendix A: Specifies test vectors for implementations in
       the elliptic curve setting.
@@ -235,7 +235,7 @@ Internet-Draft                   VOPRFs                    February 2019
 2.  Background
 
    OPRFs are functionally related to RSA-based blind signature schemes,
-   e.g., [ChaumBlindSignature].  Broadly, a blind signature scheme works
+   e.g., [ChaumBlindSignature].  Briefly, a blind signature scheme works
    as follows.  Let m be a message to be signed by a server.  It is
    assumed to be a member of the RSA group.  Also, let N be the RSA
    modulus, and e and d be the public and private keys, respectively.  A
@@ -252,16 +252,16 @@ Internet-Draft                   VOPRFs                    February 2019
 
    By the properties of RSA, s is clearly a valid signature for m.  OPRF
    protocols can be used to provide a symmetric equivalent to blind
-   signatures.  Essentially the client learns PRF(k,x) for some input x
-   of their choice, from a server that holds K.  Since the security of
-   an OPRF means that x is hidden in the interaction, then the client
-   can later reveal x to the server along with PRF(k,x).
+   signatures.  Essentially the client learns y = PRF(k,x) for some
+   input x of their choice, from a server that holds k.  Since the
+   security of an OPRF means that x is hidden in the interaction, then
+   the client can later reveal x to the server along with PRF(k,x).
 
-   The server can verify that PRF(k,x) is computed correctly by
-   recomputing the PRF on x using K.  In doing so, the client provides
-   knowledge of a 'signature' PRF(k,x) for their value x.  However, the
-   verification procedure is symmetric since it requires knowledge of k.
-   This is discussed more in the following section.
+   The server can verify that y is computed correctly by recomputing the
+   PRF on x using k.  In doing so, the client provides knowledge of a
+   'signature' y for their value x.  However, the verification procedure
+   is symmetric since it requires knowledge of k.  This is discussed
+   more in the following section.
 
 3.  Security Properties
 
@@ -294,13 +294,14 @@ Internet-Draft                   VOPRFs                    February 2019
       instance in which y = F(k, x) was computed.
 
    Optionally, for any protocol that satisfies the above properties,
-   there is a separate security property:
+   there is an additional security property:
 
    o  Verifiable: V must only complete execution of the protocol if it
-      asserts that P used its secret key k.
+      can successfully assert that P used its secret key k.
 
    In practice, the notion of verifiability requires that P commits to
-   the key k before the actual protocol execution takes place.
+   the key k before the actual protocol execution takes place.  Then V
+   verifies that P has used k in the protocol using this commitment.
 
 4.  OPRF Protocol
 
@@ -312,7 +313,7 @@ Internet-Draft                   VOPRFs                    February 2019
    parameter.  Let k be the prover's (P) secret key, and Y = kG be its
    corresponding 'public key' for some generator G taken from the group
    GG.  This public key is also referred to as a commitment to the key
-   k.  Let x be the verifier's (V) input to the VOPRF protocol.
+   k.  Let x be the verifier's (V) input to the OPRF protocol.
    (Commonly, it is a random L-bit string, though this is not required.)
 
    The OPRF protocol begins with V blinding its input for the signer
@@ -320,7 +321,6 @@ Internet-Draft                   VOPRFs                    February 2019
    applies its secret key to the blinded value and returns the result.
    To finish the computation, V then removes its blind and hashes the
    result using H_2 to yield an output.  This flow is illustrated below.
-
 
 
 
@@ -464,23 +464,24 @@ Internet-Draft                   VOPRFs                    February 2019
 
 4.4.  bin2scalar
 
-   This algorithm converts a binary string to an integer.
+   This algorithm converts a binary string to an integer modulo p.
 
    Input:
 
     s: binary string (little-endian)
     l: length of binary string
+    p: modulus
 
    Output:
 
-    z: An integer
+    z: An integer modulo p
 
    Steps:
 
     1. s_vec <- vec(s) (converts s to a column vector of dimension l)
     2. p2vec <- (2^0, 2^1, ..., 2^{l-1}) (row vector of dimension l)
-    2. z <- p2vec * s_vec
-    3. Output z
+    3. z <- p2vec * s_vec (mod p)
+    4. Output z
 
 4.5.  OPRF algorithms
 
@@ -496,7 +497,6 @@ Internet-Draft                   VOPRFs                    February 2019
    3.  V sends M to P.
 
    4.  P computes Z = kM = rkX.
-
 
 
 

@@ -500,7 +500,7 @@ ul.toc li {
 <li>Section <a href="#batch" class="xref">Section 6</a>: Specifies how the DLEQ proof mechanism can be batched for multiple VOPRF invocations, and how this changes the protocol execution.</li>
 <li>Section <a href="#ecinstantiation" class="xref">Section 7</a>: Considers explicit instantiations of the protocol in the elliptic curve setting.</li>
 <li>Section <a href="#sec" class="xref">Section 8</a>: Discusses the security considerations for the OPRF and VOPRF protocol.</li>
-<li>Section <a href="#apps" class="xref">Section 9</a>: Discusses some existing applications of the OPRF/VOPRF protocol.</li>
+<li>Section <a href="#apps" class="xref">Section 9</a>: Discusses some existing applications of OPRF and VOPRF protocols.</li>
 <li>Section <a href="#testvecs" class="xref">Appendix A</a>: Specifies test vectors for implementations in the elliptic curve setting.</li>
 </ul>
 <h1 id="rfc.section.1.1">
@@ -526,7 +526,7 @@ ul.toc li {
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#background" id="background">Background</a>
 </h1>
-<p id="rfc.section.2.p.1">OPRFs are functionally related to RSA-based blind signature schemes, e.g., <a href="#ChaumBlindSignature" class="xref">[ChaumBlindSignature]</a>. Broadly, a blind signature scheme works as follows. Let m be a message to be signed by a server. It is assumed to be a member of the RSA group. Also, let N be the RSA modulus, and e and d be the public and private keys, respectively. A prover P and verifier V engage in the following protocol given input m.</p>
+<p id="rfc.section.2.p.1">OPRFs are functionally related to RSA-based blind signature schemes, e.g., <a href="#ChaumBlindSignature" class="xref">[ChaumBlindSignature]</a>. Briefly, a blind signature scheme works as follows. Let m be a message to be signed by a server. It is assumed to be a member of the RSA group. Also, let N be the RSA modulus, and e and d be the public and private keys, respectively. A prover P and verifier V engage in the following protocol given input m.</p>
 <p></p>
 
 <ol>
@@ -534,8 +534,8 @@ ul.toc li {
 <li>P uses m&#8217; to compute s&#8217; = (m&#8217;)^d (mod N), and sends s&#8217; to the V.</li>
 <li>V removes the blinding factor r to obtain the original signature as s = (s&#8217;)^(r^-1) (mod N).</li>
 </ol>
-<p id="rfc.section.2.p.3">By the properties of RSA, s is clearly a valid signature for m. OPRF protocols can be used to provide a symmetric equivalent to blind signatures. Essentially the client learns PRF(k,x) for some input x of their choice, from a server that holds K. Since the security of an OPRF means that x is hidden in the interaction, then the client can later reveal x to the server along with PRF(k,x).</p>
-<p id="rfc.section.2.p.4">The server can verify that PRF(k,x) is computed correctly by recomputing the PRF on x using K. In doing so, the client provides knowledge of a &#8216;signature&#8217; PRF(k,x) for their value x. However, the verification procedure is symmetric since it requires knowledge of k. This is discussed more in the following section.</p>
+<p id="rfc.section.2.p.3">By the properties of RSA, s is clearly a valid signature for m. OPRF protocols can be used to provide a symmetric equivalent to blind signatures. Essentially the client learns y = PRF(k,x) for some input x of their choice, from a server that holds k. Since the security of an OPRF means that x is hidden in the interaction, then the client can later reveal x to the server along with PRF(k,x).</p>
+<p id="rfc.section.2.p.4">The server can verify that y is computed correctly by recomputing the PRF on x using k. In doing so, the client provides knowledge of a &#8216;signature&#8217; y for their value x. However, the verification procedure is symmetric since it requires knowledge of k. This is discussed more in the following section.</p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> <a href="#properties" id="properties">Security Properties</a>
 </h1>
@@ -554,15 +554,15 @@ ul.toc li {
 <li>Oblivious: P must learn nothing about V&#8217;s input, and V must learn nothing about P&#8217;s private key.</li>
 <li>Unlinkable: If V reveals x to P, P cannot link x to the protocol instance in which y = F(k, x) was computed.</li>
 </ul>
-<p id="rfc.section.3.p.5">Optionally, for any protocol that satisfies the above properties, there is a separate security property:</p>
+<p id="rfc.section.3.p.5">Optionally, for any protocol that satisfies the above properties, there is an additional security property:</p>
 <p></p>
 
-<ul><li>Verifiable: V must only complete execution of the protocol if it asserts that P used its secret key k.</li></ul>
-<p id="rfc.section.3.p.7">In practice, the notion of verifiability requires that P commits to the key k before the actual protocol execution takes place.</p>
+<ul><li>Verifiable: V must only complete execution of the protocol if it can successfully assert that P used its secret key k.</li></ul>
+<p id="rfc.section.3.p.7">In practice, the notion of verifiability requires that P commits to the key k before the actual protocol execution takes place. Then V verifies that P has used k in the protocol using this commitment.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#protocol" id="protocol">OPRF Protocol</a>
 </h1>
-<p id="rfc.section.4.p.1">In this section we describe the OPRF protocol. Let GG be a prime-order additive subgroup, with two distinct hash functions H_1 and H_2, where H_1 maps arbitrary input onto GG and H_2 maps arbitrary input to a fixed-length output, e.g., SHA256. All hash functions in the protocol are modelled as random oracles. Let L be the security parameter. Let k be the prover&#8217;s (P) secret key, and Y = kG be its corresponding &#8216;public key&#8217; for some generator G taken from the group GG.  This public key is also referred to as a commitment to the key k. Let x be the verifier&#8217;s (V) input to the VOPRF protocol. (Commonly, it is a random L-bit string, though this is not required.)</p>
+<p id="rfc.section.4.p.1">In this section we describe the OPRF protocol. Let GG be a prime-order additive subgroup, with two distinct hash functions H_1 and H_2, where H_1 maps arbitrary input onto GG and H_2 maps arbitrary input to a fixed-length output, e.g., SHA256. All hash functions in the protocol are modelled as random oracles. Let L be the security parameter. Let k be the prover&#8217;s (P) secret key, and Y = kG be its corresponding &#8216;public key&#8217; for some generator G taken from the group GG.  This public key is also referred to as a commitment to the key k. Let x be the verifier&#8217;s (V) input to the OPRF protocol. (Commonly, it is a random L-bit string, though this is not required.)</p>
 <p id="rfc.section.4.p.2">The OPRF protocol begins with V blinding its input for the signer such that it appears uniformly distributed GG. The latter then applies its secret key to the blinded value and returns the result. To finish the computation, V then removes its blind and hashes the result using H_2 to yield an output. This flow is illustrated below.</p>
 <pre>
      Verifier              Prover
@@ -628,23 +628,24 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 <h1 id="rfc.section.4.4">
 <a href="#rfc.section.4.4">4.4.</a> <a href="#bin2scalar" id="bin2scalar">bin2scalar</a>
 </h1>
-<p id="rfc.section.4.4.p.1">This algorithm converts a binary string to an integer.</p>
+<p id="rfc.section.4.4.p.1">This algorithm converts a binary string to an integer modulo p.</p>
 <pre>
 Input:
 
  s: binary string (little-endian)
  l: length of binary string
+ p: modulus
 
 Output:
 
- z: An integer
+ z: An integer modulo p
 
 Steps:
 
  1. s_vec &lt;- vec(s) (converts s to a column vector of dimension l)
  2. p2vec &lt;- (2^0, 2^1, ..., 2^{l-1}) (row vector of dimension l)
- 2. z &lt;- p2vec * s_vec
- 3. Output z
+ 3. z &lt;- p2vec * s_vec (mod p)
+ 4. Output z
 </pre>
 <h1 id="rfc.section.4.5">
 <a href="#rfc.section.4.5">4.5.</a> <a href="#oprf" id="oprf">OPRF algorithms</a>
