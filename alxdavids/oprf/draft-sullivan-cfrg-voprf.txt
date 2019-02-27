@@ -5,10 +5,10 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: August 30, 2019                                      Cloudflare
+Expires: August 31, 2019                                      Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                       February 26, 2019
+                                                       February 27, 2019
 
 
      Oblivious Pseudorandom Functions (OPRFs) in Prime-Order Groups
@@ -26,7 +26,7 @@ Abstract
    In this setting, the client can verify that the server's output is
    indeed the result of evaluating the underlying PRF with just a public
    key.  This document specifies OPRF and VOPRF constructions
-   instantiated within prime-order subgroups, including elliptic curves.
+   instantiated within prime-order groups, including elliptic curves.
 
 Status of This Memo
 
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 30, 2019.
+   This Internet-Draft will expire on August 31, 2019.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 1]
+Davidson, et al.         Expires August 31, 2019                [Page 1]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 2]
+Davidson, et al.         Expires August 31, 2019                [Page 2]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -165,7 +165,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 3]
+Davidson, et al.         Expires August 31, 2019                [Page 3]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -221,7 +221,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 4]
+Davidson, et al.         Expires August 31, 2019                [Page 4]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -255,7 +255,7 @@ Internet-Draft                   VOPRFs                    February 2019
    signatures.  Essentially the client learns y = PRF(k,x) for some
    input x of their choice, from a server that holds k.  Since the
    security of an OPRF means that x is hidden in the interaction, then
-   the client can later reveal x to the server along with PRF(k,x).
+   the client can later reveal x to the server along with y.
 
    The server can verify that y is computed correctly by recomputing the
    PRF on x using k.  In doing so, the client provides knowledge of a
@@ -277,7 +277,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 5]
+Davidson, et al.         Expires August 31, 2019                [Page 5]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -333,7 +333,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 6]
+Davidson, et al.         Expires August 31, 2019                [Page 6]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -389,7 +389,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 7]
+Davidson, et al.         Expires August 31, 2019                [Page 7]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -445,7 +445,7 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 8]
+Davidson, et al.         Expires August 31, 2019                [Page 8]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -501,13 +501,13 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019                [Page 9]
+Davidson, et al.         Expires August 31, 2019                [Page 9]
 
 Internet-Draft                   VOPRFs                    February 2019
 
 
-   5.  In the elliptic curve setting, P multiplies Z by the cofactor of
-       the elliptic curve.
+   5.  In the elliptic curve setting, P multiplies Z by the cofactor
+       (denoted h) of the elliptic curve.
 
    6.  P sends Z to V.
 
@@ -557,7 +557,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 10]
+Davidson, et al.         Expires August 31, 2019               [Page 10]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -574,8 +574,8 @@ Internet-Draft                   VOPRFs                    February 2019
    Steps:
 
     1. Z := kM
-    2. Z <- qZ (q is elliptic curve cofactor)
-    2. Output Z
+    2. Z <- hZ
+    3. Output Z
 
 4.5.4.  OPRF_Unblind
 
@@ -613,7 +613,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 11]
+Davidson, et al.         Expires August 31, 2019               [Page 11]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -669,7 +669,7 @@ Steps:
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 12]
+Davidson, et al.         Expires August 31, 2019               [Page 12]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -725,7 +725,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 13]
+Davidson, et al.         Expires August 31, 2019               [Page 13]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -781,7 +781,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 14]
+Davidson, et al.         Expires August 31, 2019               [Page 14]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -837,7 +837,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 15]
+Davidson, et al.         Expires August 31, 2019               [Page 15]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -893,7 +893,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 16]
+Davidson, et al.         Expires August 31, 2019               [Page 16]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -949,7 +949,7 @@ Steps:
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 17]
+Davidson, et al.         Expires August 31, 2019               [Page 17]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 18]
+Davidson, et al.         Expires August 31, 2019               [Page 18]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 19]
+Davidson, et al.         Expires August 31, 2019               [Page 19]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1117,7 +1117,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 20]
+Davidson, et al.         Expires August 31, 2019               [Page 20]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1173,7 +1173,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 21]
+Davidson, et al.         Expires August 31, 2019               [Page 21]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1229,7 +1229,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 22]
+Davidson, et al.         Expires August 31, 2019               [Page 22]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1285,7 +1285,7 @@ X: 0403cd8bc2f2f3c4c647e063627ca9c9ac246e3e3ec74ab76d32d3e999c522d60ff7aa1c8b0e4
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 23]
+Davidson, et al.         Expires August 31, 2019               [Page 23]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1341,7 +1341,7 @@ X: 04c0b51e5dcd6a309c77bb5720bf9850279e8142b6127952595ab9092578de810a13795bceff3
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 24]
+Davidson, et al.         Expires August 31, 2019               [Page 24]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1397,7 +1397,7 @@ Z: 040151d2dc5290ebd47065680dcb4db350c4d81346680c5589f94acfb1e28418585e7f2cbfa11
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 25]
+Davidson, et al.         Expires August 31, 2019               [Page 25]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1453,7 +1453,7 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 26]
+Davidson, et al.         Expires August 31, 2019               [Page 26]
 
 Internet-Draft                   VOPRFs                    February 2019
 
@@ -1509,4 +1509,4 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.         Expires August 30, 2019               [Page 27]
+Davidson, et al.         Expires August 31, 2019               [Page 27]
