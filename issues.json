@@ -82,7 +82,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -91,8 +91,8 @@
     "milestone": null,
     "comments": 1,
     "created_at": "2019-02-19T12:40:38Z",
-    "updated_at": "2019-02-27T11:40:07Z",
-    "closed_at": null,
+    "updated_at": "2019-02-27T11:41:36Z",
+    "closed_at": "2019-02-27T11:41:36Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
       "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/pulls/19",
@@ -238,17 +238,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-02-12T16:53:26Z",
-    "updated_at": "2019-02-12T16:53:26Z",
-    "closed_at": null,
+    "updated_at": "2019-02-27T11:41:44Z",
+    "closed_at": "2019-02-27T11:41:44Z",
     "author_association": "COLLABORATOR",
     "body": "The draft currently only covers DLEQ proof generation for input query from the client. It would be good to integrate the batching mechanism that we use in Privacy Pass when the client makes n>1 input queries."
   },
@@ -286,17 +286,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 4,
+    "comments": 5,
     "created_at": "2019-02-12T16:51:44Z",
-    "updated_at": "2019-02-13T14:30:55Z",
-    "closed_at": null,
+    "updated_at": "2019-02-27T11:41:55Z",
+    "closed_at": "2019-02-27T11:41:54Z",
     "author_association": "COLLABORATOR",
     "body": "@chris-wood I spoke to Hugo Krawczyk at RWC and he mentioned being more general in this draft so that we cover OPRFs as well as VOPRFs (i.e. make verifiability optional). This would allow us to cover additional use-cases such as that of OPAQUE (https://eprint.iacr.org/2018/163.pdf) and SPHINCS (https://eprint.iacr.org/2018/695.pdf). It may also help to differentiate the techniques that we use from VRFs without obliviousness.\r\n\r\nWhat do you think? I would be happy to write up the necessary changes."
   },
