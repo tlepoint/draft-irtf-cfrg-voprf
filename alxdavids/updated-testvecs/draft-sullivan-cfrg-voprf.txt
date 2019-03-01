@@ -5,10 +5,10 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: September 1, 2019                                    Cloudflare
+Expires: September 2, 2019                                    Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                       February 28, 2019
+                                                          March 01, 2019
 
 
      Oblivious Pseudorandom Functions (OPRFs) in Prime-Order Groups
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 1, 2019.
+   This Internet-Draft will expire on September 2, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 1]
+Davidson, et al.        Expires September 2, 2019               [Page 1]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -102,24 +102,24 @@ Table of Contents
      6.2.  Modified protocol execution . . . . . . . . . . . . . . .  18
      6.3.  PRNG and resampling . . . . . . . . . . . . . . . . . . .  18
    7.  Elliptic Curve Group and Hash Function Instantiations . . . .  18
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  20
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  19
      8.1.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  20
      8.2.  Hashing to curves . . . . . . . . . . . . . . . . . . . .  20
      8.3.  Verifiability (key consistency) . . . . . . . . . . . . .  20
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 2]
+Davidson, et al.        Expires September 2, 2019               [Page 2]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  20
-     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  21
+     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  20
      9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  21
        9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  21
    10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  21
-   11. Normative References  . . . . . . . . . . . . . . . . . . . .  22
+   11. Normative References  . . . . . . . . . . . . . . . . . . . .  21
    Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  23
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  26
 
@@ -165,9 +165,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 3]
+Davidson, et al.        Expires September 2, 2019               [Page 3]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    provides preliminary test vectors for experimentation.  The rest of
@@ -221,9 +221,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 4]
+Davidson, et al.        Expires September 2, 2019               [Page 4]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    o  NIZK: Non-interactive zero knowledge.
@@ -277,9 +277,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 5]
+Davidson, et al.        Expires September 2, 2019               [Page 5]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    o  The output distribution of y = F(k, x) is indistinguishable from
@@ -333,9 +333,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 6]
+Davidson, et al.        Expires September 2, 2019               [Page 6]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
         Verifier              Prover
@@ -389,9 +389,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 7]
+Davidson, et al.        Expires September 2, 2019               [Page 7]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    For verifiability we modify the algorithms of VOPRF_Setup, VOPRF_Sign
@@ -445,9 +445,9 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 8]
+Davidson, et al.        Expires September 2, 2019               [Page 8]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    be a prime-order subgroup of an elliptic curve over base field GF(p)
@@ -501,9 +501,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019               [Page 9]
+Davidson, et al.        Expires September 2, 2019               [Page 9]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    5.  In the elliptic curve setting, P multiplies Z by the cofactor
@@ -557,9 +557,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 10]
+Davidson, et al.        Expires September 2, 2019              [Page 10]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    Input:
@@ -613,9 +613,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 11]
+Davidson, et al.        Expires September 2, 2019              [Page 11]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
 4.6.  VOPRF algorithms
@@ -669,9 +669,9 @@ Steps:
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 12]
+Davidson, et al.        Expires September 2, 2019              [Page 12]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    Input:
@@ -725,9 +725,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 13]
+Davidson, et al.        Expires September 2, 2019              [Page 13]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    Input:
@@ -781,9 +781,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 14]
+Davidson, et al.        Expires September 2, 2019              [Page 14]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    Consequently, this allows extending the OPRF protocol with a (non-
@@ -837,9 +837,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 15]
+Davidson, et al.        Expires September 2, 2019              [Page 15]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
    Input:
@@ -893,9 +893,9 @@ Internet-Draft                   VOPRFs                    February 2019
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 16]
+Davidson, et al.        Expires September 2, 2019              [Page 16]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
 6.1.  Batched DLEQ algorithms
@@ -949,9 +949,9 @@ Steps:
 
 
 
-Davidson, et al.        Expires September 1, 2019              [Page 17]
+Davidson, et al.        Expires September 2, 2019              [Page 17]
 
-Internet-Draft                   VOPRFs                    February 2019
+Internet-Draft                   VOPRFs                       March 2019
 
 
  Input:
@@ -988,30 +988,27 @@ Internet-Draft                   VOPRFs                    February 2019
 
    Any function that satisfies the security properties of a pseudorandom
    number generator can be used for computing the batched DLEQ proof.
-   For example, SHAKE-256 or HKDF-SHA256 would be reasonable choices for
-   groups that have an order of 256 bits.
+   For example, SHAKE-256 [SHAKE] or HKDF-SHA256 [RFC5869] would be
+   reasonable choices for groups that have an order of 256 bits.
 
-   We note that the PRNG outputs d1,...,dn should be smaller than the
-   order of the group/curve that is being used.  Samples that are larger
-   should be ignored and resampling is done.  Resampling can be achieved
-   by increasing the value of the iterator that is used in the info
-   field of the PRNG input.
+   We note that the PRNG outputs d1,...,dn must be smaller than the
+   order of the group/curve that is being used.  Resampling can be
+   achieved by increasing the value of the iterator that is used in the
+   info field of the PRNG input.
 
 7.  Elliptic Curve Group and Hash Function Instantiations
 
    This section specifies supported ECVOPRF group and hash function
    instantiations.  We focus on the instantiations of the VOPRF in the
-
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 18]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
    elliptic curve setting for now.  Eventually, we would like to provide
    instantiations based on curves over non-prime-order base fields.
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 18]
+
+Internet-Draft                   VOPRFs                       March 2019
+
 
    ECVOPRF-P256-HKDF-SHA256:
 
@@ -1025,7 +1022,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    o  H_4: SHA256
 
-   o  PRNG: HKDF
+   o  PRNG: HKDF-SHA256
 
    ECVOPRF-P521-HKDF-SHA512:
 
@@ -1039,7 +1036,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    o  H_4: SHA512
 
-   o  PRNG: HKDF
+   o  PRNG: HKDF-SHA512
 
    ECVOPRF-CURVE25519-HKDF-SHA256:
 
@@ -1053,18 +1050,7 @@ Internet-Draft                   VOPRFs                    February 2019
 
    o  H_4: SHA256
 
-   o  PRNG: HKDF
-
-
-
-
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 19]
-
-Internet-Draft                   VOPRFs                    February 2019
-
+   o  PRNG: HKDF-SHA256
 
 8.  Security Considerations
 
@@ -1072,6 +1058,13 @@ Internet-Draft                   VOPRFs                    February 2019
    recommend P regularly rotate k so as to keep its window of compromise
    small.  Moreover, it each key should be generated from a source of
    safe, cryptographic randomness.
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 19]
+
+Internet-Draft                   VOPRFs                       March 2019
+
 
    Another critical aspect of this protocol is reliance on
    [I-D.irtf-cfrg-hash-to-curve] for mapping arbitrary inputs x to
@@ -1111,17 +1104,6 @@ Internet-Draft                   VOPRFs                    February 2019
 
    This section describes various applications of the VOPRF protocol.
 
-
-
-
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 20]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
 9.1.  Privacy Pass
 
    This VOPRF protocol is used by Privacy Pass system to help Tor users
@@ -1132,6 +1114,14 @@ Internet-Draft                   VOPRFs                    February 2019
    response and, if valid, signs (at most) n blinded points, which are
    then returned to C along with a batched DLEQ proof.  C stores the
    tokens if the batched proof verifies correctly.  When C attempts to
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 20]
+
+Internet-Draft                   VOPRFs                       March 2019
+
+
    connect to E again and is prompted with a CAPTCHA, C uses one of the
    unblinded and signed points, or tokens, to derive a shared symmetric
    key sk used to MAC the CAPTCHA challenge.  C sends the CAPTCHA, MAC,
@@ -1170,14 +1160,6 @@ Internet-Draft                   VOPRFs                    February 2019
    [PrivacyPass].  The authors would also like to acknowledge the
    helpful conversations with Hugo Krawczyk.
 
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 21]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
 11.  Normative References
 
    [ChaumBlindSignature]
@@ -1188,6 +1170,13 @@ Internet-Draft                   VOPRFs                    February 2019
    [ChaumPedersen]
               "Wallet Databases with Observers", n.d.,
               <https://chaum.com/publications/Wallet_Databases.pdf>.
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 21]
+
+Internet-Draft                   VOPRFs                       March 2019
+
 
    [DECAF]    "Decaf, Eliminating cofactors through point compression",
               n.d., <https://www.shiftleft.org/papers/decaf/decaf.pdf>.
@@ -1227,16 +1216,23 @@ Internet-Draft                   VOPRFs                    February 2019
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 22]
-
-Internet-Draft                   VOPRFs                    February 2019
-
+   [RFC5869]  Krawczyk, H. and P. Eronen, "HMAC-based Extract-and-Expand
+              Key Derivation Function (HKDF)", RFC 5869,
+              DOI 10.17487/RFC5869, May 2010,
+              <https://www.rfc-editor.org/info/rfc5869>.
 
    [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
               for Security", RFC 7748, DOI 10.17487/RFC7748, January
               2016, <https://www.rfc-editor.org/info/rfc7748>.
+
+
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 22]
+
+Internet-Draft                   VOPRFs                       March 2019
+
 
    [RFC8032]  Josefsson, S. and I. Liusvaara, "Edwards-Curve Digital
               Signature Algorithm (EdDSA)", RFC 8032,
@@ -1247,6 +1243,12 @@ Internet-Draft                   VOPRFs                    February 2019
               "The ristretto255 Group", n.d.,
               <https://tools.ietf.org/html/
               draft-hdevalence-cfrg-ristretto-00>.
+
+   [SHAKE]    "SHA-3 Standard, Permutation-Based Hash and Extendable-
+              Output Functions", n.d.,
+              <https://www.nist.gov/publications/sha-3-standard-
+              permutation-based-hash-and-extendable-output-
+              functions?pub_id=919061>.
 
    [SJKS17]   "SPHINX, A Password Store that Perfectly Hides from
               Itself", n.d.,
@@ -1280,16 +1282,16 @@ M: 04e2efdc73747e15e38b7a1bb90fe5e4ef964b3b8dccfda428f85a431420c84efca02f0f09c \
     83a8241b44572a059ab49c080a39d0bce2d5d0b44ff5d012b5184e7
 k: fb164de0a87e601fd4435c0d7441ff822b5fa5975d0c68035beac05a82c41118
 Z: 049d01e1c555bd3324e8ce93a13946b98bdcc765298e6d60808f93c00bdfba2ebf48eef8f28 \
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 23]
+
+Internet-Draft                   VOPRFs                       March 2019
+
+
     d8c91c903ad6bea3d840f3b9631424a6cc543a0a0e1f2d487192d5b
 N: 04723880e480b60b4415ca627585d1715ab5965570d30c94391a8b023f8854ac26f76c1d6ab \
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 23]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
     bb38688a5affbcadad50ecbf7c93ef33ddfd735003b5a4b1a21ba14
 D: { s: dfdf6ae40d141b61d5b2d72cf39c4a6c88db6ac5b12044a70c212e2bf80255b4,
      c: 271979a6b51d5f71719127102621fe250e3235867cfcf8dea749c3e253b81997 }
@@ -1336,16 +1338,16 @@ k: 0127c83f26b563b31db44233327f9bc68efcaa6e581310a6c022c6cf6b18d434cf8e08c7fb2 \
 Z: 040093b070f2b74e25e3c1735d953947e3f7e556b6ec6159aa1d3f74eaec220c70ccc62e174 \
     f9e95869b8946b002faae7911fbd4ce4d0118f989531e4340e3fe12ef5d01ec6cb89581789 \
     74ba9dc2310ef01370ca8959cb37e72f8b68b2ffbbc836ec5d50acefa131ce3f2d6af3fff8 \
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 24]
+
+Internet-Draft                   VOPRFs                       March 2019
+
+
     42b32c32372b93db634ca1cb7fd6a7568571bc000b7
 N: 0401d9712a2d8293737560f085fea1eb9b79689d191aeb1f44b054840288ca1fbe7047e30b9 \
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 24]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
     484ae61ca012f74bc9cf67bb95e2bea841fbedcdd1c619e4678e3b338cf017115d440c2a0f \
     6fb9f39777228f07db1804999a16f844269e2d183d611a85e070115109558b9c8ee0c383d0 \
     8abd249bdfd1f7ea52f55d966bd05f844982fba6fdc
@@ -1392,16 +1394,16 @@ k: 01a01384dda18314d2fc2969741413eed5e8252615b1f4ba987a70b471c71016a04239d0160 \
 PRNG: HKDF-SHA512
 salt: "DLEQ_PROOF"
 info: an iterator i for invoking the PRNG on Mi and Zi
+
+
+
+Davidson, et al.        Expires September 2, 2019              [Page 25]
+
+Internet-Draft                   VOPRFs                       March 2019
+
+
 D: { s: 01b9925b5644fc4de6806019c8300ff52433dbced0ced951cb11e949cbd0bfbdaef2ea \
     fa9ee8d8e8ef99445ecc34e284d7c13abf283574f23dfebb74804493583ddf,
-
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 25]
-
-Internet-Draft                   VOPRFs                    February 2019
-
-
      c: d5e37fe32807f49928e1eaf87f2644507183a2a92f5734068c4b0ae6fda750905d0d4d \
     8811d43c5f4677aaffaf762d0b07adb1615356ba79b6f7f07190cdb33f }
 
@@ -1451,6 +1453,4 @@ Authors' Addresses
 
 
 
-
-
-Davidson, et al.        Expires September 1, 2019              [Page 26]
+Davidson, et al.        Expires September 2, 2019              [Page 26]

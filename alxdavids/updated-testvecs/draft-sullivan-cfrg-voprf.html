@@ -332,7 +332,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Davidson, A., Sullivan, N., and C. Wood" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-sullivan-cfrg-voprf-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-02-28" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-03-01" />
   <meta name="dct.abstract" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
   <meta name="description" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
 
@@ -356,7 +356,7 @@ ul.toc li {
 <td class="right">N. Sullivan</td>
 </tr>
 <tr>
-<td class="left">Expires: September 1, 2019</td>
+<td class="left">Expires: September 2, 2019</td>
 <td class="right">Cloudflare</td>
 </tr>
 <tr>
@@ -369,7 +369,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">February 28, 2019</td>
+<td class="right">March 01, 2019</td>
 </tr>
 
     	
@@ -385,7 +385,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 1, 2019.</p>
+<p>This Internet-Draft will expire on September 2, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -1009,8 +1009,8 @@ Steps:
 <h1 id="rfc.section.6.3">
 <a href="#rfc.section.6.3">6.3.</a> <a href="#prng-and-resampling" id="prng-and-resampling">PRNG and resampling</a>
 </h1>
-<p id="rfc.section.6.3.p.1">Any function that satisfies the security properties of a pseudorandom number generator can be used for computing the batched DLEQ proof. For example, SHAKE-256 or HKDF-SHA256 would be reasonable choices for groups that have an order of 256 bits.</p>
-<p id="rfc.section.6.3.p.2">We note that the PRNG outputs d1,&#8230;,dn should be smaller than the order of the group/curve that is being used. Samples that are larger should be ignored and resampling is done. Resampling can be achieved by increasing the value of the iterator that is used in the info field of the PRNG input.</p>
+<p id="rfc.section.6.3.p.1">Any function that satisfies the security properties of a pseudorandom number generator can be used for computing the batched DLEQ proof. For example, SHAKE-256 <a href="#SHAKE" class="xref">[SHAKE]</a> or HKDF-SHA256 <a href="#RFC5869" class="xref">[RFC5869]</a> would be reasonable choices for groups that have an order of 256 bits.</p>
+<p id="rfc.section.6.3.p.2">We note that the PRNG outputs d1,&#8230;,dn must be smaller than the order of the group/curve that is being used. Resampling can be achieved by increasing the value of the iterator that is used in the info field of the PRNG input.</p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#ecinstantiation" id="ecinstantiation">Elliptic Curve Group and Hash Function Instantiations</a>
 </h1>
@@ -1025,7 +1025,7 @@ Steps:
 <li>H_2: SHA256</li>
 <li>H_3: SHA256</li>
 <li>H_4: SHA256</li>
-<li>PRNG: HKDF</li>
+<li>PRNG: HKDF-SHA256</li>
 </ul>
 <p id="rfc.section.7.p.4">ECVOPRF-P521-HKDF-SHA512:</p>
 <p></p>
@@ -1037,7 +1037,7 @@ Steps:
 <li>H_2: SHA512</li>
 <li>H_3: SHA512</li>
 <li>H_4: SHA512</li>
-<li>PRNG: HKDF</li>
+<li>PRNG: HKDF-SHA512</li>
 </ul>
 <p id="rfc.section.7.p.6">ECVOPRF-CURVE25519-HKDF-SHA256:</p>
 <p></p>
@@ -1050,7 +1050,7 @@ Steps:
 <li>H_2: SHA256</li>
 <li>H_3: SHA256</li>
 <li>H_4: SHA256</li>
-<li>PRNG: HKDF</li>
+<li>PRNG: HKDF-SHA256</li>
 </ul>
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#sec" id="sec">Security Considerations</a>
@@ -1141,6 +1141,11 @@ Steps:
 <a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
 </tr>
 <tr>
+<td class="reference"><b id="RFC5869">[RFC5869]</b></td>
+<td class="top">
+<a>Krawczyk, H.</a> and <a>P. Eronen</a>, "<a href="https://tools.ietf.org/html/rfc5869">HMAC-based Extract-and-Expand Key Derivation Function (HKDF)</a>", RFC 5869, DOI 10.17487/RFC5869, May 2010.</td>
+</tr>
+<tr>
 <td class="reference"><b id="RFC7748">[RFC7748]</b></td>
 <td class="top">
 <a>Langley, A.</a>, <a>Hamburg, M.</a> and <a>S. Turner</a>, "<a href="https://tools.ietf.org/html/rfc7748">Elliptic Curves for Security</a>", RFC 7748, DOI 10.17487/RFC7748, January 2016.</td>
@@ -1153,6 +1158,10 @@ Steps:
 <tr>
 <td class="reference"><b id="RISTRETTO">[RISTRETTO]</b></td>
 <td class="top">"<a href="https://tools.ietf.org/html/draft-hdevalence-cfrg-ristretto-00">The ristretto255 Group</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="SHAKE">[SHAKE]</b></td>
+<td class="top">"<a href="https://www.nist.gov/publications/sha-3-standard-permutation-based-hash-and-extendable-output-functions?pub_id=919061">SHA-3 Standard, Permutation-Based Hash and Extendable-Output Functions</a>", n.d..</td>
 </tr>
 <tr>
 <td class="reference"><b id="SJKS17">[SJKS17]</b></td>
