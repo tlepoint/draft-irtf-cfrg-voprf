@@ -715,7 +715,6 @@ Steps:
 Input:
 
  r: Random scalar in [1, p - 1].
- M: Blinded representation of x using blind r, an element in GG.
  Z: An element in GG.
 
 Output:
@@ -895,7 +894,7 @@ Steps:
 </h1>
 <p id="rfc.section.4.6.p.1">In the <a href="#OPAQUE" class="xref">[OPAQUE]</a> draft, it is noted that it may be more efficient to use additive blinding rather than multiplicative if the client can preprocess some values. For example, computing rH_1(x) is an example of multiplicative blinding.  A valid way of computing additive blinding would be to instead compute H_1(x)+rG, where G is the common generator for the group.</p>
 <p id="rfc.section.4.6.p.2">If the client preprocesses values of the form rG, then computing H_1(x)+rG is more efficient than computing rH_1(x) (one addition against log_2(r)).  Therefore, it may be advantageous to define the OPRF and VOPRF protocols using additive blinding rather than multiplicative blinding. In fact the only algorithms that need to change are OPRF_Blind and OPRF_Unblind (and similarly for the VOPRF variants).</p>
-<p id="rfc.section.4.6.p.3">We define the additive blinding variants of the above algorithms below along with a new algorithm OPRF_Preprocess that defines how preprocessing is carried out. The equivalent algorithms for VOPRF are identical. Notice that the only computation that changes is for V, the necessary computation of P does not change.</p>
+<p id="rfc.section.4.6.p.3">We define the additive blinding variants of the above algorithms below along with a new algorithm OPRF_Preprocess that defines how preprocessing is carried out. The equivalent algorithms for VOPRF are almost identical and so we do not redefine them here. Notice that the only computation that changes is for V, the necessary computation of P does not change.</p>
 <h1 id="rfc.section.4.6.1">
 <a href="#rfc.section.4.6.1">4.6.1.</a> <a href="#oprfpreprocess" id="oprfpreprocess">OPRF_Preprocess</a>
 </h1>
@@ -939,7 +938,6 @@ Steps:
 <pre>
 Input:
 
- rG: Preprocessed element of GG.
  rY: Preprocessed element of GG.
  M: Blinded representation of x using rG, an element in GG.
  Z: An element in GG.

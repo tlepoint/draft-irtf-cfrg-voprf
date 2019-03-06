@@ -567,7 +567,6 @@ Internet-Draft                   VOPRFs                       March 2019
    Input:
 
     r: Random scalar in [1, p - 1].
-    M: Blinded representation of x using blind r, an element in GG.
     Z: An element in GG.
 
    Output:
@@ -610,6 +609,7 @@ Internet-Draft                   VOPRFs                       March 2019
 
    4.  V sends M to P.
 
+   5.  P computes Z = kM = rkX, and D = DLEQ_Generate(k,G,Y,M,Z).
 
 
 
@@ -617,8 +617,6 @@ Davidson, et al.        Expires September 7, 2019              [Page 11]
 
 Internet-Draft                   VOPRFs                       March 2019
 
-
-   5.  P computes Z = kM = rkX, and D = DLEQ_Generate(k,G,Y,M,Z).
 
    6.  P sends (Z, D) to V.
 
@@ -663,6 +661,8 @@ Internet-Draft                   VOPRFs                       March 2019
     1.  r <-$ GF(p)
     2.  M := rH_1(x)
     3.  Output (r, M)
+
+
 
 
 
@@ -797,8 +797,9 @@ Internet-Draft                   VOPRFs                       March 2019
    We define the additive blinding variants of the above algorithms
    below along with a new algorithm OPRF_Preprocess that defines how
    preprocessing is carried out.  The equivalent algorithms for VOPRF
-   are identical.  Notice that the only computation that changes is for
-   V, the necessary computation of P does not change.
+   are almost identical and so we do not redefine them here.  Notice
+   that the only computation that changes is for V, the necessary
+   computation of P does not change.
 
 4.6.1.  OPRF_Preprocess
 
@@ -836,7 +837,6 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-
 Davidson, et al.        Expires September 7, 2019              [Page 15]
 
 Internet-Draft                   VOPRFs                       March 2019
@@ -846,7 +846,6 @@ Internet-Draft                   VOPRFs                       March 2019
 
    Input:
 
-    rG: Preprocessed element of GG.
     rY: Preprocessed element of GG.
     M: Blinded representation of x using rG, an element in GG.
     Z: An element in GG.
@@ -884,6 +883,7 @@ Internet-Draft                   VOPRFs                       March 2019
    below.
 
 5.1.  DLEQ_Generate
+
 
 
 
