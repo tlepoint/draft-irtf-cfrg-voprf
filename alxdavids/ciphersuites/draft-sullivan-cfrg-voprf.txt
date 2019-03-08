@@ -1091,8 +1091,11 @@ Internet-Draft                   VOPRFs                       March 2019
 
    This section specifies supported ECVOPRF group and hash function
    instantiations.  We only provide ciphersuites in the EC setting as
-   these provide the most efficient way of instantiating the VOPRF.  In
-   addition, we currently only support ciphersuites demonstrating 128
+   these provide the most efficient way of instantiating the OPRF.  Our
+   instantiation includes considerations for providing the DLEQ proofs
+   that make the instantiation a VOPRF.  To only support OPRF operations
+   (ECOPRF) then support for the relevant components is just dropped.
+   In addition, we currently only support ciphersuites demonstrating 128
    bits of security.
 
    ECVOPRF-P256-HKDF-SHA256:
@@ -1111,9 +1114,6 @@ Internet-Draft                   VOPRFs                       March 2019
 
          +  label: voprf_h2c
 
-   o  H_2: SHA256
-
-   o  H_3: SHA256
 
 
 
@@ -1121,6 +1121,10 @@ Davidson, et al.        Expires September 9, 2019              [Page 20]
 
 Internet-Draft                   VOPRFs                       March 2019
 
+
+   o  H_2: SHA256
+
+   o  H_3: SHA256
 
    o  H_4: SHA256
 
@@ -1166,10 +1170,6 @@ Internet-Draft                   VOPRFs                       March 2019
    [I-D.irtf-cfrg-hash-to-curve] for mapping arbitrary inputs x to
    points on a curve.  Security requires this mapping be pre-image and
    collision resistant.
-
-
-
-
 
 
 
