@@ -336,7 +336,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Davidson, A., Sullivan, N., and C. Wood" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-sullivan-cfrg-voprf-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-03-06" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-03-08" />
   <meta name="dct.abstract" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
   <meta name="description" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
 
@@ -360,7 +360,7 @@ ul.toc li {
 <td class="right">N. Sullivan</td>
 </tr>
 <tr>
-<td class="left">Expires: September 7, 2019</td>
+<td class="left">Expires: September 9, 2019</td>
 <td class="right">Cloudflare</td>
 </tr>
 <tr>
@@ -373,7 +373,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">March 06, 2019</td>
+<td class="right">March 08, 2019</td>
 </tr>
 
     	
@@ -389,7 +389,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 7, 2019.</p>
+<p>This Internet-Draft will expire on September 9, 2019.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -696,6 +696,7 @@ Steps:
 Input:
 
  k: Signer secret key.
+ h: optional cofactor (defaults to 1).
  M: An element in GG.
 
 Output:
@@ -810,6 +811,7 @@ Input:
  k: Signer secret key.
  Y: Signer public key (= kG).
  M: An element in GG.
+ h: optional cofactor (defaults to 1).
 
 Output:
 
@@ -819,8 +821,9 @@ Output:
 Steps:
 
  1. Z := kM
- 2. D = DLEQ_Generate(k,G,Y,M,Z)
- 3. Output (Z, D)
+ 2. Z &lt;- hZ
+ 3. D = DLEQ_Generate(k,G,Y,M,Z)
+ 4. Output (Z, D)
 </pre>
 <h1 id="rfc.section.4.4.4">
 <a href="#rfc.section.4.4.4">4.4.4.</a> <a href="#voprfunblind" id="voprfunblind">VOPRF_Unblind</a>
@@ -1089,45 +1092,50 @@ Steps:
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#ciphersuites" id="ciphersuites">Supported ciphersuites</a>
 </h1>
-<p id="rfc.section.7.p.1">This section specifies supported ECVOPRF group and hash function instantiations.  We only provide ciphersuites in the EC setting as these provide the most efficient way of instantiating the VOPRF.</p>
+<p id="rfc.section.7.p.1">This section specifies supported ECVOPRF group and hash function instantiations.  We only provide ciphersuites in the EC setting as these provide the most efficient way of instantiating the VOPRF. In addition, we currently only support ciphersuites demonstrating 128 bits of security.</p>
 <p id="rfc.section.7.p.2">ECVOPRF-P256-HKDF-SHA256:</p>
 <p></p>
 
 <ul>
-<li>GG: P-256</li>
-<li>H_1: Simplified SWU encoding <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>
+<li>GG: SECP256K1 curve <a href="#SEC2" class="xref">[SEC2]</a>
+</li>
+<li>H_1: <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> <ul>
+<li>hash-to-curve: map2curve_simple_swu</li>
+<li>hash-to-base: <ul>
+<li>H: SHA-256</li>
+<li>hbits: 256</li>
+<li>label: voprf_h2c</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>H_2: SHA256</li>
 <li>H_3: SHA256</li>
 <li>H_4: SHA256</li>
 <li>PRNG: HKDF-SHA256</li>
 </ul>
-<p id="rfc.section.7.p.4">ECVOPRF-P521-HKDF-SHA512:</p>
-<p></p>
-
-<ul>
-<li>GG: P-521</li>
-<li>H_1: Icart encoding <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>
-</li>
-<li>H_2: SHA512</li>
-<li>H_3: SHA512</li>
-<li>H_4: SHA512</li>
-<li>PRNG: HKDF-SHA512</li>
-</ul>
-<p id="rfc.section.7.p.6">ECVOPRF-RISTRETTO-HKDF-SHA256:</p>
+<p id="rfc.section.7.p.4">ECVOPRF-RISTRETTO-HKDF-SHA256:</p>
 <p></p>
 
 <ul>
 <li>GG: Ristretto <a href="#RISTRETTO" class="xref">[RISTRETTO]</a>
 </li>
-<li>H_1: Elligator2 encoding <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>
+<li>H_1: <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> <ul>
+<li>hash-to-curve: map2curve_elligator2</li>
+<li>hash-to-base: <ul>
+<li>hash: SHA256</li>
+<li>hbits: 256</li>
+<li>label: voprf_h2c</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>H_2: SHA256</li>
 <li>H_3: SHA256</li>
 <li>H_4: SHA256</li>
 <li>PRNG: HKDF-SHA256</li>
 </ul>
-<p id="rfc.section.7.p.8">In the case of Ristretto, internal point representations are represented by Ed25519 <a href="#RFC7748" class="xref">[RFC7748]</a> points. As a result, we can use the same hash-to-curve encoding as we would use for Ed25519 <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>.</p>
+<p id="rfc.section.7.p.6">In the case of Ristretto, internal point representations are represented by Ed25519 <a href="#RFC7748" class="xref">[RFC7748]</a> points. As a result, we can use the same hash-to-curve encoding as we would use for Ed25519 <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>.</p>
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#sec" id="sec">Security Considerations</a>
 </h1>
@@ -1234,6 +1242,11 @@ Steps:
 <tr>
 <td class="reference"><b id="RISTRETTO">[RISTRETTO]</b></td>
 <td class="top">"<a href="https://tools.ietf.org/html/draft-hdevalence-cfrg-ristretto-00">The ristretto255 Group</a>", n.d..</td>
+</tr>
+<tr>
+<td class="reference"><b id="SEC2">[SEC2]</b></td>
+<td class="top">
+<a>Standards for Efficient Cryptography Group (SECG), .</a>, "<a href="http://www.secg.org/sec2-v2.pdf">SEC 2: Recommended Elliptic Curve Domain Parameters</a>", n.d..</td>
 </tr>
 <tr>
 <td class="reference"><b id="SHAKE">[SHAKE]</b></td>
