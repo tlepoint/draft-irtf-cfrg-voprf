@@ -5,13 +5,13 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                 ISG, Royal Holloway, University of London
 Intended status: Informational                               N. Sullivan
-Expires: September 9, 2019                                    Cloudflare
+Expires: September 11, 2019                                   Cloudflare
                                                                  C. Wood
                                                               Apple Inc.
-                                                          March 08, 2019
+                                                          March 10, 2019
 
 
-     Oblivious Pseudorandom Functions (OPRFs) in Prime-Order Groups
+   Oblivious Pseudorandom Functions (OPRFs) using Prime-Order Groups
                     draft-sullivan-cfrg-voprf-latest
 
 Abstract
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 9, 2019.
+   This Internet-Draft will expire on September 11, 2019.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 1]
+Davidson, et al.       Expires September 11, 2019               [Page 1]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 2]
+Davidson, et al.       Expires September 11, 2019               [Page 2]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    7.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  20
@@ -165,9 +165,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 3]
+Davidson, et al.       Expires September 11, 2019               [Page 3]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    computation using a known public key that serves as a commitment to
@@ -221,9 +221,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 4]
+Davidson, et al.       Expires September 11, 2019               [Page 4]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    o  Verifier (V): Protocol initiator when computing F(k, x).
@@ -277,9 +277,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 5]
+Davidson, et al.       Expires September 11, 2019               [Page 5]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 3.  Security Properties
@@ -333,9 +333,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 6]
+Davidson, et al.       Expires September 11, 2019               [Page 6]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    To finish the computation, V then removes its blind and hashes the
@@ -389,9 +389,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 7]
+Davidson, et al.       Expires September 11, 2019               [Page 7]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    o  OPRF_Unblind(r,M,Z): Unblind blinded signature Z with blind r,
@@ -445,9 +445,9 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Sign(k,M)))) = H_2(x, F(k,x))
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 8]
+Davidson, et al.       Expires September 11, 2019               [Page 8]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    cyclic, and we can pick a generator of this subgroup by picking g
@@ -501,9 +501,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019               [Page 9]
+Davidson, et al.       Expires September 11, 2019               [Page 9]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
  Input:
@@ -557,9 +557,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 10]
+Davidson, et al.       Expires September 11, 2019              [Page 10]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 4.3.4.  OPRF_Unblind
@@ -613,9 +613,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 11]
+Davidson, et al.       Expires September 11, 2019              [Page 11]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    6.  P sends (Z, D) to V.
@@ -669,9 +669,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 12]
+Davidson, et al.       Expires September 11, 2019              [Page 12]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 4.4.3.  VOPRF_Sign
@@ -725,9 +725,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 13]
+Davidson, et al.       Expires September 11, 2019              [Page 13]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    Input:
@@ -781,9 +781,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 14]
+Davidson, et al.       Expires September 11, 2019              [Page 14]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    If the client preprocesses values of the form rG, then computing
@@ -837,9 +837,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 15]
+Davidson, et al.       Expires September 11, 2019              [Page 15]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 4.6.3.  OPRF_Unblind
@@ -893,9 +893,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 16]
+Davidson, et al.       Expires September 11, 2019              [Page 16]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
   Input:
@@ -949,9 +949,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 17]
+Davidson, et al.       Expires September 11, 2019              [Page 17]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    communication.  To get around this, applications use a 'batching'
@@ -1005,9 +1005,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 18]
+Davidson, et al.       Expires September 11, 2019              [Page 18]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 Input:
@@ -1061,9 +1061,9 @@ Steps:
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 19]
+Davidson, et al.       Expires September 11, 2019              [Page 19]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 6.2.  Modified protocol execution
@@ -1117,9 +1117,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 20]
+Davidson, et al.       Expires September 11, 2019              [Page 20]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    o  H_2: SHA256
@@ -1173,9 +1173,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 21]
+Davidson, et al.       Expires September 11, 2019              [Page 21]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 8.1.  Timing Leaks
@@ -1229,9 +1229,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 22]
+Davidson, et al.       Expires September 11, 2019              [Page 22]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    The Privacy Pass implementation uses the P-256 instantiation of the
@@ -1285,9 +1285,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 23]
+Davidson, et al.       Expires September 11, 2019              [Page 23]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    [DGSTV18]  "Privacy Pass, Bypassing Internet Challenges Anonymously",
@@ -1341,9 +1341,9 @@ Internet-Draft                   VOPRFs                       March 2019
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 24]
+Davidson, et al.       Expires September 11, 2019              [Page 24]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
    [RISTRETTO]
@@ -1397,9 +1397,9 @@ Appendix A.  Test Vectors
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 25]
+Davidson, et al.       Expires September 11, 2019              [Page 25]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 P-256
@@ -1453,9 +1453,9 @@ D: { s: b2123044e633d4721894d573decebc9366869fe3c6b4b79a00311ecfa46c9e34,
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 26]
+Davidson, et al.       Expires September 11, 2019              [Page 26]
 
-Internet-Draft                   VOPRFs                       March 2019
+Internet-Draft                    OPRFs                       March 2019
 
 
 Authors' Addresses
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Davidson, et al.        Expires September 9, 2019              [Page 27]
+Davidson, et al.       Expires September 11, 2019              [Page 27]
