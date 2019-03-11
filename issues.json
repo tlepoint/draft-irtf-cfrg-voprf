@@ -1,6 +1,114 @@
 [
 
   {
+    "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/25",
+    "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf",
+    "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/25/labels{/name}",
+    "comments_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/25/comments",
+    "events_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/25/events",
+    "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/25",
+    "id": 419299797,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MjU5ODM2NDc5",
+    "number": 25,
+    "title": "Add notes on additional key consistency constraints.",
+    "user": {
+      "login": "e271828-",
+      "id": 7109823,
+      "node_id": "MDQ6VXNlcjcxMDk4MjM=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7109823?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/e271828-",
+      "html_url": "https://github.com/e271828-",
+      "followers_url": "https://api.github.com/users/e271828-/followers",
+      "following_url": "https://api.github.com/users/e271828-/following{/other_user}",
+      "gists_url": "https://api.github.com/users/e271828-/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/e271828-/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/e271828-/subscriptions",
+      "organizations_url": "https://api.github.com/users/e271828-/orgs",
+      "repos_url": "https://api.github.com/users/e271828-/repos",
+      "events_url": "https://api.github.com/users/e271828-/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/e271828-/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-03-11T05:26:36Z",
+    "updated_at": "2019-03-11T14:37:51Z",
+    "closed_at": null,
+    "author_association": "FIRST_TIME_CONTRIBUTOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/pulls/25",
+      "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/25",
+      "diff_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/25.diff",
+      "patch_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/25.patch"
+    },
+    "body": "Covers some of the points we went over in person last month, and corrects a few typos.\r\n\r\n(On the correct document this time.)"
+  },
+  {
+    "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/24",
+    "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf",
+    "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/24/labels{/name}",
+    "comments_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/24/comments",
+    "events_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/24/events",
+    "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/24",
+    "id": 419229291,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MjU5Nzg3NDMy",
+    "number": 24,
+    "title": "Small changes and typos",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-03-10T20:36:32Z",
+    "updated_at": "2019-03-11T15:19:36Z",
+    "closed_at": "2019-03-11T15:19:36Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/pulls/24",
+      "html_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/24",
+      "diff_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/24.diff",
+      "patch_url": "https://github.com/chris-wood/draft-sullivan-cfrg-oprf/pull/24.patch"
+    },
+    "body": "- Change file name to oprf\r\n- Fix typos in algorithm inputs\r\n- Make the h2c ciphersuites a bit briefer\r\n- Switched the Ristretto ciphersuite to use SHA-512 to be consistent with the Curve25519 h2c ciphersuite."
+  },
+  {
     "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/23",
     "repository_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf",
     "labels_url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/issues/23/labels{/name}",
@@ -34,17 +142,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-03-10T20:16:39Z",
-    "updated_at": "2019-03-10T20:16:39Z",
-    "closed_at": null,
+    "updated_at": "2019-03-11T05:25:35Z",
+    "closed_at": "2019-03-11T05:25:35Z",
     "author_association": "FIRST_TIME_CONTRIBUTOR",
     "pull_request": {
       "url": "https://api.github.com/repos/chris-wood/draft-sullivan-cfrg-oprf/pulls/23",
