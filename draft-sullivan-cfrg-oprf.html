@@ -1146,7 +1146,9 @@ Steps:
 <h1 id="rfc.section.8.3">
 <a href="#rfc.section.8.3">8.3.</a> <a href="#verifiability-key-consistency" id="verifiability-key-consistency">Verifiability (key consistency)</a>
 </h1>
-<p id="rfc.section.8.3.p.1">DLEQ proofs are essential to the protocol to allow V to check that P&#8217;s designated private key was used in the computation. A side effect of this property is that it prevents P from using unique key for select verifiers as a way of &#8220;tagging&#8221; them. If all verifiers expect use of a certain private key, e.g., by locating P&#8217;s public key key published from a trusted registry, then P cannot present unique keys to an individual verifier.</p>
+<p id="rfc.section.8.3.p.1">DLEQ proofs are essential to the protocol to allow V to check that P&#8217;s designated private key was used in the computation. A side effect of this property is that it prevents P from using a unique key for select verifiers as a way of &#8220;tagging&#8221; them. If all verifiers expect use of a certain private key, e.g., by locating P&#8217;s public key published from a trusted registry, then P cannot present unique keys to an individual verifier.</p>
+<p id="rfc.section.8.3.p.2">For this side effect to hold, P must also be prevented from using other techniques to manipulate their public key within the trusted registry to reduce client anonymity. For example, if P&#8217;s public key is rotated too frequently then this may stratify the user base into small anonymity groups (those with VOPRF_Sign outputs taken from a given key epoch). In this case, it may become practical to link VOPRF sessions for a given user and thus compromises their privacy.</p>
+<p id="rfc.section.8.3.p.3">Similarly, if P can publish N public keys to a trusted registry then P may be able to control presentation of these keys in such a way that V is retroactively identified by V&#8217;s key choice across multiple requests.</p>
 <h1 id="rfc.section.9">
 <a href="#rfc.section.9">9.</a> <a href="#apps" id="apps">Applications</a>
 </h1>
@@ -1168,7 +1170,7 @@ Steps:
 <h1 id="rfc.section.10">
 <a href="#rfc.section.10">10.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
 </h1>
-<p id="rfc.section.10.p.1">This document resulted from the work of the Privacy Pass team <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>.  The authors would also like to acknowledge the helpful conversations with Hugo Krawczyk.</p>
+<p id="rfc.section.10.p.1">This document resulted from the work of the Privacy Pass team <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>.  The authors would also like to acknowledge the helpful conversations with Hugo Krawczyk. Eli-Shaoul Khedouri provided additional review and comments on key consistency.</p>
 <h1 id="rfc.references">
 <a href="#rfc.references">11.</a> Normative References</h1>
 <table><tbody>
