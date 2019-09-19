@@ -874,6 +874,7 @@ Input:
  M: An element in GG.
  Z: An element in GG.
  D: DLEQ proof (c, s).
+ H_3: A hash function from GG to {0,1}^L, modelled as a random oracle.
 
 Output:
 
@@ -887,7 +888,7 @@ Steps:
  4. Output c == c' (mod p)
 ~~~
 
-# Batched VOPRF evaluation {#batch}
+## Batched VOPRF evaluation {#batch}
 
 Common applications (e.g. {{PrivacyPass}}) require V to obtain multiple PRF
 evaluations from P. In the VOPRF case, this would also require generation and
@@ -910,8 +911,6 @@ In this section, we describe algorithms for batching the DLEQ generation and
 verification procedure. For these algorithms we require an additional random
 oracle H_5: {0,1}^a x ZZ^3 -> {0,1}^b that takes an inputs of a binary
 string of length a and three integer values, and outputs an element in {0,1}^b.
-
-## Batched DLEQ algorithms
 
 ### Batched_DLEQ_Generate
 
@@ -952,6 +951,8 @@ Input:
  [ Mi ]: An array of points in GG of length n.
  [ Zi ]: An array of points in GG of length n.
  D: DLEQ proof (c, s).
+ H_4: A hash function from GG^(2n+2) to {0,1}^a, modelled as a random oracle.
+ H_5: A hash function from {0,1}^a x ZZ^2 to {0,1}^b, modelled as a random oracle.
 
 Output:
 
@@ -967,7 +968,7 @@ Steps:
  6. Output DLEQ_Verify(G,Y,M,Z,D)
 ~~~
 
-## Modified protocol execution
+### Modified protocol execution
 
 The VOPRF protocol from Section {{protocol}} changes to allow specifying
 multiple blinded PRF inputs [ Mi ] for i in 1...n. P computes the array [ Zi ]
@@ -975,6 +976,132 @@ and replaces DLEQ_Generate with Batched_DLEQ_Generate over these arrays. The
 same applies to the algorithm VOPRF_Eval. The same applies for replacing
 DLEQ_Verify with Batched_DLEQ_Verify when V verifies the response from P and
 during the algorithm VOPRF_Verify.
+
+## DLEQ OR-proofs {#or-proofs}
+
+We describe a third variant of the DLEQ proof system that allows a server to
+prove the following statement:
+
+~~~
+- Let Y1 = k1G, and Y2 = k2G for independent scalar keys k1 and k2, for some group element G.
+- Let Z = kiM, for some group element M, and some scalar ki.
+- Given G, Y1, Y2, M, Z, then ki == k1, or ki == k2.
+~~~
+
+The proof system still proves this statement in zero-knowledge, meaning that the
+client does not learn k1, k2, or ki. Note that this approach requires committing
+to two public-key pairs, (G,Y1) and (G,Y2).
+
+The utility provided by this proof system extends to situations where the VOPRF
+evaluator would like to provide tokens signed by either one of k1, and k2. This
+allows the VOPRF evaluator to store a bit of information about the user that it
+has issued tokens for. The user does not learn which of the keys has been used
+to issue tokens. When the user later redeems the unblinded issuance data with
+the server, the server uses both keys and can check which key it used to sign
+the data. Token redemption is an important part of many of the applications of
+VOPRFs ({{apps}}).
+
+This information may be useful in classifying redemptions differently for each
+user. For example, the server may want to store some binary flag about the user
+at the moment of issuance (such as whether the user is 'trusted' or not). Then
+at the redemption stage, the server can learn whether the user is deemed to be
+trusted and act accordingly.
+
+### Security considerations
+
+Note that stratifying the user base of the VOPRF evaluator can lead to
+anonymisation attacks. We study the efficacy of attacks of this nature more
+closely in {{client-privacy}}. In summary, we should limit the ability of the
+VOPRF evaluator to segregate the user base. This means that it is necessary to
+also limit the amount of metadata that the evaluator can store about the user.
+For this use-case, storing a single bit of information (and segregating users
+into two groups) is reasonable as long as the number of users remains high, and
+as long as the keys are both committed to properly.
+
+We discuss the parameters and affect on client privacy in more depth in
+{{client-privacy}}.
+
+### Algorithms
+
+We detail the algorithms of the proof system below. In the following, we will
+assume that Z = k2M without loss of generality. The proof can be mirrored to
+the case where Z = k1M, if necessary.
+
+#### OR_DLEQ_Generate
+
+~~~
+Input:
+
+ k1: First evaluator secret key.
+ k2: Second evaluator secret key.
+ G: Public fixed generator of GG.
+ Y1: First evaluator public key (= k1G).
+ Y2: First evaluator public key (= k2G).
+ M: An element in GG.
+ Z: An element in GG (= k2M).
+ H_3: A hash function from GG to {0,1}^L, modelled as a random oracle.
+
+Output:
+
+ D: OR-DLEQ proof (c1, c2, r1, r2)
+
+Steps:
+
+ 1. v1, v2, w <-$ GF(p)
+ 2. A1 := v1*G + w*Y1
+ 3. A2 := v1*M + w*Z
+ 4. A3 := v2*G
+ 5. A4 := v2*M
+ 6. c <- H_3(G,Y1,Y2,M,Z,A1,A2,A3,A4) (mod p)
+ 7. c1 := w
+ 8. c2 := c - c1
+ 9. r1 := v1
+ 10. r2 := v2 - c2k2
+ 11. Output D := (c1, c2, r1, r2)
+~~~
+
+#### OR_DLEQ_Verify
+
+~~~
+Input:
+
+ G: Public fixed generator of GG.
+ Y1: First evaluator public key (= k1G).
+ Y2: First evaluator public key (= k2G).
+ M: An element in GG.
+ Z: An element in GG (= k2M).
+ D: DLEQ proof (c1, c2, r1, r2).
+ H_3: A hash function from GG to {0,1}^L, modelled as a random oracle.
+
+Output:
+
+ True if log_G(Y2) == log_M(Z), False otherwise.
+
+Steps:
+
+ 1. A1’ = c1*Y1 + r1*G = w*Y1 + v1*G
+ 2. A2’ = c1*Z + r1*M = w*Z + v1*M
+ 3. A3’ = c2*Y2 + r2*G = v2*G
+ 4. A4’ = c2*Z + r2*M = v2*M
+ 5. c' <- H_3(G,Y1,Y2,M,Z,A1',A2',A3',A4') (mod p)
+ 6. Output (c' == (c2 + c1))
+~~~
+
+### Security arguments
+
+TODO: should we give security arguments, or are we able to leverage generic
+techniques?
+
+### Batching OR proofs
+
+It is possible to batch multiple VOPRF evaluations into a single batched proof
+object, in a similar to that described in {{batch}}. There is a caveat in that
+batching only applies in the case that all VOPRF evaluations in the same batch
+are computed using the same key. That is, if we have multiple pairs (M1,Z1),
+(M2,Z2) ... that we wish to construct a single batched proof over, then we
+require that Zi = k2*Mi for all i (or k1, without loss of generality).
+
+TODO: describe batched proof construction, if necessary.
 
 ## Random oracle instantiations for proofs
 
@@ -1031,17 +1158,20 @@ encoding as we would use for Ed25519 {{I-D.irtf-cfrg-hash-to-curve}}. We remark
 that the 'label' field is necessary for domain separation of the hash-to-curve
 functionality.
 
-# Security Considerations {#sec}
+# Security considerations {#sec}
 
-Security of the protocol depends on P's secrecy of k. Best practices recommend P
-regularly rotate k so as to keep its window of compromise small. Moreover, if
-each key should be generated from a source of safe, cryptographic randomness.
+We describe a series of security considerations that are critical to a secure
+instantiation of the (V)OPRF functionality. We focus on the following aspects:
 
-A critical aspect of this protocol is reliance on
-{{I-D.irtf-cfrg-hash-to-curve}} for mapping arbitrary inputs x to points on a
-curve. Security requires this mapping be pre-image and collision resistant.
+- The security of the server's key
+- The hash-to-curve used for encoding random bytes as curve points
+- The use of DLEQ proofs for verifying that the server always uses a consistent
+  key
+- Ensuring client privacy by preventing the segregation of the VOPRF user-base
 
-## Timing Leaks
+## Security of server key
+
+### Timing leaks
 
 To ensure no information is leaked during protocol execution, all operations
 that use secret data MUST be constant time. Operations that SHOULD be constant
@@ -1049,7 +1179,37 @@ time include: H_1() (hashing arbitrary strings to curves) and DLEQ_Generate().
 {{I-D.irtf-cfrg-hash-to-curve}} describes various algorithms for constant-time
 implementations of H_1.
 
+### Key rotation {#key-rotation}
+
+Since the server's key is critical to security, the longer it is exposed by
+performing VOPRF operations on client inputs, the longer it is possible that the
+key can be compromised. For instance, if the key is kept in production for a
+long period of time, then this grants the client the ability to hoard large
+numbers of tokens. This has negative impacts for some of the applications that
+we consider in {{apps}}. As another example, if the key is kept in
+circulation for a long period of time, then any out-of-band compromisation of
+the key has greater utility.
+
+To combat attacks of this nature, we argue that fairly regular key rotation
+should be employed on the server-side. A suitable key-cycle for a key used to
+compute (V)OPRF evaluations would be between two weeks, and three months.
+
+We note that key rotations that are too frequent (<< 2 weeks) can lead to large
+segregation of the wider user base. This occurs because as keys are rotated,
+different users have tokens issued under different keys. If a token is later
+revealed to the server, then they can identify in which time period the user has
+had their token issued. See {{client-privacy}} for more details.
+
+As such, the length of the key cycles represent a trade-off between greater
+server key security (for shorter cycles), and better client privacy (for longer
+cycles). In situations where client privacy is paramount, then longer key cycles
+should be employed.
+
 ## Hashing to curves
+
+A critical aspect of this protocol is reliance on
+{{I-D.irtf-cfrg-hash-to-curve}} for mapping arbitrary inputs x to points on a
+curve. Security requires this mapping be pre-image and collision resistant.
 
 We choose different encodings in relation to the elliptic curve that is used,
 all methods are illuminated precisely in {{I-D.irtf-cfrg-hash-to-curve}}. In
@@ -1078,6 +1238,11 @@ compromise their privacy.
 Similarly, if P can publish N public keys to a trusted registry then P may be
 able to control presentation of these keys in such a way that V is retroactively
 identified by V's key choice across multiple requests.
+
+## Client privacy {#client-privacy}
+
+TODO: discuss client-privacy considerations with respect to segregating user
+bases
 
 # Applications {#apps}
 
