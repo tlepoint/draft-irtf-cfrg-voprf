@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/57",
+    "id": 503478724,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzI1MzIyOTkx",
+    "number": 57,
+    "title": "Protocol integration suggestions",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-10-07T14:12:04Z",
+    "updated_at": "2019-10-07T14:20:43Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/57",
+      "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/57",
+      "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/57.diff",
+      "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/57.patch"
+    },
+    "body": "Branch to be merged into alxdavids/sec-considerations branch as it depends on some changes in that branch.\r\n\r\nChanges:\r\n- Changes to some of the (V)OPRF functions\r\n- Suggestions for implementing OPRF evaluation as part of wider protocol\r\n\r\n@chris-wood are these recommendations for protocol integration helpful?"
+  },
+  {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/56",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/56/labels{/name}",
@@ -129,7 +183,7 @@
     "milestone": null,
     "comments": 3,
     "created_at": "2019-10-04T15:28:53Z",
-    "updated_at": "2019-10-04T15:46:25Z",
+    "updated_at": "2019-10-04T16:08:30Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -2039,7 +2093,10 @@
     "closed_at": "2019-07-05T13:45:07Z",
     "author_association": "COLLABORATOR",
     "body": "From Hugo:\r\n```\r\nA note on terminology: additive vs multiplicative is problematic since in the\r\ncase of multiplicative notation this becomes multiplicative vs exponential with\r\nmultiplicative playing two different meanings. I thought maybe calling them\r\nFixed-base blinding (FBB) vs Variable-base blinding (VBB).\r\n```\r\ni.e. we should replace additive blinding with FBB, and multiplicative with VBB."
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/27",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
@@ -2125,10 +2182,7 @@
     "closed_at": null,
     "author_association": "NONE",
     "body": "At section 5.1.  DLEQ_Generate\r\n~~~\r\n4. s := (r - ck) (mod p)  \r\n~~~\r\nIt must be reduced modulo the order of the curve.\r\n"
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/26",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
