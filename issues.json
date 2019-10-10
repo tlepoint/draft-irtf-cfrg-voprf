@@ -1,6 +1,146 @@
 [
 
   {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59",
+    "id": 505313432,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzI2NzcwNDE1",
+    "number": 59,
+    "title": "Update batching section",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-10-10T14:34:15Z",
+    "updated_at": "2019-10-10T14:34:15Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/59",
+      "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59",
+      "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59.diff",
+      "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59.patch"
+    },
+    "body": "- More specificity on rejection sampling\r\n- Add batched unblinding algorithm"
+  },
+  {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/58",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/58/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/58/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/58/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/58",
+    "id": 504143279,
+    "node_id": "MDU6SXNzdWU1MDQxNDMyNzk=",
+    "number": 58,
+    "title": "Allow specifying auxiliary data in OPRF_Finalize",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "assignees": [
+      {
+        "login": "alxdavids",
+        "id": 7470539,
+        "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/alxdavids",
+        "html_url": "https://github.com/alxdavids",
+        "followers_url": "https://api.github.com/users/alxdavids/followers",
+        "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+        "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+        "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+        "repos_url": "https://api.github.com/users/alxdavids/repos",
+        "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+        "type": "User",
+        "site_admin": false
+      }
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-10-08T16:17:00Z",
+    "updated_at": "2019-10-08T16:17:00Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "body": "We should modify the OPRF_Finalize procedure to run:\r\n\r\n```\r\ndk = H_2(lbl, x .. N)\r\ny = H_2(dk, aux)\r\n```\r\n\r\nwhere aux is arbitrary auxiliary data that is also stored by the client. This is closer to current implementations of the Privacy Pass protocol and likely to be useful in applications where there is a later redemption step that needs to be bound to specific request data."
+  },
+  {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/57/labels{/name}",
@@ -1959,7 +2099,10 @@
     "closed_at": "2019-07-08T13:00:55Z",
     "author_association": "COLLABORATOR",
     "body": "Hugo noted that some of the Sections are incorrectly labelled."
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/29",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
@@ -2093,10 +2236,7 @@
     "closed_at": "2019-07-05T13:45:07Z",
     "author_association": "COLLABORATOR",
     "body": "From Hugo:\r\n```\r\nA note on terminology: additive vs multiplicative is problematic since in the\r\ncase of multiplicative notation this becomes multiplicative vs exponential with\r\nmultiplicative playing two different meanings. I thought maybe calling them\r\nFixed-base blinding (FBB) vs Variable-base blinding (VBB).\r\n```\r\ni.e. we should replace additive blinding with FBB, and multiplicative with VBB."
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/27",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
