@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/60",
+    "id": 505326264,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzI2NzgwOTE0",
+    "number": 60,
+    "title": "Update OPRF_Finalize algorithm",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-10-10T14:54:19Z",
+    "updated_at": "2019-10-10T14:54:19Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/60",
+      "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/60",
+      "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/60.diff",
+      "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/60.patch"
+    },
+    "body": "It is helpful in some applications to allow finalization over specific data. This change is based on the existing PR for protocol integrations and so needs to be merged into that branch before master.\r\n\r\nChanges:\r\n- Allows finalization over auxiliary data"
+  },
+  {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/59/labels{/name}",
@@ -43,7 +97,7 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2019-10-10T14:34:15Z",
-    "updated_at": "2019-10-10T14:34:15Z",
+    "updated_at": "2019-10-10T14:34:38Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -52,7 +106,7 @@
       "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59.diff",
       "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/59.patch"
     },
-    "body": "- More specificity on rejection sampling\r\n- Add batched unblinding algorithm"
+    "body": "For #56:\r\n- More specificity on rejection sampling\r\n- Add batched unblinding algorithm"
   },
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/58",
@@ -183,7 +237,7 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2019-10-07T14:12:04Z",
-    "updated_at": "2019-10-07T14:20:43Z",
+    "updated_at": "2019-10-28T16:55:47Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -323,7 +377,7 @@
     "milestone": null,
     "comments": 3,
     "created_at": "2019-10-04T15:28:53Z",
-    "updated_at": "2019-10-04T16:08:30Z",
+    "updated_at": "2019-10-28T17:34:29Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -2013,7 +2067,10 @@
     "closed_at": "2019-07-08T13:06:08Z",
     "author_association": "COLLABORATOR",
     "body": "From Hugo:\r\n\r\n```\r\n> This schemes does not work with RSA. You cannot compute the inverse of r\r\n> without knowing the factorization of N. Chaum's scheme uses multiplicative\r\n> blinding (see my comments on this issue).  \r\n```\r\n\r\nMaybe we should just remove this section, it's probably not that helpful anyway?"
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/30",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
@@ -2099,10 +2156,7 @@
     "closed_at": "2019-07-08T13:00:55Z",
     "author_association": "COLLABORATOR",
     "body": "Hugo noted that some of the Sections are incorrectly labelled."
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/29",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
