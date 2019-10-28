@@ -1534,10 +1534,8 @@ Internet-Draft                    OPRFs                     October 2019
    immediately know which initial request they launched.
 
    The VOPRF variant helps mitigate this attack since each server
-   evaluation can be bound to a known public key.  However, DLEQ proofs
-   that link each server evaluation to a known public key.  However,
-   there are still ways that the VOPRF construction can be abused.  In
-   particular:
+   evaluation can be bound to a known public key.  However, there are
+   still ways that the VOPRF construction can be abused.  In particular:
 
    o  If the server successfully provisions a large number of keys that
       are trusted by clients, then the server can divide the user-base
@@ -1561,6 +1559,8 @@ Internet-Draft                    OPRFs                     October 2019
    should be accessible from a client-trusted registry with a way of
    auditing the history of key updates.  We also recommend that public
    keys have a corresponding expiry date that clients can use to prevent
+   the server from using keys that have been provisioned for a long
+   period of time.
 
 
 
@@ -1569,9 +1569,6 @@ Davidson, et al.         Expires April 30, 2020                [Page 28]
 
 Internet-Draft                    OPRFs                     October 2019
 
-
-   the server from using keys that have been provisioned for a long
-   period of time.
 
 8.5.  Key rotation
 
@@ -1618,6 +1615,9 @@ Internet-Draft                    OPRFs                     October 2019
    use x to derive sk and verify the CAPTCHA MAC.  Thus, each token is
    used at most once by the system.
 
+   The Privacy Pass implementation uses the P-256 instantiation of the
+   VOPRF protocol.  For more details, see [DGSTV18].
+
 
 
 
@@ -1625,9 +1625,6 @@ Davidson, et al.         Expires April 30, 2020                [Page 29]
 
 Internet-Draft                    OPRFs                     October 2019
 
-
-   The Privacy Pass implementation uses the P-256 instantiation of the
-   VOPRF protocol.  For more details, see [DGSTV18].
 
 9.2.  Private Password Checker
 
@@ -1674,6 +1671,9 @@ Internet-Draft                    OPRFs                     October 2019
 
    [BG04]     "The Static Diffie-Hellman Problem", n.d.,
               <https://eprint.iacr.org/2004/306>.
+
+
+
 
 
 
