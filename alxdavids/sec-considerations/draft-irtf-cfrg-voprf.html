@@ -349,12 +349,12 @@ ul.toc li {
 <link href="#rfc.authors" rel="Chapter">
 
 
-  <meta name="generator" content="xml2rfc version 2.31.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.34.0 - https://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Davidson, A., Sullivan, N., and C. Wood" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-irtf-cfrg-voprf-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-10-04" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-10-28" />
   <meta name="dct.abstract" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
   <meta name="description" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
 
@@ -378,7 +378,7 @@ ul.toc li {
 <td class="right">Cloudflare</td>
 </tr>
 <tr>
-<td class="left">Expires: April 6, 2020</td>
+<td class="left">Expires: April 30, 2020</td>
 <td class="right">C. Wood</td>
 </tr>
 <tr>
@@ -387,7 +387,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">October 04, 2019</td>
+<td class="right">October 28, 2019</td>
 </tr>
 
     	
@@ -403,7 +403,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on April 6, 2020.</p>
+<p>This Internet-Draft will expire on April 30, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -653,17 +653,17 @@ ul.toc li {
 <ul>
 <li>G is a generator of GG;</li>
 <li>a,b are elements of FFp;</li>
-<li>if d==0: C = ab*G; else: C is sampled uniformly GG(sp).</li>
+<li>if d == 0: C = ab*G; else: C is sampled uniformly GG(sp).</li>
 </ul>
 <p id="rfc.section.3.2.2.p.3">Output d&#8217; == d.</p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> <a href="#protocol" id="protocol">OPRF Protocol</a>
 </h1>
-<p id="rfc.section.4.p.1">In this section we describe the OPRF and VOPRF protocols. Our OPRF construction is based on the VOPRF construction known as 2HashDH-NIZK given by <a href="#JKK14" class="xref">[JKK14]</a>; essentially without providing zero-knowledge proofs that verify that the output is correct. Our VOPRF construction (including the NIZK DLEQ proofs from <a href="#dleq" class="xref">Section 5</a>) is identical to the <a href="#JKK14" class="xref">[JKK14]</a> construction. With batched proofs (<a href="#batch" class="xref">Section 6</a>) our construction differs slightly in that we can perform multiple VOPRF evaluations in one go, whilst only constructing one NIZK proof object.</p>
+<p id="rfc.section.4.p.1">In this section we describe the OPRF and VOPRF protocols. Our OPRF construction is based on the VOPRF construction known as 2HashDH-NIZK given by <a href="#JKK14" class="xref">[JKK14]</a>; essentially without providing zero-knowledge proofs that verify the output is correct. Our VOPRF construction (including the NIZK DLEQ proofs from <a href="#dleq" class="xref">Section 5</a>) is identical to the <a href="#JKK14" class="xref">[JKK14]</a> construction. With batched proofs (<a href="#batch" class="xref">Section 6</a>) our construction differs slightly in that we can perform multiple VOPRF evaluations in one go, whilst only constructing one NIZK proof object.</p>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#design" id="design">Design</a>
 </h1>
-<p id="rfc.section.4.1.p.1">Let GG be an additive group of prime-order p, let GF(p) be the Galois field defined by the integers modulo p. Define distinct hash functions H_1 and H_2, where H_1 maps arbitrary input onto GG and H_2 maps arbitrary input to a fixed-length output, e.g., SHA256. All hash functions in the protocol are modelled as random oracles. Let L be the security parameter. Let k be the prover&#8217;s (P) secret key, and Y = kG be its corresponding &#8216;public key&#8217; for some fixed generator G taken from the description of the group GG. This public key Y is also referred to as a commitment to the OPRF key k, and the pair (G,Y) as a commitment pair. Let x be the verifier&#8217;s (V) input to the OPRF protocol.  (Commonly, it is a random L-bit string, though this is not required.)</p>
+<p id="rfc.section.4.1.p.1">Let GG be an additive group of prime-order p, let GF(p) be the Galois field defined by the integers modulo p. Define distinct hash functions H_1 and H_2, where H_1 maps arbitrary input onto GG and H_2 maps arbitrary input to a fixed-length output, e.g., SHA256. All hash functions in the protocol are modelled as random oracles. Let L be the security parameter. Let k be the prover&#8217;s (P) secret key, and Y = k*G be its corresponding &#8216;public key&#8217; for some fixed generator G taken from the description of the group GG. This public key Y is also referred to as a commitment to the OPRF key k, and the pair (G,Y) as a commitment pair. Let x be the verifier&#8217;s (V) input to the OPRF protocol.  (Commonly, it is a random L-bit string, though this is not required.)</p>
 <p id="rfc.section.4.1.p.2">The OPRF protocol begins with V blinding its input for the OPRF evaluator such that it appears uniformly distributed GG. The latter then applies its secret key to the blinded value and returns the result. To finish the computation, V then removes its blind and hashes the result using H_2 to yield an output. This flow is illustrated below.</p>
 <pre>
      Verifier                       Prover
@@ -1068,7 +1068,7 @@ Steps:
       - j_s is a number between 1 and N for each s;
       - Q is the number of allowed queries.
 </pre>
-<p id="rfc.section.4.9.p.3">The original paper <a href="#JKK14" class="xref">[JKK14]</a> gives a security proof that the 2HashDH-NIZK construction satisfies the security guarantees of a VOPRF protocol <a href="#properties" class="xref">Section 3.1</a> under the OMDH assumption in the universal composability (UC) security model. Without the NIZK proof system, the protocol instantiates an OPRF protocol only. We defer the interested reader to the paper for further details.</p>
+<p id="rfc.section.4.9.p.3">The original paper <a href="#JKK14" class="xref">[JKK14]</a> gives a security proof that the 2HashDH-NIZK construction satisfies the security guarantees of a VOPRF protocol <a href="#properties" class="xref">Section 3.1</a> under the OMDH assumption in the universal composability (UC) security model. Without the NIZK proof system, the protocol instantiates an OPRF protocol only. See the paper for further details.</p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> <a href="#dleq" id="dleq">NIZK Discrete Logarithm Equality Proof</a>
 </h1>
@@ -1258,11 +1258,11 @@ Steps:
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#sec" id="sec">Security Considerations</a>
 </h1>
-<p id="rfc.section.8.p.1">We discuss the implications around using an OPRF, along with some suggestions and trade-offs that arise from their usage.</p>
+<p id="rfc.section.8.p.1">This section discusses OPRF usage implications, along with some suggestions and trade-offs that arise from their usage.</p>
 <h1 id="rfc.section.8.1">
 <a href="#rfc.section.8.1">8.1.</a> <a href="#cryptanalysis" id="cryptanalysis">Cryptographic security</a>
 </h1>
-<p id="rfc.section.8.1.p.1">As we mentioned previously, the hardness of our (V)OPRF protocol depends on the (N,Q)-OMDH assumption <a href="#protocol-sec" class="xref">Section 4.9</a>, where N is the number of group elements received and Q is the number of adversarial queries. The original 2HashDH-NIZK construction in <a href="#JKK14" class="xref">[JKK14]</a> comes with a security proof in the UC security model under this assumption.</p>
+<p id="rfc.section.8.1.p.1">As mentioned previously, the hardness of our (V)OPRF protocol depends on the (N,Q)-OMDH assumption <a href="#protocol-sec" class="xref">Section 4.9</a>, where N is the number of group elements received and Q is the number of adversarial queries. The original 2HashDH-NIZK construction in <a href="#JKK14" class="xref">[JKK14]</a> comes with a security proof in the UC security model under this assumption.</p>
 <h1 id="rfc.section.8.1.1">
 <a href="#rfc.section.8.1.1">8.1.1.</a> <a href="#qsdh" id="qsdh">Q-strong-DH oracle</a>
 </h1>
@@ -1272,7 +1272,7 @@ Steps:
 
     Output ( (1/(k+c))*G1, c ) where c is an element of FFp
 </pre>
-<p id="rfc.section.8.1.1.p.2">The assumption that this problem is hard was first introduced in <a href="#BB04" class="xref">[BB04]</a>. Since then, there have been a number of cryptanalytic studies that have reduced the security of the assumption below that implied by the group instantiation (for example, <a href="#BG04" class="xref">[BG04]</a> and <a href="#Cheon06" class="xref">[Cheon06]</a>). In summary, the attacks reduce the security of the group instantation by log_2(Q) bits.</p>
+<p id="rfc.section.8.1.1.p.2">The assumption that this problem is hard was first introduced in <a href="#BB04" class="xref">[BB04]</a>. Since then, there have been a number of cryptanalytic studies that have reduced the security of the assumption below that implied by the group instantiation (for example, <a href="#BG04" class="xref">[BG04]</a> and <a href="#Cheon06" class="xref">[Cheon06]</a>). In summary, known attacks reduce the security of the group instantation by log_2(Q) bits.</p>
 <p id="rfc.section.8.1.1.p.3">As an example, suppose that a group instantiation is used that provides 128 bits of security. Then an adversary with access to a Q-sDH oracle and makes Q=2^20 queries can reduce the security of the instantiation by log_2(2^20) = 20 bits.</p>
 <p id="rfc.section.8.1.1.p.4">Notice that it is easy to instantiate a Q-sDH oracle using the OPRF functionality that we provide. A client can just submit sequential queries of the form (G, k<em>G, (k^2)</em>G, &#8230;, (k^(Q-1))*G), where each query is the output of the previous interaction. This means that any client that submit Q queries to the OPRF can use the aforementioned attacks to reduce security of the group instantiation by log_2(Q) bits.</p>
 <p id="rfc.section.8.1.1.p.5">Recall that from a malicious client&#8217;s perspective, the adversary wins if they can distinguish the OPRF interaction from a protocol that computes the ideal functionality provided by the PRF.</p>
@@ -1285,7 +1285,7 @@ Steps:
 <a href="#rfc.section.8.2">8.2.</a> <a href="#hashing-to-curve" id="hashing-to-curve">Hashing to curve</a>
 </h1>
 <p id="rfc.section.8.2.p.1">A critical aspect of implementing this protocol using elliptic curve group instantiations is a method of instantiating the function H1, that maps inputs to group elements. In the elliptic curve setting, this must be a deterministic function that maps arbitrary inputs x (as bytes) to uniformly chosen points in the curve.</p>
-<p id="rfc.section.8.2.p.2">In the security proof of the construction H1 is modelled as a random oracle.  This implies that any instantiation of H1 must e pre-image and collision resistant. In <a href="#ciphersuites" class="xref">Section 7</a> we give instantiations of this functionality based on the functions described in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>.  Consequently, any OPRF implementation must adhere to the implementation and security considerations discussed in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> when instantiating the function H1.</p>
+<p id="rfc.section.8.2.p.2">In the security proof of the construction H1 is modelled as a random oracle.  This implies that any instantiation of H1 must be pre-image and collision resistant. In <a href="#ciphersuites" class="xref">Section 7</a> we give instantiations of this functionality based on the functions described in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>.  Consequently, any OPRF implementation must adhere to the implementation and security considerations discussed in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> when instantiating the function H1.</p>
 <h1 id="rfc.section.8.3">
 <a href="#rfc.section.8.3">8.3.</a> <a href="#timing-leaks" id="timing-leaks">Timing Leaks</a>
 </h1>
@@ -1305,7 +1305,7 @@ Steps:
 <a href="#rfc.section.8.4.2">8.4.2.</a> <a href="#multiple-keys" id="multiple-keys">Evaluation on multiple keys</a>
 </h1>
 <p id="rfc.section.8.4.2.p.1">Such an attack consists of the server evaluating the OPRF on multiple different keys related to the number of clients that use the functionality. As an extreme, the server could evaluate the OPRF with a different key for each client. If the client then revealed their hidden information at a later date then the server would immediately know which initial request they launched.</p>
-<p id="rfc.section.8.4.2.p.2">The attacks highlighted above are prevented in the VOPRF case using the NIZK DLEQ proofs that link each server evaluation to a known public key. However, there are still ways that the VOPRF construction can be abused. In particular:</p>
+<p id="rfc.section.8.4.2.p.2">The VOPRF variant helps mitigate this attack since each server evaluation can be bound to a known public key. However, DLEQ proofs that link each server evaluation to a known public key. However, there are still ways that the VOPRF construction can be abused. In particular:</p>
 <p></p>
 
 <ul>
@@ -1317,8 +1317,8 @@ Steps:
 <a href="#rfc.section.8.5">8.5.</a> <a href="#key-rotation" id="key-rotation">Key rotation</a>
 </h1>
 <p id="rfc.section.8.5.p.1">Since the server&#8217;s key is critical to security, the longer it is exposed by performing (V)OPRF operations on client inputs, the longer it is possible that the key can be compromised. For instance, if the key is kept in production for a long period of time, then this may grant the client the ability to hoard large numbers of tokens. This has negative impacts for some of the applications that we consider in <a href="#apps" class="xref">Section 9</a>. As another example, if the key is kept in circulation for a long period of time, then it also allows the clients to make enough queries to launch more powerful variants of the Q-sDH attacks from <a href="#qsdh" class="xref">Section 8.1.1</a>.</p>
-<p id="rfc.section.8.5.p.2">To combat attacks of this nature, we argue that fairly regular key rotation should be employed on the server-side. A suitable key-cycle for a key used to compute (V)OPRF evaluations would be between one and three months.</p>
-<p id="rfc.section.8.5.p.3">As we discussed in <a href="#multiple-keys" class="xref">Section 8.4.2</a>, key rotation cycles that are too frequent (&#171;&#160;1 month) can lead to large segregation of the wider user base. As such, the length of the key cycles represent a trade-off between greater server key security (for shorter cycles), and better client privacy (for longer cycles). In situations where client privacy is paramount, then longer key cycles should be employed.</p>
+<p id="rfc.section.8.5.p.2">To combat attacks of this nature, regular key rotation should be employed on the server-side. A suitable key-cycle for a key used to compute (V)OPRF evaluations would be between one and three months.</p>
+<p id="rfc.section.8.5.p.3">As we discussed in <a href="#multiple-keys" class="xref">Section 8.4.2</a>, key rotation cycles that are too frequent (&#171;&#160;1 month) can lead to large segregation of the wider user base. As such, the length of the key cycles represent a trade-off between greater server key security (for shorter cycles), and better client privacy (for longer cycles). In situations where client privacy is paramount, longer key cycles should be employed.</p>
 <h1 id="rfc.section.9">
 <a href="#rfc.section.9">9.</a> <a href="#apps" id="apps">Applications</a>
 </h1>
