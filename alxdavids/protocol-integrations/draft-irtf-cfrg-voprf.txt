@@ -101,11 +101,11 @@ Table of Contents
        4.7.1.  OPRF_Preprocess . . . . . . . . . . . . . . . . . . .  18
        4.7.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  18
        4.7.3.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  18
-     4.8.  Embedding (V)OPRFs as subroutines . . . . . . . . . . . .  19
-   5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  19
-     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  20
-     5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  20
-     5.3.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . .  21
+     4.8.  Recommended protocol integration  . . . . . . . . . . . .  19
+       4.8.1.  Setup phase . . . . . . . . . . . . . . . . . . . . .  20
+       4.8.2.  Evaluation phase  . . . . . . . . . . . . . . . . . .  21
+       4.8.3.  Additional requirements . . . . . . . . . . . . . . .  21
+   5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  21
 
 
 
@@ -114,37 +114,37 @@ Davidson, et al.           Expires May 1, 2020                  [Page 2]
 Internet-Draft                    OPRFs                     October 2019
 
 
-       5.3.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  22
-       5.3.2.  Batched_DLEQ_Verify . . . . . . . . . . . . . . . . .  22
-       5.3.3.  Modified protocol execution . . . . . . . . . . . . .  23
-       5.3.4.  Random oracle instantiations for proofs . . . . . . .  23
-   6.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  24
-     6.1.  VOPRF-curve448-HKDF-SHA512-ELL2:  . . . . . . . . . . . .  24
-     6.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  24
-     6.3.  VOPRF-p521-HKDF-SHA512-SSWU:  . . . . . . . . . . . . . .  25
-   7.  Recommended protocol integration  . . . . . . . . . . . . . .  25
-     7.1.  Setup phase . . . . . . . . . . . . . . . . . . . . . . .  26
-     7.2.  Evaluation phase  . . . . . . . . . . . . . . . . . . . .  27
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  27
-     8.1.  Cryptographic security  . . . . . . . . . . . . . . . . .  27
-       8.1.1.  Computational hardness assumptions  . . . . . . . . .  27
-       8.1.2.  Protocol security . . . . . . . . . . . . . . . . . .  28
-       8.1.3.  Q-strong-DH oracle  . . . . . . . . . . . . . . . . .  28
-       8.1.4.  Implications for ciphersuite choices  . . . . . . . .  29
-     8.2.  Hashing to curve  . . . . . . . . . . . . . . . . . . . .  29
-     8.3.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  30
-     8.4.  User segregation  . . . . . . . . . . . . . . . . . . . .  30
-       8.4.1.  Linkage patterns  . . . . . . . . . . . . . . . . . .  31
-       8.4.2.  Evaluation on multiple keys . . . . . . . . . . . . .  31
-     8.5.  Key rotation  . . . . . . . . . . . . . . . . . . . . . .  32
-   9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  32
-     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  32
-     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  33
-       9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  33
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  33
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  34
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  34
-     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  36
+     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  22
+     5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  22
+     5.3.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . .  23
+       5.3.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  24
+       5.3.2.  Batched_DLEQ_Verify . . . . . . . . . . . . . . . . .  24
+       5.3.3.  Modified protocol execution . . . . . . . . . . . . .  25
+       5.3.4.  Random oracle instantiations for proofs . . . . . . .  25
+   6.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  26
+     6.1.  VOPRF-curve448-HKDF-SHA512-ELL2:  . . . . . . . . . . . .  26
+     6.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  26
+     6.3.  VOPRF-p521-HKDF-SHA512-SSWU:  . . . . . . . . . . . . . .  27
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .  27
+     7.1.  Cryptographic security  . . . . . . . . . . . . . . . . .  27
+       7.1.1.  Computational hardness assumptions  . . . . . . . . .  27
+       7.1.2.  Protocol security . . . . . . . . . . . . . . . . . .  28
+       7.1.3.  Q-strong-DH oracle  . . . . . . . . . . . . . . . . .  29
+       7.1.4.  Implications for ciphersuite choices  . . . . . . . .  29
+     7.2.  Hashing to curve  . . . . . . . . . . . . . . . . . . . .  30
+     7.3.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  30
+     7.4.  User segregation  . . . . . . . . . . . . . . . . . . . .  30
+       7.4.1.  Linkage patterns  . . . . . . . . . . . . . . . . . .  31
+       7.4.2.  Evaluation on multiple keys . . . . . . . . . . . . .  31
+     7.5.  Key rotation  . . . . . . . . . . . . . . . . . . . . . .  32
+   8.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  33
+     8.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  33
+     8.2.  Private Password Checker  . . . . . . . . . . . . . . . .  33
+       8.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  34
+   9.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  34
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  34
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  34
+     10.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  36
    Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  36
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  37
 
@@ -215,7 +215,7 @@ Internet-Draft                    OPRFs                     October 2019
    o  Section 6: Considers explicit instantiations of the protocol in
       the elliptic curve setting.
 
-   o  Section 8: Discusses the security considerations for the OPRF and
+   o  Section 7: Discusses the security considerations for the OPRF and
       VOPRF protocol.
 
 
@@ -226,7 +226,7 @@ Davidson, et al.           Expires May 1, 2020                  [Page 4]
 Internet-Draft                    OPRFs                     October 2019
 
 
-   o  Section 9: Discusses some existing applications of OPRF and VOPRF
+   o  Section 8: Discusses some existing applications of OPRF and VOPRF
       protocols.
 
    o  Appendix A: Specifies test vectors for implementations in the
@@ -377,7 +377,7 @@ Internet-Draft                    OPRFs                     October 2019
    constructing one NIZK proof object.
 
    We highlight the computational assumptions that are necessary for
-   proving the security of this construction in Section 8.1.1.
+   proving the security of this construction in Section 7.1.1.
 
 4.1.  Design
 
@@ -451,7 +451,7 @@ Internet-Draft                    OPRFs                     October 2019
 
 
    The security of our construction is discussed in more detail in
-   Section 8.1.2.  We discuss the considerations that should be made
+   Section 7.1.2.  We discuss the considerations that should be made
    when embedding (V)OPRF protocols into wider protocols in Section 4.8.
 
 4.2.  Protocol functionality
@@ -1029,7 +1029,115 @@ Internet-Draft                    OPRFs                     October 2019
    kH_1(x) by the commutativity of scalar multiplication in GG.  This is
    the same output as in the original OPRF_Unblind algorithm.
 
-4.8.  Embedding (V)OPRFs as subroutines
+4.8.  Recommended protocol integration
+
+   We describe some recommendations and suggestions on the topic of
+   integrating the (V)OPRF protocol from Section 4 into wider protocols.
+   It should be noted that since [JKK14] provides a security proof of
+   the VOPRF construction in the UC security model, then any UC-secure
+   protocol that uses the OPRF construction as an atomic instantiation
+   will remain UC-secure.
+
+   Thus, it is RECOMMENDED that any protocol that wishes to include an
+   OPRF stage does so by implementing all OPRF evaluation functionality
+   as a contiguous block of operations during the protocol.  This does
+   not include the OPRF setup phase, which should be run before the
+   entire protocol interaction.  For example, such an instantiation for
+   a wider protocol W would look like the following.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 19]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
+       ================================================================
+                              OPRF setup phase
+       ================================================================
+
+       > ...
+       > BEGIN(protocol W)
+       > ...
+       > PAUSE(protocol W)
+
+       ================================================================
+                            OPRF evaluation phase
+       ================================================================
+
+       > RESTART(protocol W)
+       > ...
+       > END(protocol W)
+
+   In other words, no messages from protocol W should take place during
+   the OPRF protocol instantiation.  This DOES NOT preclude the
+   participants in protocol W from using the outputs of the OPRF
+   evaluation, once the OPRF protocol is complete.  Note that the OPRF
+   protocol can involve batched evaluations, as well as single
+   evaluations.
+
+4.8.1.  Setup phase
+
+   In the VOPRF setting, the server must send to the client (p,Y) where
+   p is the prime used in instantiating the group used for the VOPRF
+   operations, and Y is a commitment to the server key k.  From this
+   information, the client and server must agree on a generator G for
+   the group description.  It is important that the generator G of GG is
+   not chosen by the server, and that it is agreed upon before the
+   protocol starts.  In the elliptic curve setting, we recommend that G
+   is chosen as the standard generator for the curve.
+
+   As we mentioned above, if an implementer wants to embed OPRF
+   evaluation as part of a wider protocol, then we recommend that this
+   setup phase should occur before all communication takes place;
+   including all communication required for the wider protocol.  We
+   recommend that any server implementation only implements one group
+   instantiation at any one time.  This means that the client does not
+   have to pick a specific instantiation when it sends the first
+   evaluation message.
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 20]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
+4.8.2.  Evaluation phase
+
+   The evaluation phase of the OPRF results in a client receiving
+   pseudorandom function evaluations from the server.  It is important
+   that the client is able to link the computation that it performs in
+   the first step, with the output that it receives from the server.  In
+   other words, the client must store the data (r,M) output by
+   OPRF_Blind(x).  When it receives Z from the server, it must then use
+   (r,M) as inputs to OPRF_Blind.
+
+   In the batched setting, the client stores multiple values (ri,Mi) and
+   sends each Mi to the server.  Both client and server should preserve
+   this ordering throughout the evaluation phase so that the client can
+   successfully finalize the output in the final step.
+
+4.8.3.  Additional requirements
 
    The client input to the OPRF evaluation phase is a set of bytes x.
    These bytes are RECOMMENDED to be uniformly distributed.  If the
@@ -1059,15 +1167,17 @@ Internet-Draft                    OPRFs                     October 2019
    satisfies log_G(Y) == log_M(Z) where Z is the output of
    VOPRF_Eval(k,G,Y,M).
 
+   This may be used, for example, to ensure that P uses the same private
+   key for computing the VOPRF output and does not attempt to "tag"
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 19]
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 21]
 
 Internet-Draft                    OPRFs                     October 2019
 
 
-   This may be used, for example, to ensure that P uses the same private
-   key for computing the VOPRF output and does not attempt to "tag"
    individual verifiers with select keys.  This proof must not reveal
    the P's long-term private key to V.
 
@@ -1117,7 +1227,9 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 20]
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 22]
 
 Internet-Draft                    OPRFs                     October 2019
 
@@ -1173,7 +1285,7 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 21]
+Davidson, et al.           Expires May 1, 2020                 [Page 23]
 
 Internet-Draft                    OPRFs                     October 2019
 
@@ -1229,7 +1341,7 @@ Steps:
 
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 22]
+Davidson, et al.           Expires May 1, 2020                 [Page 24]
 
 Internet-Draft                    OPRFs                     October 2019
 
@@ -1285,7 +1397,7 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 23]
+Davidson, et al.           Expires May 1, 2020                 [Page 25]
 
 Internet-Draft                    OPRFs                     October 2019
 
@@ -1304,7 +1416,7 @@ Internet-Draft                    OPRFs                     October 2019
    instantiation includes considerations for providing the DLEQ proofs
    that make the instantiation a VOPRF.  Supporting OPRF operations
    alone can be allowed by simply dropping the relevant components.  For
-   reasons that are detailed in Section 8.1, we only consider
+   reasons that are detailed in Section 7.1, we only consider
    ciphersuites that provide strictly greater than 128 bits of security
    [NIST].
 
@@ -1341,7 +1453,7 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.           Expires May 1, 2020                 [Page 24]
+Davidson, et al.           Expires May 1, 2020                 [Page 26]
 
 Internet-Draft                    OPRFs                     October 2019
 
@@ -1367,125 +1479,19 @@ Internet-Draft                    OPRFs                     October 2019
    We remark that the 'label' field is necessary for domain separation
    of the hash-to-curve functionality.
 
-7.  Recommended protocol integration
-
-   We describe some recommendations and suggestions on the topic of
-   integrating the (V)OPRF protocol from Section 4 into wider protocols.
-   It should be noted that since [JKK14] provides a security proof of
-   the VOPRF construction in the UC security model, then any UC-secure
-   protocol that uses the OPRF construction as an atomic instantiation
-   will remain UC-secure.
-
-   Thus, it is RECOMMENDED that any protocol that wishes to include an
-   OPRF stage does so by implementing all OPRF evaluation functionality
-   as a contiguous block of operations during the protocol.  This does
-   not include the OPRF setup phase, which should be run before the
-   entire protocol interaction.  For example, such an instantiation for
-   a wider protocol W would look like the following.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 25]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
-       ================================================================
-                              OPRF setup phase
-       ================================================================
-
-       > ...
-       > BEGIN(protocol W)
-       > ...
-       > PAUSE(protocol W)
-
-       ================================================================
-                            OPRF evaluation phase
-       ================================================================
-
-       > RESTART(protocol W)
-       > ...
-       > END(protocol W)
-
-   In other words, no messages from protocol W should take place during
-   the OPRF protocol instantiation.  This DOES NOT preclude the
-   participants in protocol W from using the outputs of the OPRF
-   evaluation, once the OPRF protocol is complete.  Note that the OPRF
-   protocol can involve batched evaluations, as well as single
-   evaluations.
-
-7.1.  Setup phase
-
-   In the VOPRF setting, the server must send to the client (p,Y) where
-   p is the prime used in instantiating the group used for the VOPRF
-   operations, and Y is a commitment to the server key k.  From this
-   information, the client and server must agree on a generator G for
-   the group description.  It is important that the generator G of GG is
-   not chosen by the server, and that it is agreed upon before the
-   protocol starts.  In the elliptic curve setting, we recommend that G
-   is chosen as the standard generator for the curve.
-
-   As we mentioned above, if an implementer wants to embed OPRF
-   evaluation as part of a wider protocol, then we recommend that this
-   setup phase should occur before all communication takes place;
-   including all communication required for the wider protocol.  We
-   recommend that any server implementation only implements one group
-   instantiation at any one time.  This means that the client does not
-   have to pick a specific instantiation when it sends the first
-   evaluation message.
-
-
-
-
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 26]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
-7.2.  Evaluation phase
-
-   The evaluation phase of the OPRF results in a client receiving
-   pseudorandom function evaluations from the server.  It is important
-   that the client is able to link the computation that it performs in
-   the first step, with the output that it receives from the server.  In
-   other words, the client must store the data (r,M) output by
-   OPRF_Blind(x).  When it receives Z from the server, it must then use
-   (r,M) as inputs to OPRF_Blind.
-
-   In the batched setting, the client stores multiple values (ri,Mi) and
-   sends each Mi to the server.  Both client and server should preserve
-   this ordering throughout the evaluation phase so that the client can
-   successfully finalize the output in the final step.
-
-8.  Security Considerations
+7.  Security Considerations
 
    This section discusses the cryptographic security of our protocol,
    along with some suggestions and trade-offs that arise from the
    implementation of the implementation of an OPRF.
 
-8.1.  Cryptographic security
+7.1.  Cryptographic security
 
    We discuss the cryptographic security of the OPRF protocol from
    Section 4, relative to the necessary cryptographic assumptions that
    need to be made.
 
-8.1.1.  Computational hardness assumptions
+7.1.1.  Computational hardness assumptions
 
    Each assumption states that the problems specified below are
    computationally difficult to solve in relation to sp (the security
@@ -1496,16 +1502,10 @@ Internet-Draft                    OPRFs                     October 2019
    Let GG = GG(sp) be a group with prime-order p, and let FFp be the
    finite field of order p.
 
-8.1.1.1.  Discrete-log (DL) problem
 
-   Given G, a generator of GG, and H = h*G for some h in FFp; output h.
 
-8.1.1.2.  Decisional Diffie-Hellman (DDH) problem
 
-   Sample a uniformly random bit d in {0,1}. Given (G, a*G, b*G, C),
-   where:
 
-   o  G is a generator of GG;
 
 
 
@@ -1514,13 +1514,24 @@ Davidson, et al.           Expires May 1, 2020                 [Page 27]
 Internet-Draft                    OPRFs                     October 2019
 
 
+7.1.1.1.  Discrete-log (DL) problem
+
+   Given G, a generator of GG, and H = h*G for some h in FFp; output h.
+
+7.1.1.2.  Decisional Diffie-Hellman (DDH) problem
+
+   Sample a uniformly random bit d in {0,1}. Given (G, a*G, b*G, C),
+   where:
+
+   o  G is a generator of GG;
+
    o  a,b are elements of FFp;
 
    o  if d == 0: C = ab*G; else: C is sampled uniformly GG(sp).
 
    Output d' == d.
 
-8.1.2.  Protocol security
+7.1.2.  Protocol security
 
    As aforementioned, our OPRF and VOPRF constructions are based heavily
    on the 2HashDH-NIZK construction given in [JKK14], except for
@@ -1552,7 +1563,14 @@ Internet-Draft                    OPRFs                     October 2019
    the protocol instantiates an OPRF protocol only.  See the paper for
    further details.
 
-8.1.3.  Q-strong-DH oracle
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 28]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
+7.1.3.  Q-strong-DH oracle
 
    A side-effect of our OPRF design is that it allows instantiation of a
    oracle for constructing Q-strong-DH (Q-sDH) samples.  The Q-Strong-DH
@@ -1561,14 +1579,6 @@ Internet-Draft                    OPRFs                     October 2019
     Given G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2 generators of GG.
 
     Output ( (1/(k+c))*G1, c ) where c is an element of FFp
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 28]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    The assumption that this problem is hard was first introduced in
    [BB04].  Since then, there have been a number of cryptanalytic
@@ -1594,7 +1604,7 @@ Internet-Draft                    OPRFs                     October 2019
    if they can distinguish the OPRF interaction from a protocol that
    computes the ideal functionality provided by the PRF.
 
-8.1.4.  Implications for ciphersuite choices
+7.1.4.  Implications for ciphersuite choices
 
    The OPRF instantiations that we recommend in this document are
    informed by the cryptanalytic discussion above.  In particular,
@@ -1608,16 +1618,6 @@ Internet-Draft                    OPRFs                     October 2019
    result in problems in the future.  Therefore, all of our ciphersuites
    in Section 6 come with a minimum group instantiation corresponding to
    196 bits of security.  This would require an adversary to launch a
-   minimum of Q = 2^(68) queries to reduce security to 128 bits using
-   the Q-sDH attacks.  As a result, it appears prohibitively expensive
-   to launch credible attacks on these parameters with our current
-   understanding of the attack surface.
-
-8.2.  Hashing to curve
-
-   A critical aspect of implementing this protocol using elliptic curve
-   group instantiations is a method of instantiating the function H1,
-   that maps inputs to group elements.  In the elliptic curve setting,
 
 
 
@@ -1626,6 +1626,16 @@ Davidson, et al.           Expires May 1, 2020                 [Page 29]
 Internet-Draft                    OPRFs                     October 2019
 
 
+   minimum of Q = 2^(68) queries to reduce security to 128 bits using
+   the Q-sDH attacks.  As a result, it appears prohibitively expensive
+   to launch credible attacks on these parameters with our current
+   understanding of the attack surface.
+
+7.2.  Hashing to curve
+
+   A critical aspect of implementing this protocol using elliptic curve
+   group instantiations is a method of instantiating the function H1,
+   that maps inputs to group elements.  In the elliptic curve setting,
    this must be a deterministic function that maps arbitrary inputs x
    (as bytes) to uniformly chosen points in the curve.
 
@@ -1638,7 +1648,7 @@ Internet-Draft                    OPRFs                     October 2019
    discussed in [I-D.irtf-cfrg-hash-to-curve] when instantiating the
    function H1.
 
-8.3.  Timing Leaks
+7.3.  Timing Leaks
 
    To ensure no information is leaked during protocol execution, all
    operations that use secret data MUST be constant time.  Operations
@@ -1647,7 +1657,7 @@ Internet-Draft                    OPRFs                     October 2019
    [I-D.irtf-cfrg-hash-to-curve] describes various algorithms for
    constant-time implementations of H_1.
 
-8.4.  User segregation
+7.4.  User segregation
 
    The aim of the OPRF functionality is to allow clients receive
    pseudorandom function evaluations on their own inputs, without
@@ -1664,6 +1674,14 @@ Internet-Draft                    OPRFs                     October 2019
    into different sets.  Then this reduces the effective privacy of all
    of the clients involved, since the client above belongs to a smaller
    set of users than previously hoped.  In general, if the user-base of
+
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 30]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
    the OPRF functionality is quite small, then the obliviousness of
    clients is limited.  That is, smaller user-bases mean that the server
    is able to identify client's with higher certainty.
@@ -1674,19 +1692,11 @@ Internet-Draft                    OPRFs                     October 2019
    the server should be link the revealed input to a protocol
    instantiation with probability 1/pp.
 
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 30]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    Below, we provide a few techniques that could be used to abuse
    client-privacy in the OPRF construction by segregating the user-base,
    along with some mitigations.
 
-8.4.1.  Linkage patterns
+7.4.1.  Linkage patterns
 
    If the server is able to ascertain patterns of usage for some clients
    - such as timings associated with usage - then the effective privacy
@@ -1696,7 +1706,7 @@ Internet-Draft                    OPRFs                     October 2019
    registered users, such problems are inherent to any anonymity-
    preserving system.
 
-8.4.2.  Evaluation on multiple keys
+7.4.2.  Evaluation on multiple keys
 
    Such an attack consists of the server evaluating the OPRF on multiple
    different keys related to the number of clients that use the
@@ -1720,6 +1730,14 @@ Internet-Draft                    OPRFs                     October 2019
       thus higher key update frequencies can be better managed on the
       client-side.
 
+
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 31]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
    o  If the server rotates their key frequently, then this may result
       in client's holding out-of-date information from a past
       interaction.  Such information can also be used to segregate the
@@ -1729,17 +1747,8 @@ Internet-Draft                    OPRFs                     October 2019
       This will prevent too many clients from being segregated into
       different groups related to the time that they accessed the
       functionality.  There are viable reasons for rotating the server
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 31]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
       key (for protecting against malicious clients) that we address
-      more closely in Section 8.5.
+      more closely in Section 7.5.
 
    Since key provisioning requires careful handling, all public keys
    should be accessible from a client-trusted registry with a way of
@@ -1748,7 +1757,7 @@ Internet-Draft                    OPRFs                     October 2019
    the server from using keys that have been provisioned for a long
    period of time.
 
-8.5.  Key rotation
+7.5.  Key rotation
 
    Since the server's key is critical to security, the longer it is
    exposed by performing (V)OPRF operations on client inputs, the longer
@@ -1756,16 +1765,16 @@ Internet-Draft                    OPRFs                     October 2019
    key is kept in production for a long period of time, then this may
    grant the client the ability to hoard large numbers of tokens.  This
    has negative impacts for some of the applications that we consider in
-   Section 9.  As another example, if the key is kept in circulation for
+   Section 8.  As another example, if the key is kept in circulation for
    a long period of time, then it also allows the clients to make enough
    queries to launch more powerful variants of the Q-sDH attacks from
-   Section 8.1.3.
+   Section 7.1.3.
 
    To combat attacks of this nature, regular key rotation should be
    employed on the server-side.  A suitable key-cycle for a key used to
    compute (V)OPRF evaluations would be between one week and six months.
 
-   As we discussed in Section 8.4.2, key rotation cycles that are too
+   As we discussed in Section 7.4.2, key rotation cycles that are too
    frequent (in the order of days) can lead to large segregation of the
    wider user base.  As such, the length of the key cycles represent a
    trade-off between greater server key security (for shorter cycles),
@@ -1775,17 +1784,8 @@ Internet-Draft                    OPRFs                     October 2019
    Transparency-type system [keytrans]; this allows clients to publicly
    audit their rotations.
 
-9.  Applications
 
-   This section describes various applications of the VOPRF protocol.
 
-9.1.  Privacy Pass
-
-   This VOPRF protocol is used by the Privacy Pass system [PrivacyPass]
-   to help Tor users bypass CAPTCHA challenges.  Their system works as
-   follows.  Client C connects - through Tor - to an edge server E
-   serving content.  Upon receipt, E serves a CAPTCHA to C, who then
-   solves the CAPTCHA and supplies, in response, n blinded points.  E
 
 
 
@@ -1794,6 +1794,17 @@ Davidson, et al.           Expires May 1, 2020                 [Page 32]
 Internet-Draft                    OPRFs                     October 2019
 
 
+8.  Applications
+
+   This section describes various applications of the VOPRF protocol.
+
+8.1.  Privacy Pass
+
+   This VOPRF protocol is used by the Privacy Pass system [PrivacyPass]
+   to help Tor users bypass CAPTCHA challenges.  Their system works as
+   follows.  Client C connects - through Tor - to an edge server E
+   serving content.  Upon receipt, E serves a CAPTCHA to C, who then
+   solves the CAPTCHA and supplies, in response, n blinded points.  E
    verifies the CAPTCHA response and, if valid, signs (at most) n
    blinded points, which are then returned to C along with a batched
    DLEQ proof.  C stores the tokens if the batched proof verifies
@@ -1807,7 +1818,7 @@ Internet-Draft                    OPRFs                     October 2019
    The Privacy Pass implementation uses the P-256 instantiation of the
    VOPRF protocol.  For more details, see [DGSTV18].
 
-9.2.  Private Password Checker
+8.2.  Private Password Checker
 
    In this application, let D be a collection of plaintext passwords
    obtained by prover P.  For each password p in D, P computes
@@ -1827,21 +1838,10 @@ Internet-Draft                    OPRFs                     October 2019
 
    o  password-protected secret-sharing [JKKX17].
 
-9.2.1.  Parameter Commitments
 
-   For some applications, it may be desirable for P to bind tokens to
-   certain parameters, e.g., protocol versions, ciphersuites, etc.  To
-   accomplish this, P should use a distinct scalar for each parameter
-   combination.  Upon redemption of a token T from V, P can later verify
-   that T was generated using the scalar associated with the
-   corresponding parameters.
 
-10.  Acknowledgements
 
-   This document resulted from the work of the Privacy Pass team
-   [PrivacyPass].  The authors would also like to acknowledge the
-   helpful conversations with Hugo Krawczyk.  Eli-Shaoul Khedouri
-   provided additional review and comments on key consistency.
+
 
 
 
@@ -1850,9 +1850,25 @@ Davidson, et al.           Expires May 1, 2020                 [Page 33]
 Internet-Draft                    OPRFs                     October 2019
 
 
-11.  References
+8.2.1.  Parameter Commitments
 
-11.1.  Normative References
+   For some applications, it may be desirable for P to bind tokens to
+   certain parameters, e.g., protocol versions, ciphersuites, etc.  To
+   accomplish this, P should use a distinct scalar for each parameter
+   combination.  Upon redemption of a token T from V, P can later verify
+   that T was generated using the scalar associated with the
+   corresponding parameters.
+
+9.  Acknowledgements
+
+   This document resulted from the work of the Privacy Pass team
+   [PrivacyPass].  The authors would also like to acknowledge the
+   helpful conversations with Hugo Krawczyk.  Eli-Shaoul Khedouri
+   provided additional review and comments on key consistency.
+
+10.  References
+
+10.1.  Normative References
 
    [BB04]     "Short Signatures Without Random Oracles", n.d.,
               <http://ai.stanford.edu/~xb/eurocrypt04a/bbsigs.pdf>.
@@ -1881,6 +1897,15 @@ Internet-Draft                    OPRFs                     October 2019
               popets.2018.2018.issue-3/popets-2018-0026/popets-
               2018-0026.xml>.
 
+
+
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 34]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
    [I-D.irtf-cfrg-hash-to-curve]
               Faz-Hernandez, A., Scott, S., Sullivan, N., Wahby, R., and
               C. Wood, "Hashing to Elliptic Curves", draft-irtf-cfrg-
@@ -1897,14 +1922,6 @@ Internet-Draft                    OPRFs                     October 2019
    [JKKX17]   "TOPPSS: Cost-minimal Password-Protected Secret Sharing
               based on Threshold OPRF", n.d.,
               <https://eprint.iacr.org/2017/363>.
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 34]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    [keytrans]
               "Security Through Transparency", n.d.,
@@ -1938,6 +1955,13 @@ Internet-Draft                    OPRFs                     October 2019
               DOI 10.17487/RFC5869, May 2010,
               <https://www.rfc-editor.org/info/rfc5869>.
 
+
+
+Davidson, et al.           Expires May 1, 2020                 [Page 35]
+
+Internet-Draft                    OPRFs                     October 2019
+
+
    [RFC7748]  Langley, A., Hamburg, M., and S. Turner, "Elliptic Curves
               for Security", RFC 7748, DOI 10.17487/RFC7748, January
               2016, <https://www.rfc-editor.org/info/rfc7748>.
@@ -1951,17 +1975,6 @@ Internet-Draft                    OPRFs                     October 2019
               2: Recommended Elliptic Curve Domain Parameters", n.d.,
               <http://www.secg.org/sec2-v2.pdf>.
 
-
-
-
-
-
-
-Davidson, et al.           Expires May 1, 2020                 [Page 35]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    [SHAKE]    "SHA-3 Standard, Permutation-Based Hash and Extendable-
               Output Functions", n.d.,
               <https://www.nist.gov/publications/sha-3-standard-
@@ -1971,7 +1984,7 @@ Internet-Draft                    OPRFs                     October 2019
    [SJKS17]   "SPHINX, A Password Store that Perfectly Hides from
               Itself", n.d., <https://eprint.iacr.org/2018/695>.
 
-11.2.  URIs
+10.2.  URIs
 
    [1] https://tools.ietf.org/html/draft-irtf-cfrg-voprf-00
 
@@ -1979,19 +1992,6 @@ Appendix A.  Test Vectors
 
    This section includes test vectors for the VOPRF-P256-HKDF-SHA256
    VOPRF ciphersuite, including batched DLEQ output.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
