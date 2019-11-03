@@ -318,10 +318,10 @@ ul.toc li {
 <link href="#rfc.section.5.2" rel="Chapter" title="5.2 DLEQ_Verify">
 <link href="#rfc.section.6" rel="Chapter" title="6 Batched VOPRF evaluation">
 <link href="#rfc.section.6.1" rel="Chapter" title="6.1 Batched DLEQ algorithms">
-<link href="#rfc.section.6.1.1" rel="Chapter" title="6.1.1 Batched_DLEQ_Generate">
-<link href="#rfc.section.6.1.2" rel="Chapter" title="6.1.2 Batched_DLEQ_Verify">
+<link href="#rfc.section.6.1.1" rel="Chapter" title="6.1.1 DLEQ_Batched_Generate">
+<link href="#rfc.section.6.1.2" rel="Chapter" title="6.1.2 DLEQ_Batched_Verify">
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 Modified protocol execution">
-<link href="#rfc.section.6.3" rel="Chapter" title="6.3 Random oracle instantiations for proofs">
+<link href="#rfc.section.6.2.1" rel="Chapter" title="6.2.1 VOPRF_Batch_Unblind">
 <link href="#rfc.section.7" rel="Chapter" title="7 Supported ciphersuites">
 <link href="#rfc.section.7.1" rel="Chapter" title="7.1 VOPRF-curve448-HKDF-SHA512-ELL2:">
 <link href="#rfc.section.7.2" rel="Chapter" title="7.2 VOPRF-p384-HKDF-SHA512-ICART:">
@@ -483,15 +483,15 @@ ul.toc li {
 </li>
 <ul><li>6.1.   <a href="#rfc.section.6.1">Batched DLEQ algorithms</a>
 </li>
-<ul><li>6.1.1.   <a href="#rfc.section.6.1.1">Batched_DLEQ_Generate</a>
+<ul><li>6.1.1.   <a href="#rfc.section.6.1.1">DLEQ_Batched_Generate</a>
 </li>
-<li>6.1.2.   <a href="#rfc.section.6.1.2">Batched_DLEQ_Verify</a>
+<li>6.1.2.   <a href="#rfc.section.6.1.2">DLEQ_Batched_Verify</a>
 </li>
 </ul><li>6.2.   <a href="#rfc.section.6.2">Modified protocol execution</a>
 </li>
-<li>6.3.   <a href="#rfc.section.6.3">Random oracle instantiations for proofs</a>
+<ul><li>6.2.1.   <a href="#rfc.section.6.2.1">VOPRF_Batch_Unblind</a>
 </li>
-</ul><li>7.   <a href="#rfc.section.7">Supported ciphersuites</a>
+</ul></ul><li>7.   <a href="#rfc.section.7">Supported ciphersuites</a>
 </li>
 <ul><li>7.1.   <a href="#rfc.section.7.1">VOPRF-curve448-HKDF-SHA512-ELL2:</a>
 </li>
@@ -1110,11 +1110,12 @@ Steps:
 </ul>
 <p id="rfc.section.6.p.3">Therefore, since P is usually a powerful server, we can tolerate a slight increase in proof generation complexity for much more efficient communication and proof verification.</p>
 <p id="rfc.section.6.p.4">In this section, we describe algorithms for batching the DLEQ generation and verification procedure. For these algorithms we require an additional random oracle H_5: {0,1}^a x ZZ^3 -&gt; {0,1}^b that takes an inputs of a binary string of length a and three integer values, and outputs an element in {0,1}^b.</p>
+<p id="rfc.section.6.p.5">We can instantiate the random oracle function H_4 using the same hash function that is used for H_1,H_2,H_3. For H_5, we can also use a similar instantiation, or we can use a variable-length output generator. For example, for groups with an order of 256-bit, valid instantiations include functions such as SHAKE-256 <a href="#SHAKE" class="xref">[SHAKE]</a> or HKDF-Expand-SHA256 <a href="#RFC5869" class="xref">[RFC5869]</a>.</p>
 <h1 id="rfc.section.6.1">
 <a href="#rfc.section.6.1">6.1.</a> <a href="#batched-dleq-algorithms" id="batched-dleq-algorithms">Batched DLEQ algorithms</a>
 </h1>
 <h1 id="rfc.section.6.1.1">
-<a href="#rfc.section.6.1.1">6.1.1.</a> <a href="#batcheddleqgenerate" id="batcheddleqgenerate">Batched_DLEQ_Generate</a>
+<a href="#rfc.section.6.1.1">6.1.1.</a> <a href="#dleqbatchedgenerate" id="dleqbatchedgenerate">DLEQ_Batched_Generate</a>
 </h1>
 <pre>
 Input:
@@ -1143,7 +1144,7 @@ Steps:
  6. Output D &lt;- DLEQ_Generate(k,G,Y,M,Z)
 </pre>
 <h1 id="rfc.section.6.1.2">
-<a href="#rfc.section.6.1.2">6.1.2.</a> <a href="#batcheddleqverify" id="batcheddleqverify">Batched_DLEQ_Verify</a>
+<a href="#rfc.section.6.1.2">6.1.2.</a> <a href="#dleqbatchedverify" id="dleqbatchedverify">DLEQ_Batched_Verify</a>
 </h1>
 <pre>
 Input:
@@ -1161,23 +1162,48 @@ Output:
 Steps:
 
  1. seed &lt;- H_4(G,Y,[Mi,Zi]))
- 2. for i in [n]: di &lt;- H_5(seed,i,info)
- 3. c1,...,cn := (int)d1,...,(int)dn
- 4. M := c1M1 + ... + cnMn
- 5. Z := c1Z1 + ... + cnZn
- 6. Output DLEQ_Verify(G,Y,M,Z,D)
+ 2. i' := i
+ 3. for i in [n]:
+    1. di &lt;- H_5(seed,i',info)
+    2. if di &gt; p:
+       1. i' = i'+1
+       2. i = i-1 // decrement and try again
+       3. continue
+ 4. c1,...,cn := (int)d1,...,(int)dn
+ 5. M := c1M1 + ... + cnMn
+ 6. Z := c1Z1 + ... + cnZn
+ 7. Output DLEQ_Verify(G,Y,M,Z,D)
 </pre>
+<p id="rfc.section.6.1.2.p.1">Note that in step 3. we perform rejection sampling for each coefficient di. In summary, each di must be sampled as the output of H5 such that it is less than the group order p. We note that di MUST NOT be reduced modulo p instead, as this may create biases in the form of di&#8217;s that produced.</p>
 <h1 id="rfc.section.6.2">
 <a href="#rfc.section.6.2">6.2.</a> <a href="#modified-protocol-execution" id="modified-protocol-execution">Modified protocol execution</a>
 </h1>
-<p id="rfc.section.6.2.p.1">The VOPRF protocol from Section <a href="#protocol" class="xref">Section 4</a> changes to allow specifying multiple blinded PRF inputs&#160;[ Mi ] for i in 1&#8230;n. P computes the array [ Zi ] and replaces DLEQ_Generate with Batched_DLEQ_Generate over these arrays. The same applies to the algorithm VOPRF_Eval. The same applies for replacing DLEQ_Verify with Batched_DLEQ_Verify when V verifies the response from P and during the algorithm VOPRF_Verify.</p>
-<h1 id="rfc.section.6.3">
-<a href="#rfc.section.6.3">6.3.</a> <a href="#random-oracle-instantiations-for-proofs" id="random-oracle-instantiations-for-proofs">Random oracle instantiations for proofs</a>
+<p id="rfc.section.6.2.p.1">The VOPRF protocol from Section <a href="#protocol" class="xref">Section 4</a> changes to allow specifying multiple blinded PRF inputs&#160;[ Mi ] for i in 1&#8230;n. P computes the array [ Zi ] and replaces DLEQ_Generate with DLEQ_Batched_Generate over these arrays. The same applies to the algorithm VOPRF_Eval. The same applies for replacing DLEQ_Verify with DLEQ_Batched_Verify when V verifies the response from P and during the algorithm VOPRF_Unblind.</p>
+<p id="rfc.section.6.2.p.2">We describe a new algorithm <samp>VOPRF_Batch_Unblind</samp> that allows specifying multiple Zi values along with a batched proof system. We describe the new algorithm below.</p>
+<h1 id="rfc.section.6.2.1">
+<a href="#rfc.section.6.2.1">6.2.1.</a> <a href="#voprfbatchunblind" id="voprfbatchunblind">VOPRF_Batch_Unblind</a>
 </h1>
-<p id="rfc.section.6.3.p.1">We can instantiate the random oracle function H_4 using the same hash function that is used for H_1,H_2,H_3. For H_5, we can also use a similar instantiation, or we can use a variable-length output generator. For example, for groups with an order of 256-bit, valid instantiations include functions such as SHAKE-256 <a href="#SHAKE" class="xref">[SHAKE]</a> or HKDF-Expand-SHA256 <a href="#RFC5869" class="xref">[RFC5869]</a>.</p>
-<p id="rfc.section.6.3.p.2">In addition if a function with larger output than the order of the base field is used, we note that the outputs of H_5 (d1,&#8230;,dn) must be smaller than this order. If any di that is sampled is larger than then order, then we should resample until a di&#8217; is sampled that is valid.</p>
-<p id="rfc.section.6.3.p.3">In these cases, the iterating integer i is increased monotonically to i&#8217; until such di&#8217; is sampled. When sampling the next value d(i+1), the counter i+1 is started at i&#8217;+1.</p>
-<p id="rfc.section.6.3.p.4">TODO: Give a more detailed specification of this construction.</p>
+<p id="rfc.section.6.2.1.p.1">In the below, we assume that i is an iterator that runs between 1 and some numeric value Q &gt; 1.</p>
+<pre>
+Input:
+
+ [ ri ]: Random scalars in [1, p - 1].
+ G: Public fixed generator of group GG.
+ Y: Evaluator public key.
+ [ Mi ]: Blinded elements of GG.
+ [ Zi ]: Server-generated elements in GG.
+ D: A batched DLEQ proof object.
+
+Output:
+
+ N: element in GG, or "error".
+
+Steps:
+
+ 1. N := (r^(-1))Z
+ 2. If 1 = DLEQ_Batched_Verify(G,Y,[ Mi ],[ Zi ],D), output N
+ 3. Output "error"
+</pre>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> <a href="#ciphersuites" id="ciphersuites">Supported ciphersuites</a>
 </h1>

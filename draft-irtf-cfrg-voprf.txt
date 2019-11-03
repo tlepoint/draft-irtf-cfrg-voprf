@@ -115,35 +115,35 @@ Internet-Draft                    OPRFs                    November 2019
 
 
      6.1.  Batched DLEQ algorithms . . . . . . . . . . . . . . . . .  21
-       6.1.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  21
-       6.1.2.  Batched_DLEQ_Verify . . . . . . . . . . . . . . . . .  21
+       6.1.1.  DLEQ_Batched_Generate . . . . . . . . . . . . . . . .  21
+       6.1.2.  DLEQ_Batched_Verify . . . . . . . . . . . . . . . . .  21
      6.2.  Modified protocol execution . . . . . . . . . . . . . . .  22
-     6.3.  Random oracle instantiations for proofs . . . . . . . . .  22
+       6.2.1.  VOPRF_Batch_Unblind . . . . . . . . . . . . . . . . .  23
    7.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  23
      7.1.  VOPRF-curve448-HKDF-SHA512-ELL2:  . . . . . . . . . . . .  23
-     7.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  23
+     7.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  24
      7.3.  VOPRF-p521-HKDF-SHA512-SSWU:  . . . . . . . . . . . . . .  24
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  24
-     8.1.  Cryptographic security  . . . . . . . . . . . . . . . . .  24
-       8.1.1.  Computational hardness assumptions  . . . . . . . . .  24
+     8.1.  Cryptographic security  . . . . . . . . . . . . . . . . .  25
+       8.1.1.  Computational hardness assumptions  . . . . . . . . .  25
        8.1.2.  Q-strong-DH oracle  . . . . . . . . . . . . . . . . .  25
        8.1.3.  Implications for ciphersuite choices  . . . . . . . .  26
      8.2.  Hashing to curve  . . . . . . . . . . . . . . . . . . . .  26
-     8.3.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  26
+     8.3.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  27
      8.4.  User segregation  . . . . . . . . . . . . . . . . . . . .  27
-       8.4.1.  Linkage patterns  . . . . . . . . . . . . . . . . . .  27
-       8.4.2.  Evaluation on multiple keys . . . . . . . . . . . . .  27
-     8.5.  Key rotation  . . . . . . . . . . . . . . . . . . . . . .  28
+       8.4.1.  Linkage patterns  . . . . . . . . . . . . . . . . . .  28
+       8.4.2.  Evaluation on multiple keys . . . . . . . . . . . . .  28
+     8.5.  Key rotation  . . . . . . . . . . . . . . . . . . . . . .  29
    9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  29
      9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  29
-     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  29
+     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  30
        9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  30
    10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  30
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  30
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  30
-     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  32
-   Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  32
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  33
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  31
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  31
+     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  33
+   Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  33
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
 
 1.  Introduction
 
@@ -1126,9 +1126,16 @@ Internet-Draft                    OPRFs                    November 2019
    that takes an inputs of a binary string of length a and three integer
    values, and outputs an element in {0,1}^b.
 
+   We can instantiate the random oracle function H_4 using the same hash
+   function that is used for H_1,H_2,H_3.  For H_5, we can also use a
+   similar instantiation, or we can use a variable-length output
+   generator.  For example, for groups with an order of 256-bit, valid
+   instantiations include functions such as SHAKE-256 [SHAKE] or HKDF-
+   Expand-SHA256 [RFC5869].
+
 6.1.  Batched DLEQ algorithms
 
-6.1.1.  Batched_DLEQ_Generate
+6.1.1.  DLEQ_Batched_Generate
 
 Input:
 
@@ -1155,14 +1162,7 @@ Steps:
  5. Z := c1Z1 + ... + cnZn
  6. Output D <- DLEQ_Generate(k,G,Y,M,Z)
 
-6.1.2.  Batched_DLEQ_Verify
-
-
-
-
-
-
-
+6.1.2.  DLEQ_Batched_Verify
 
 
 
@@ -1193,37 +1193,37 @@ Internet-Draft                    OPRFs                    November 2019
  Steps:
 
   1. seed <- H_4(G,Y,[Mi,Zi]))
-  2. for i in [n]: di <- H_5(seed,i,info)
-  3. c1,...,cn := (int)d1,...,(int)dn
-  4. M := c1M1 + ... + cnMn
-  5. Z := c1Z1 + ... + cnZn
-  6. Output DLEQ_Verify(G,Y,M,Z,D)
+  2. i' := i
+  3. for i in [n]:
+     1. di <- H_5(seed,i',info)
+     2. if di > p:
+        1. i' = i'+1
+        2. i = i-1 // decrement and try again
+        3. continue
+  4. c1,...,cn := (int)d1,...,(int)dn
+  5. M := c1M1 + ... + cnMn
+  6. Z := c1Z1 + ... + cnZn
+  7. Output DLEQ_Verify(G,Y,M,Z,D)
+
+   Note that in step 3. we perform rejection sampling for each
+   coefficient di.  In summary, each di must be sampled as the output of
+   H5 such that it is less than the group order p.  We note that di MUST
+   NOT be reduced modulo p instead, as this may create biases in the
+   form of di's that produced.
 
 6.2.  Modified protocol execution
 
    The VOPRF protocol from Section Section 4 changes to allow specifying
    multiple blinded PRF inputs [ Mi ] for i in 1...n.  P computes the
-   array [ Zi ] and replaces DLEQ_Generate with Batched_DLEQ_Generate
+   array [ Zi ] and replaces DLEQ_Generate with DLEQ_Batched_Generate
    over these arrays.  The same applies to the algorithm VOPRF_Eval.
-   The same applies for replacing DLEQ_Verify with Batched_DLEQ_Verify
+   The same applies for replacing DLEQ_Verify with DLEQ_Batched_Verify
    when V verifies the response from P and during the algorithm
-   VOPRF_Verify.
+   VOPRF_Unblind.
 
-6.3.  Random oracle instantiations for proofs
-
-   We can instantiate the random oracle function H_4 using the same hash
-   function that is used for H_1,H_2,H_3.  For H_5, we can also use a
-   similar instantiation, or we can use a variable-length output
-   generator.  For example, for groups with an order of 256-bit, valid
-   instantiations include functions such as SHAKE-256 [SHAKE] or HKDF-
-   Expand-SHA256 [RFC5869].
-
-   In addition if a function with larger output than the order of the
-   base field is used, we note that the outputs of H_5 (d1,...,dn) must
-   be smaller than this order.  If any di that is sampled is larger than
-   then order, then we should resample until a di' is sampled that is
-   valid.
-
+   We describe a new algorithm "VOPRF_Batch_Unblind" that allows
+   specifying multiple Zi values along with a batched proof system.  We
+   describe the new algorithm below.
 
 
 
@@ -1234,11 +1234,29 @@ Davidson, et al.           Expires May 6, 2020                 [Page 22]
 Internet-Draft                    OPRFs                    November 2019
 
 
-   In these cases, the iterating integer i is increased monotonically to
-   i' until such di' is sampled.  When sampling the next value d(i+1),
-   the counter i+1 is started at i'+1.
+6.2.1.  VOPRF_Batch_Unblind
 
-   TODO: Give a more detailed specification of this construction.
+   In the below, we assume that i is an iterator that runs between 1 and
+   some numeric value Q > 1.
+
+   Input:
+
+    [ ri ]: Random scalars in [1, p - 1].
+    G: Public fixed generator of group GG.
+    Y: Evaluator public key.
+    [ Mi ]: Blinded elements of GG.
+    [ Zi ]: Server-generated elements in GG.
+    D: A batched DLEQ proof object.
+
+   Output:
+
+    N: element in GG, or "error".
+
+   Steps:
+
+    1. N := (r^(-1))Z
+    2. If 1 = DLEQ_Batched_Verify(G,Y,[ Mi ],[ Zi ],D), output N
+    3. Output "error"
 
 7.  Supported ciphersuites
 
@@ -1264,6 +1282,14 @@ Internet-Draft                    OPRFs                    November 2019
 
    o  H_3: SHA512
 
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 23]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    o  H_4: SHA512
 
    o  H_5: HKDF-Expand-SHA512
@@ -1281,14 +1307,6 @@ Internet-Draft                    OPRFs                    November 2019
    o  H_3: SHA512
 
    o  H_4: SHA512
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 23]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
    o  H_5: HKDF-Expand-SHA512
 
@@ -1317,6 +1335,17 @@ Internet-Draft                    OPRFs                    November 2019
    along with some suggestions and trade-offs that arise from the
    implementation of the implementation of an OPRF.
 
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 24]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 8.1.  Cryptographic security
 
    We discuss the cryptographic security of the OPRF protocol from
@@ -1333,18 +1362,6 @@ Internet-Draft                    OPRFs                    November 2019
 
    Let GG = GG(sp) be a group with prime-order p, and let FFp be the
    finite field of order p.
-
-
-
-
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 24]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
 8.1.1.1.  Discrete-log (DL) problem
 
@@ -1377,6 +1394,14 @@ Internet-Draft                    OPRFs                    November 2019
    [BB04].  Since then, there have been a number of cryptanalytic
    studies that have reduced the security of the assumption below that
    implied by the group instantiation (for example, [BG04] and
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 25]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    [Cheon06]).  In summary, known attacks reduce the security of the
    group instantation by log_2(Q) bits.
 
@@ -1392,15 +1417,6 @@ Internet-Draft                    OPRFs                    November 2019
    client that submit Q queries to the OPRF can use the aforementioned
    attacks to reduce security of the group instantiation by log_2(Q)
    bits.
-
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 25]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
    Recall that from a malicious client's perspective, the adversary wins
    if they can distinguish the OPRF interaction from a protocol that
@@ -1433,6 +1449,15 @@ Internet-Draft                    OPRFs                    November 2019
    this must be a deterministic function that maps arbitrary inputs x
    (as bytes) to uniformly chosen points in the curve.
 
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 26]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    In the security proof of the construction H1 is modelled as a random
    oracle.  This implies that any instantiation of H1 must be pre-image
    and collision resistant.  In Section 7 we give instantiations of this
@@ -1450,13 +1475,6 @@ Internet-Draft                    OPRFs                    November 2019
    strings to curves) and DLEQ_Generate().  As mentioned previously,
    [I-D.irtf-cfrg-hash-to-curve] describes various algorithms for
    constant-time implementations of H_1.
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 26]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
 8.4.  User segregation
 
@@ -1489,6 +1507,13 @@ Internet-Draft                    OPRFs                    November 2019
    client-privacy in the OPRF construction by segregating the user-base,
    along with some mitigations.
 
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 27]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 8.4.1.  Linkage patterns
 
    If the server is able to ascertain patterns of usage for some clients
@@ -1505,15 +1530,6 @@ Internet-Draft                    OPRFs                    November 2019
    different keys related to the number of clients that use the
    functionality.  As an extreme, the server could evaluate the OPRF
    with a different key for each client.  If the client then revealed
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 27]
-
-Internet-Draft                    OPRFs                    November 2019
-
-
    their hidden information at a later date then the server would
    immediately know which initial request they launched.
 
@@ -1546,6 +1562,14 @@ Internet-Draft                    OPRFs                    November 2019
 
    Since key provisioning requires careful handling, all public keys
    should be accessible from a client-trusted registry with a way of
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 28]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    auditing the history of key updates.  We also recommend that public
    keys have a corresponding expiry date that clients can use to prevent
    the server from using keys that have been provisioned for a long
@@ -1561,15 +1585,6 @@ Internet-Draft                    OPRFs                    November 2019
    has negative impacts for some of the applications that we consider in
    Section 9.  As another example, if the key is kept in circulation for
    a long period of time, then it also allows the clients to make enough
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 28]
-
-Internet-Draft                    OPRFs                    November 2019
-
-
    queries to launch more powerful variants of the Q-sDH attacks from
    Section 8.1.2.
 
@@ -1603,6 +1618,14 @@ Internet-Draft                    OPRFs                    November 2019
    DLEQ proof.  C stores the tokens if the batched proof verifies
    correctly.  When C attempts to connect to E again and is prompted
    with a CAPTCHA, C uses one of the unblinded and signed points, or
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 29]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    tokens, to derive a shared symmetric key sk used to MAC the CAPTCHA
    challenge.  C sends the CAPTCHA, MAC, and token input x to E, who can
    use x to derive sk and verify the CAPTCHA MAC.  Thus, each token is
@@ -1618,14 +1641,6 @@ Internet-Draft                    OPRFs                    November 2019
    VOPRF_Eval on H_1(p), where H_1 is as described above, and stores the
    result in a separate collection D'.  P then publishes D' with Y, its
    public key.  If a client C wishes to query D' for a password p', it
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 29]
-
-Internet-Draft                    OPRFs                    November 2019
-
-
    runs the VOPRF protocol using p as input x to obtain output y.  By
    construction, y will be the OPRF evaluation of p hashed onto the
    curve.  C can then search D' for y to determine if there is a match.
@@ -1655,6 +1670,18 @@ Internet-Draft                    OPRFs                    November 2019
    helpful conversations with Hugo Krawczyk.  Eli-Shaoul Khedouri
    provided additional review and comments on key consistency.
 
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 30]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 11.  References
 
 11.1.  Normative References
@@ -1673,14 +1700,6 @@ Internet-Draft                    OPRFs                    November 2019
    [ChaumPedersen]
               "Wallet Databases with Observers", n.d.,
               <https://chaum.com/publications/Wallet_Databases.pdf>.
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 30]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
    [Cheon06]  "Security Analysis of the Strong Diffie-Hellman Problem",
               n.d., <https://www.iacr.org/archive/
@@ -1711,6 +1730,14 @@ Internet-Draft                    OPRFs                    November 2019
               based on Threshold OPRF", n.d.,
               <https://eprint.iacr.org/2017/363>.
 
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 31]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    [keytrans]
               "Security Through Transparency", n.d.,
               <https://security.googleblog.com/2017/01/security-through-
@@ -1727,16 +1754,6 @@ Internet-Draft                    OPRFs                    November 2019
    [PrivacyPass]
               "Privacy Pass", n.d.,
               <https://github.com/privacypass/challenge-bypass-server>.
-
-
-
-
-
-
-Davidson, et al.           Expires May 6, 2020                 [Page 31]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1770,6 +1787,13 @@ Internet-Draft                    OPRFs                    November 2019
    [SJKS17]   "SPHINX, A Password Store that Perfectly Hides from
               Itself", n.d., <https://eprint.iacr.org/2018/695>.
 
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 32]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 11.2.  URIs
 
    [1] https://tools.ietf.org/html/draft-irtf-cfrg-voprf-00
@@ -1789,7 +1813,39 @@ Appendix A.  Test Vectors
 
 
 
-Davidson, et al.           Expires May 6, 2020                 [Page 32]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 33]
 
 Internet-Draft                    OPRFs                    November 2019
 
@@ -1845,7 +1901,7 @@ Authors' Addresses
 
 
 
-Davidson, et al.           Expires May 6, 2020                 [Page 33]
+Davidson, et al.           Expires May 6, 2020                 [Page 34]
 
 Internet-Draft                    OPRFs                    November 2019
 
@@ -1901,4 +1957,4 @@ Internet-Draft                    OPRFs                    November 2019
 
 
 
-Davidson, et al.           Expires May 6, 2020                 [Page 34]
+Davidson, et al.           Expires May 6, 2020                 [Page 35]
