@@ -5,9 +5,9 @@
 Network Working Group                                        A. Davidson
 Internet-Draft                                               N. Sullivan
 Intended status: Informational                                Cloudflare
-Expires: April 12, 2020                                          C. Wood
+Expires: May 6, 2020                                             C. Wood
                                                               Apple Inc.
-                                                        October 10, 2019
+                                                       November 03, 2019
 
 
    Oblivious Pseudorandom Functions (OPRFs) using Prime-Order Groups
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 12, 2020.
+   This Internet-Draft will expire on May 6, 2020.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Davidson, et al.         Expires April 12, 2020                 [Page 1]
+Davidson, et al.           Expires May 6, 2020                  [Page 1]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -71,67 +71,79 @@ Internet-Draft                    OPRFs                     October 2019
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
-     1.1.  Change log  . . . . . . . . . . . . . . . . . . . . . . .   4
+     1.1.  Change log  . . . . . . . . . . . . . . . . . . . . . . .   5
      1.2.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   5
      1.3.  Requirements  . . . . . . . . . . . . . . . . . . . . . .   5
    2.  Background  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-   3.  Security Properties . . . . . . . . . . . . . . . . . . . . .   6
+   3.  Preliminaries . . . . . . . . . . . . . . . . . . . . . . . .   6
+     3.1.  Security Properties . . . . . . . . . . . . . . . . . . .   6
    4.  OPRF Protocol . . . . . . . . . . . . . . . . . . . . . . . .   7
-     4.1.  Protocol correctness  . . . . . . . . . . . . . . . . . .   9
-     4.2.  Instantiations of GG  . . . . . . . . . . . . . . . . . .   9
-     4.3.  OPRF algorithms . . . . . . . . . . . . . . . . . . . . .  10
-       4.3.1.  OPRF_Setup  . . . . . . . . . . . . . . . . . . . . .  10
-       4.3.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  11
-       4.3.3.  OPRF_Eval . . . . . . . . . . . . . . . . . . . . . .  11
-       4.3.4.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  11
-       4.3.5.  OPRF_Finalize . . . . . . . . . . . . . . . . . . . .  12
-     4.4.  VOPRF algorithms  . . . . . . . . . . . . . . . . . . . .  12
-       4.4.1.  VOPRF_Setup . . . . . . . . . . . . . . . . . . . . .  13
-       4.4.2.  VOPRF_Blind . . . . . . . . . . . . . . . . . . . . .  13
-       4.4.3.  VOPRF_Eval  . . . . . . . . . . . . . . . . . . . . .  13
-       4.4.4.  VOPRF_Unblind . . . . . . . . . . . . . . . . . . . .  14
-       4.4.5.  VOPRF_Finalize  . . . . . . . . . . . . . . . . . . .  14
-     4.5.  Utility algorithms  . . . . . . . . . . . . . . . . . . .  15
-       4.5.1.  bin2scalar  . . . . . . . . . . . . . . . . . . . . .  15
-     4.6.  Efficiency gains with pre-processing and fixed-base
-           blinding  . . . . . . . . . . . . . . . . . . . . . . . .  15
-       4.6.1.  OPRF_Preprocess . . . . . . . . . . . . . . . . . . .  16
-       4.6.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  16
-       4.6.3.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  17
-   5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  17
-     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  18
-     5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  18
-   6.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . . . .  19
-     6.1.  Batched DLEQ algorithms . . . . . . . . . . . . . . . . .  20
-       6.1.1.  DLEQ_Batched_Generate . . . . . . . . . . . . . . . .  20
-       6.1.2.  DLEQ_Batched_Verify . . . . . . . . . . . . . . . . .  20
-     6.2.  Modified protocol execution . . . . . . . . . . . . . . .  21
+     4.1.  Design  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+     4.2.  Protocol API functions  . . . . . . . . . . . . . . . . .   8
+     4.3.  Protocol correctness  . . . . . . . . . . . . . . . . . .   9
+     4.4.  Instantiations of GG  . . . . . . . . . . . . . . . . . .  10
+     4.5.  OPRF algorithms . . . . . . . . . . . . . . . . . . . . .  10
+       4.5.1.  OPRF_Setup  . . . . . . . . . . . . . . . . . . . . .  11
+       4.5.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  11
+       4.5.3.  OPRF_Eval . . . . . . . . . . . . . . . . . . . . . .  11
+       4.5.4.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  12
+       4.5.5.  OPRF_Finalize . . . . . . . . . . . . . . . . . . . .  12
+     4.6.  VOPRF algorithms  . . . . . . . . . . . . . . . . . . . .  13
+       4.6.1.  VOPRF_Setup . . . . . . . . . . . . . . . . . . . . .  13
+       4.6.2.  VOPRF_Blind . . . . . . . . . . . . . . . . . . . . .  14
+       4.6.3.  VOPRF_Eval  . . . . . . . . . . . . . . . . . . . . .  14
+       4.6.4.  VOPRF_Unblind . . . . . . . . . . . . . . . . . . . .  14
+       4.6.5.  VOPRF_Finalize  . . . . . . . . . . . . . . . . . . .  15
+     4.7.  Utility algorithms  . . . . . . . . . . . . . . . . . . .  15
+       4.7.1.  bin2scalar  . . . . . . . . . . . . . . . . . . . . .  15
+     4.8.  Efficiency gains with pre-processing and fixed-base
+           blinding  . . . . . . . . . . . . . . . . . . . . . . . .  16
+       4.8.1.  OPRF_Preprocess . . . . . . . . . . . . . . . . . . .  17
+       4.8.2.  OPRF_Blind  . . . . . . . . . . . . . . . . . . . . .  17
+       4.8.3.  OPRF_Unblind  . . . . . . . . . . . . . . . . . . . .  17
+     4.9.  Cryptographic security  . . . . . . . . . . . . . . . . .  18
+   5.  NIZK Discrete Logarithm Equality Proof  . . . . . . . . . . .  19
+     5.1.  DLEQ_Generate . . . . . . . . . . . . . . . . . . . . . .  19
+     5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  20
+   6.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . . . .  20
 
 
 
-Davidson, et al.         Expires April 12, 2020                 [Page 2]
+Davidson, et al.           Expires May 6, 2020                  [Page 2]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
-       6.2.1.  VOPRF_Batch_Unblind . . . . . . . . . . . . . . . . .  22
-   7.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  22
-     7.1.  ECVOPRF-P256-HKDF-SHA256-SSWU:  . . . . . . . . . . . . .  22
-     7.2.  ECVOPRF-ed25519-HKDF-SHA256-Elligator2: . . . . . . . . .  23
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  23
-     8.1.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  23
-     8.2.  Hashing to curves . . . . . . . . . . . . . . . . . . . .  24
-     8.3.  Verifiability (key consistency) . . . . . . . . . . . . .  24
-   9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  24
-     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  24
-     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  25
-       9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  25
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  25
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  26
-     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  27
-   Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  27
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  28
+     6.1.  Batched DLEQ algorithms . . . . . . . . . . . . . . . . .  21
+       6.1.1.  DLEQ_Batched_Generate . . . . . . . . . . . . . . . .  21
+       6.1.2.  DLEQ_Batched_Verify . . . . . . . . . . . . . . . . .  21
+     6.2.  Modified protocol execution . . . . . . . . . . . . . . .  22
+       6.2.1.  VOPRF_Batch_Unblind . . . . . . . . . . . . . . . . .  23
+   7.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  23
+     7.1.  VOPRF-curve448-HKDF-SHA512-ELL2:  . . . . . . . . . . . .  23
+     7.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  24
+     7.3.  VOPRF-p521-HKDF-SHA512-SSWU:  . . . . . . . . . . . . . .  24
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  24
+     8.1.  Cryptographic security  . . . . . . . . . . . . . . . . .  25
+       8.1.1.  Computational hardness assumptions  . . . . . . . . .  25
+       8.1.2.  Q-strong-DH oracle  . . . . . . . . . . . . . . . . .  25
+       8.1.3.  Implications for ciphersuite choices  . . . . . . . .  26
+     8.2.  Hashing to curve  . . . . . . . . . . . . . . . . . . . .  26
+     8.3.  Timing Leaks  . . . . . . . . . . . . . . . . . . . . . .  27
+     8.4.  User segregation  . . . . . . . . . . . . . . . . . . . .  27
+       8.4.1.  Linkage patterns  . . . . . . . . . . . . . . . . . .  28
+       8.4.2.  Evaluation on multiple keys . . . . . . . . . . . . .  28
+     8.5.  Key rotation  . . . . . . . . . . . . . . . . . . . . . .  29
+   9.  Applications  . . . . . . . . . . . . . . . . . . . . . . . .  29
+     9.1.  Privacy Pass  . . . . . . . . . . . . . . . . . . . . . .  29
+     9.2.  Private Password Checker  . . . . . . . . . . . . . . . .  30
+       9.2.1.  Parameter Commitments . . . . . . . . . . . . . . . .  30
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  30
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  31
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  31
+     11.2.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  33
+   Appendix A.  Test Vectors . . . . . . . . . . . . . . . . . . . .  33
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
 
 1.  Introduction
 
@@ -150,6 +162,14 @@ Internet-Draft                    OPRFs                     October 2019
    knowledge (NIZK) proof of equality between (G, Y) and (Z, M), where Z
    = kM for some point M.
 
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 3]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    OPRFs have been shown to be useful for constructing: password-
    protected secret sharing schemes [JKK14]; privacy-preserving password
    stores [SJKS17]; and password-authenticated key exchange or PAKE
@@ -161,14 +181,6 @@ Internet-Draft                    OPRFs                     October 2019
    used to generate one-time authentication tokens to bypass CAPTCHA
    challenges.  VOPRFs have also been used for password-protected secret
    sharing schemes e.g.  [JKKX16].
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 3]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    This document introduces an OPRF protocol built in prime-order
    groups, applying to finite fields of prime-order and also elliptic
@@ -185,12 +197,12 @@ Internet-Draft                    OPRFs                     October 2019
    o  Section 2: Describe background, related work, and use cases of
       OPRF/VOPRF protocols.
 
-   o  Section 3: Discuss security properties of OPRFs/VOPRFs.
+   o  Section 3.1: Discuss security properties of OPRFs/VOPRFs.
 
    o  Section 4: Specify an authentication protocol from OPRF
       functionality, based in prime-order groups (with an optional
       verifiable mode).  Algorithms are stated formally for OPRFs in
-      Section 4.3 and for VOPRFs in Section 4.4.
+      Section 4.5 and for VOPRFs in Section 4.6.
 
    o  Section 5: Specify the NIZK discrete logarithm equality (DLEQ)
       construction used for constructing the VOPRF protocol.
@@ -205,6 +217,15 @@ Internet-Draft                    OPRFs                     October 2019
    o  Section 8: Discusses the security considerations for the OPRF and
       VOPRF protocol.
 
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 4]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    o  Section 9: Discusses some existing applications of OPRF and VOPRF
       protocols.
 
@@ -217,14 +238,6 @@ Internet-Draft                    OPRFs                     October 2019
 
    o  Updated ciphersuites to be in line with
       https://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-04
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 4]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    o  Made some necessary modular reductions more explicit
 
@@ -261,6 +274,14 @@ Internet-Draft                    OPRFs                     October 2019
    signing key of some server.  The security properties of such a scheme
    dictate that the client learns nothing about the signing key, and
    that the server learns nothing about the data that is signed.  One of
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 5]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    the more popular blind signature schemes is based on the RSA
    cryptosystem and is known as Blind RSA [ChaumBlindSignature].
 
@@ -273,19 +294,14 @@ Internet-Draft                    OPRFs                     October 2019
    The server can verify that y is computed correctly by recomputing the
    PRF on x using k.  In doing so, the client provides knowledge of a
    'signature' y for their value x.  The verification procedure is thus
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 5]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    symmetric as it requires knowledge of the key k.  This is discussed
    more in the following section.
 
-3.  Security Properties
+3.  Preliminaries
+
+   We start by detailing some necessary cryptographic definitions.
+
+3.1.  Security Properties
 
    The security properties of an OPRF protocol with functionality y =
    F(k, x) include those of a standard PRF.  Specifically:
@@ -313,6 +329,15 @@ Internet-Draft                    OPRFs                     October 2019
 
    Essentially, obliviousness tells us that, even if P learns V's input
    x at some point in the future, then P will not be able to link any
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 6]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    particular OPRF evaluation to x.  This property is also known as
    unlinkability [DGSTV18].
 
@@ -330,31 +355,45 @@ Internet-Draft                    OPRFs                     October 2019
    the protocol using this commitment.  In the following, we may also
    refer to this commitment as a public key.
 
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 6]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
 4.  OPRF Protocol
 
-   In this section we describe the OPRF protocol.  Let GG be an additive
-   group of prime-order p, let GF(p) be the Galois field defined by the
-   integers modulo p.  Define distinct hash functions H_1 and H_2, where
-   H_1 maps arbitrary input onto GG and H_2 maps arbitrary input to a
-   fixed-length output, e.g., SHA256.  All hash functions in the
-   protocol are modelled as random oracles.  Let L be the security
-   parameter.  Let k be the prover's (P) secret key, and Y = kG be its
-   corresponding 'public key' for some fixed generator G taken from the
-   description of the group GG.  This public key Y is also referred to
-   as a commitment to the OPRF key k, and the pair (G,Y) as a commitment
-   pair.  Let x be the verifier's (V) input to the OPRF protocol.
-   (Commonly, it is a random L-bit string, though this is not required.)
+   In this section we describe the OPRF and VOPRF protocols.  Our OPRF
+   construction is based on the VOPRF construction known as 2HashDH-NIZK
+   given by [JKK14]; essentially without providing zero-knowledge proofs
+   that verify the output is correct.  Our VOPRF construction (including
+   the NIZK DLEQ proofs from Section 5) is identical to the [JKK14]
+   construction.  With batched proofs (Section 6) our construction
+   differs slightly in that we can perform multiple VOPRF evaluations in
+   one go, whilst only constructing one NIZK proof object.
+
+   We highlight the computational assumptions that are necessary for
+   proving the security of this construction in Section 8.1.1.
+
+4.1.  Design
+
+   Let GG be an additive group of prime-order p, let GF(p) be the Galois
+   field defined by the integers modulo p.  Define distinct hash
+   functions H_1 and H_2, where H_1 maps arbitrary input onto GG and H_2
+   maps arbitrary input to a fixed-length output, e.g., SHA256.  All
+   hash functions in the protocol are modelled as random oracles.  Let L
+   be the security parameter.  Let k be the prover's (P) secret key, and
+   Y = k*G be its corresponding 'public key' for some fixed generator G
+   taken from the description of the group GG.  This public key Y is
+   also referred to as a commitment to the OPRF key k, and the pair
+   (G,Y) as a commitment pair.  Let x be the verifier's (V) input to the
+   OPRF protocol.  (Commonly, it is a random L-bit string, though this
+   is not required.)
 
    The OPRF protocol begins with V blinding its input for the OPRF
    evaluator such that it appears uniformly distributed GG.  The latter
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 7]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    then applies its secret key to the blinded value and returns the
    result.  To finish the computation, V then removes its blind and
    hashes the result using H_2 to yield an output.  This flow is
@@ -386,14 +425,6 @@ Internet-Draft                    OPRFs                     October 2019
 
    F(k, x) = N = kH_1(x)
 
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 7]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    It is clear that this is a PRF H_1(x) maps x to a random element in
    GG, and GG is cyclic.  This output is computed when the client
    computes Zr^(-1) by the commutativity of the multiplication.  The
@@ -401,11 +432,23 @@ Internet-Draft                    OPRFs                     October 2019
    the output from P is not the PRF value because the actual input x is
    blinded by r.
 
+   The security of our construction is discussed in more detail in
+   Section 4.9.
+
+4.2.  Protocol API functions
+
    This protocol may be decomposed into a series of steps, as described
    below:
 
    o  OPRF_Setup(l): Generate am integer k of sufficient bit-length l
       and output k.
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 8]
+
+Internet-Draft                    OPRFs                    November 2019
+
 
    o  OPRF_Blind(x): Compute and return a blind, r, and blinded
       representation of x in GG, denoted M.
@@ -419,8 +462,8 @@ Internet-Draft                    OPRFs                     October 2019
 
    o  OPRF_Finalize(x,N): Finalize N to produce the output H_2(x, N).
 
-   For verifiability we modify the algorithms of VOPRF_Setup, VOPRF_Eval
-   and VOPRF_Unblind to be the following:
+   For verifiability (VOPRF) we modify the algorithms of VOPRF_Setup,
+   VOPRF_Eval and VOPRF_Unblind to be the following:
 
    o  VOPRF_Setup(l): Generate an integer k of sufficient bit-length l
       and output (k, (G,Y)) where Y = kG for the fixed generator G of
@@ -439,18 +482,7 @@ Internet-Draft                    OPRFs                     October 2019
    explicitly to VOPRF execution, we replace 'OPRF' in all method names
    with 'VOPRF'.
 
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 8]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
-4.1.  Protocol correctness
+4.3.  Protocol correctness
 
    Protocol correctness requires that, for any key k, input x, and (r,
    M) = OPRF_Blind(x), it must be true that:
@@ -464,7 +496,17 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,(G,Y),M,(VOPRF_Eval(k,(G,Y),M)))) = H_2(x, F(k
 
    with overwhelming probability, where (r, M) = VOPRF_Blind(x).
 
-4.2.  Instantiations of GG
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                  [Page 9]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+4.4.  Instantiations of GG
 
    As we remarked above, GG is a subgroup with associated prime-order p.
    While we choose to write operations in the setting where GG comes
@@ -494,23 +536,11 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,(G,Y),M,(VOPRF_Eval(k,(G,Y),M)))) = H_2(x, F(k
    that we use for the group GG is a fixed generator.  This generator
    should be provided in the description of the group GG.
 
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                 [Page 9]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
-4.3.  OPRF algorithms
+4.5.  OPRF algorithms
 
    This section provides algorithms for each step in the OPRF protocol.
-   We describe the VOPRF analogues in Section 4.4.  We provide generic
-   utility algorithms in Section 4.5.
+   We describe the VOPRF analogues in Section 4.6.  We provide generic
+   utility algorithms in Section 4.7.
 
    1.  P samples a uniformly random key k <- {0,1}^l for sufficient
        length l, and interprets it as an integer.
@@ -525,6 +555,13 @@ Internet-Draft                    OPRFs                     October 2019
    5.  In the elliptic curve setting, P multiplies Z by the cofactor
        (denoted h) of the elliptic curve.
 
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 10]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    6.  P sends Z to V.
 
    7.  V unblinds Z to compute N = r^(-1)Z = kX.
@@ -533,9 +570,9 @@ Internet-Draft                    OPRFs                     October 2019
 
    We note here that the blinding mechanism that we use can be modified
    slightly with the opportunity for making performance gains in some
-   scenarios.  We detail these modifications in Section Section 4.6.
+   scenarios.  We detail these modifications in Section Section 4.8.
 
-4.3.1.  OPRF_Setup
+4.5.1.  OPRF_Setup
 
    Input:
 
@@ -550,19 +587,7 @@ Internet-Draft                    OPRFs                     October 2019
     1. Sample k_bin <-$ {0,1}^l
     2. Output k <- bin2scalar(k_bin, l)
 
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 10]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
-4.3.2.  OPRF_Blind
+4.5.2.  OPRF_Blind
 
    Input:
 
@@ -579,7 +604,19 @@ Internet-Draft                    OPRFs                     October 2019
     2.  M := rH_1(x)
     3.  Output (r, M)
 
-4.3.3.  OPRF_Eval
+4.5.3.  OPRF_Eval
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 11]
+
+Internet-Draft                    OPRFs                    November 2019
+
 
    Input:
 
@@ -597,26 +634,7 @@ Internet-Draft                    OPRFs                     October 2019
     2. Z <- hZ
     3. Output Z
 
-4.3.4.  OPRF_Unblind
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 11]
-
-Internet-Draft                    OPRFs                     October 2019
-
+4.5.4.  OPRF_Unblind
 
    Input:
 
@@ -632,7 +650,7 @@ Internet-Draft                    OPRFs                     October 2019
     1. N := (r^(-1))Z
     2. Output N
 
-4.3.5.  OPRF_Finalize
+4.5.5.  OPRF_Finalize
 
    Input:
 
@@ -648,7 +666,15 @@ Internet-Draft                    OPRFs                     October 2019
     1. y := H_2(x, N)
     2. Output y
 
-4.4.  VOPRF algorithms
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 12]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+4.6.  VOPRF algorithms
 
    The steps in the VOPRF setting are written as:
 
@@ -667,13 +693,6 @@ Internet-Draft                    OPRFs                     October 2019
 
    6.  P sends (Z, D) to V.
 
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 12]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    7.  V ensures that 1 = DLEQ_Verify(G,Y,M,Z,D).  If not, V outputs an
        error.
 
@@ -681,7 +700,7 @@ Internet-Draft                    OPRFs                     October 2019
 
    9.  V outputs the pair H_2(x, N).
 
-4.4.1.  VOPRF_Setup
+4.6.1.  VOPRF_Setup
 
    Input:
 
@@ -699,7 +718,19 @@ Internet-Draft                    OPRFs                     October 2019
      2. Y := kG
      3. Output (k, (G,Y))
 
-4.4.2.  VOPRF_Blind
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 13]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+4.6.2.  VOPRF_Blind
 
    Input:
 
@@ -716,19 +747,7 @@ Internet-Draft                    OPRFs                     October 2019
     2.  M := rH_1(x)
     3.  Output (r, M)
 
-4.4.3.  VOPRF_Eval
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 13]
-
-Internet-Draft                    OPRFs                     October 2019
-
+4.6.3.  VOPRF_Eval
 
    Input:
 
@@ -750,7 +769,22 @@ Internet-Draft                    OPRFs                     October 2019
     3. D = DLEQ_Generate(k,G,Y,M,Z)
     4. Output (Z, D)
 
-4.4.4.  VOPRF_Unblind
+4.6.4.  VOPRF_Unblind
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 14]
+
+Internet-Draft                    OPRFs                    November 2019
+
 
    Input:
 
@@ -771,20 +805,7 @@ Internet-Draft                    OPRFs                     October 2019
     2. If 1 = DLEQ_Verify(G,Y,M,Z,D), output N
     3. Output "error"
 
-4.4.5.  VOPRF_Finalize
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 14]
-
-Internet-Draft                    OPRFs                     October 2019
-
+4.6.5.  VOPRF_Finalize
 
    Input:
 
@@ -801,11 +822,25 @@ Internet-Draft                    OPRFs                     October 2019
     2. y := H_2(x, N)
     3. Output y
 
-4.5.  Utility algorithms
+4.7.  Utility algorithms
 
-4.5.1.  bin2scalar
+4.7.1.  bin2scalar
 
    This algorithm converts a binary string to an integer modulo p.
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 15]
+
+Internet-Draft                    OPRFs                    November 2019
+
 
    Input:
 
@@ -824,23 +859,15 @@ Internet-Draft                    OPRFs                     October 2019
     3. z <- p2Vec * sVec (mod p)
     4. Output z
 
-4.6.  Efficiency gains with pre-processing and fixed-base blinding
+4.8.  Efficiency gains with pre-processing and fixed-base blinding
 
-   In Section Section 4.3 we assume that the client-side blinding is
+   In Section Section 4.5 we assume that the client-side blinding is
    carried out directly on the output of H_1(x), i.e. computing rH_1(x)
    for some r <-$ GF(p).  In the [OPAQUE] draft, it is noted that it may
    be more efficient to use additive blinding rather than multiplicative
    if the client can preprocess some values.  For example, a valid way
    of computing additive blinding would be to instead compute H_1(x)+rG,
    where G is the fixed generator for the group GG.
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 15]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    We refer to the 'multiplicative' blinding as variable-base blinding
    (VBB), since the base of the blinding (H_1(x)) varies with each
@@ -858,14 +885,23 @@ Internet-Draft                    OPRFs                     October 2019
    algorithms that need to change are OPRF_Blind and OPRF_Unblind (and
    similarly for the VOPRF variants).
 
-   We define the FBB variants of the algorithms in Section 4.3 below
+   We define the FBB variants of the algorithms in Section 4.5 below
    along with a new algorithm OPRF_Preprocess that defines how
    preprocessing is carried out.  The equivalent algorithms for VOPRF
    are almost identical and so we do not redefine them here.  Notice
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 16]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    that the only computation that changes is for V, the necessary
    computation of P does not change.
 
-4.6.1.  OPRF_Preprocess
+4.8.1.  OPRF_Preprocess
 
    Input:
 
@@ -882,21 +918,7 @@ Internet-Draft                    OPRFs                     October 2019
     1.  r <-$ GF(p)
     2.  Output (r, rG, rY)
 
-4.6.2.  OPRF_Blind
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 16]
-
-Internet-Draft                    OPRFs                     October 2019
-
+4.8.2.  OPRF_Blind
 
    Input:
 
@@ -912,7 +934,25 @@ Internet-Draft                    OPRFs                     October 2019
     1.  M := H_1(x)+rG
     2.  Output M
 
-4.6.3.  OPRF_Unblind
+4.8.3.  OPRF_Unblind
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 17]
+
+Internet-Draft                    OPRFs                    November 2019
+
 
    Input:
 
@@ -933,6 +973,46 @@ Internet-Draft                    OPRFs                     October 2019
    kH_1(x) by the commutativity of scalar multiplication in GG.  This is
    the same output as in the original OPRF_Unblind algorithm.
 
+4.9.  Cryptographic security
+
+   As aforementioned, our OPRF and VOPRF constructions are based heavily
+   on the 2HashDH-NIZK construction given in [JKK14], except for
+   considerations on how we instantiate the NIZK DLEQ proof system.
+   This means that the cryptographic security of our construction is
+   also based on the assumption that the One-More Gap DH is
+   computationally difficult to solve.
+
+   The (N,Q)-One-More Gap DH (OMDH) problem asks the following.
+
+    Given:
+    - G, kG, G_1, ... , G_N where G, G1, ... GN are elements of the group GG;
+    - oracle access to an OPRF functionality using the key k;
+    - oracle access to DDH solvers.
+
+    Find Q+1 pairs of the form below:
+
+    (G_{j_s}, kG_{j_s})
+
+    where the following conditions hold:
+      - s is a number between 1 and Q+1;
+      - j_s is a number between 1 and N for each s;
+      - Q is the number of allowed queries.
+
+   The original paper [JKK14] gives a security proof that the 2HashDH-
+   NIZK construction satisfies the security guarantees of a VOPRF
+   protocol Section 3.1 under the OMDH assumption in the universal
+   composability (UC) security model.  Without the NIZK proof system,
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 18]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+   the protocol instantiates an OPRF protocol only.  See the paper for
+   further details.
+
 5.  NIZK Discrete Logarithm Equality Proof
 
    For the VOPRF protocol we require that V is able to verify that P has
@@ -945,14 +1025,6 @@ Internet-Draft                    OPRFs                     October 2019
    key for computing the VOPRF output and does not attempt to "tag"
    individual verifiers with select keys.  This proof must not reveal
    the P's long-term private key to V.
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 17]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    Consequently, this allows extending the OPRF protocol with a (non-
    interactive) discrete logarithm equality (DLEQ) algorithm built on a
@@ -985,30 +1057,19 @@ Internet-Draft                    OPRFs                     October 2019
 
    We note here that it is essential that a different r value is used
    for every invocation.  If this is not done, then this may leak the
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 19]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    key k in a similar fashion as is possible in Schnorr or (EC)DSA
    scenarios where fresh randomness is not used.
 
 5.2.  DLEQ_Verify
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 18]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    Input:
 
@@ -1053,18 +1114,24 @@ Internet-Draft                    OPRFs                     October 2019
 
    In this section, we describe algorithms for batching the DLEQ
    generation and verification procedure.  For these algorithms we
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 20]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    require an additional random oracle H_5: {0,1}^a x ZZ^3 -> {0,1}^b
    that takes an inputs of a binary string of length a and three integer
    values, and outputs an element in {0,1}^b.
 
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 19]
-
-Internet-Draft                    OPRFs                     October 2019
-
+   We can instantiate the random oracle function H_4 using the same hash
+   function that is used for H_1,H_2,H_3.  For H_5, we can also use a
+   similar instantiation, or we can use a variable-length output
+   generator.  For example, for groups with an order of 256-bit, valid
+   instantiations include functions such as SHAKE-256 [SHAKE] or HKDF-
+   Expand-SHA256 [RFC5869].
 
 6.1.  Batched DLEQ algorithms
 
@@ -1106,20 +1173,9 @@ Steps:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 20]
+Davidson, et al.           Expires May 6, 2020                 [Page 21]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
  Input:
@@ -1173,9 +1229,9 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 21]
+Davidson, et al.           Expires May 6, 2020                 [Page 22]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
 6.2.1.  VOPRF_Batch_Unblind
@@ -1204,124 +1260,347 @@ Internet-Draft                    OPRFs                     October 2019
 
 7.  Supported ciphersuites
 
-   This section specifies supported ECVOPRF group and hash function
+   This section specifies supported VOPRF group and hash function
    instantiations.  We only provide ciphersuites in the EC setting as
    these provide the most efficient way of instantiating the OPRF.  Our
    instantiation includes considerations for providing the DLEQ proofs
    that make the instantiation a VOPRF.  Supporting OPRF operations
    (ECOPRF) alone can be allowed by simply dropping the relevant
-   components.  In addition, we currently only support ciphersuites
-   demonstrating 128 bits of security.
+   components.  For reasons that are detailed in Section 8.1, we only
+   consider ciphersuites that provide strictly greater than 128 bits of
+   security [NIST].
 
-7.1.  ECVOPRF-P256-HKDF-SHA256-SSWU:
+7.1.  VOPRF-curve448-HKDF-SHA512-ELL2:
 
-   o  GG: secp256r1 [SEC2]
+   o  GG: curve448 [RFC7748]
 
-   o  H_1: P256-SHA256-SSWU-RO [I-D.irtf-cfrg-hash-to-curve]
+   o  H_1: curve448-SHA512-ELL2-RO [I-D.irtf-cfrg-hash-to-curve]
 
       *  label: voprf_h2c
 
-   o  H_2: SHA256
+   o  H_2: SHA512
 
-   o  H_3: SHA256
-
-   o  H_4: SHA256
+   o  H_3: SHA512
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 22]
+
+Davidson, et al.           Expires May 6, 2020                 [Page 23]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
-   o  H_5: HKDF-Expand-SHA256
+   o  H_4: SHA512
 
-7.2.  ECVOPRF-ed25519-HKDF-SHA256-Elligator2:
+   o  H_5: HKDF-Expand-SHA512
 
-   o  GG: Ristretto255 [RISTRETTO]
+7.2.  VOPRF-p384-HKDF-SHA512-ICART:
 
-   o  H_1: edwards25519-SHA256-EDELL2-RO [I-D.irtf-cfrg-hash-to-curve]
+   o  GG: secp384r1 [SEC2]
+
+   o  H_1: P384-SHA512-ICART-RO [I-D.irtf-cfrg-hash-to-curve]
 
       *  label: voprf_h2c
 
-   o  H_2: SHA256
+   o  H_2: SHA512
 
-   o  H_3: SHA256
+   o  H_3: SHA512
 
-   o  H_4: SHA256
+   o  H_4: SHA512
 
-   o  H_5: HKDF-Expand-SHA256
+   o  H_5: HKDF-Expand-SHA512
 
-   In the case of Ristretto, internal point representations are
-   represented by Ed25519 [RFC7748] points.  As a result, we can use the
-   same hash-to-curve encoding as we would use for Ed25519
-   [I-D.irtf-cfrg-hash-to-curve].  We remark that the 'label' field is
-   necessary for domain separation of the hash-to-curve functionality.
+7.3.  VOPRF-p521-HKDF-SHA512-SSWU:
+
+   o  GG: secp521r1 [SEC2]
+
+   o  H_1: P521-SHA512-SSWU-RO [I-D.irtf-cfrg-hash-to-curve]
+
+      *  label: voprf_h2c
+
+   o  H_2: SHA512
+
+   o  H_3: SHA512
+
+   o  H_4: SHA512
+
+   o  H_5: HKDF-Expand-SHA512
+
+   We remark that the 'label' field is necessary for domain separation
+   of the hash-to-curve functionality.
 
 8.  Security Considerations
 
-   Security of the protocol depends on P's secrecy of k.  Best practices
-   recommend P regularly rotate k so as to keep its window of compromise
-   small.  Moreover, if each key should be generated from a source of
-   safe, cryptographic randomness.
+   This section discusses the cryptographic security of our protocol,
+   along with some suggestions and trade-offs that arise from the
+   implementation of the implementation of an OPRF.
 
-   A critical aspect of this protocol is reliance on
-   [I-D.irtf-cfrg-hash-to-curve] for mapping arbitrary inputs x to
-   points on a curve.  Security requires this mapping be pre-image and
-   collision resistant.
 
-8.1.  Timing Leaks
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 24]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+8.1.  Cryptographic security
+
+   We discuss the cryptographic security of the OPRF protocol from
+   Section 4, relative to the necessary cryptographic assumptions that
+   need to be made.
+
+8.1.1.  Computational hardness assumptions
+
+   Each assumption states that the problems specified below are
+   computationally difficult to solve in relation to sp (the security
+   parameter).  In other words, the probability that an adversary has in
+   solving the problem is bounded by a function negl(sp), where negl(sp)
+   < 1/f(sp) for all polynomial functions f().
+
+   Let GG = GG(sp) be a group with prime-order p, and let FFp be the
+   finite field of order p.
+
+8.1.1.1.  Discrete-log (DL) problem
+
+   Given G, a generator of GG, and H = h*G for some h in FFp; output h.
+
+8.1.1.2.  Decisional Diffie-Hellman (DDH) problem
+
+   Sample a uniformly random bit d in {0,1}. Given (G, a_G, b_G, C),
+   where:
+
+   o  G is a generator of GG;
+
+   o  a,b are elements of FFp;
+
+   o  if d == 0: C = ab*G; else: C is sampled uniformly GG(sp).
+
+   Output d' == d.
+
+8.1.2.  Q-strong-DH oracle
+
+   A side-effect of our OPRF design is that it allows instantiation of a
+   oracle for constructing Q-strong-DH (Q-sDH) samples.  The Q-Strong-DH
+   problem asks the following.
+
+    Given G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2 generators of GG.
+
+    Output ( (1/(k+c))*G1, c ) where c is an element of FFp
+
+   The assumption that this problem is hard was first introduced in
+   [BB04].  Since then, there have been a number of cryptanalytic
+   studies that have reduced the security of the assumption below that
+   implied by the group instantiation (for example, [BG04] and
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 25]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+   [Cheon06]).  In summary, known attacks reduce the security of the
+   group instantation by log_2(Q) bits.
+
+   As an example, suppose that a group instantiation is used that
+   provides 128 bits of security.  Then an adversary with access to a
+   Q-sDH oracle and makes Q=2^20 queries can reduce the security of the
+   instantiation by log_2(2^20) = 20 bits.
+
+   Notice that it is easy to instantiate a Q-sDH oracle using the OPRF
+   functionality that we provide.  A client can just submit sequential
+   queries of the form (G, k_G, (k^2)_G, ..., (k^(Q-1))*G), where each
+   query is the output of the previous interaction.  This means that any
+   client that submit Q queries to the OPRF can use the aforementioned
+   attacks to reduce security of the group instantiation by log_2(Q)
+   bits.
+
+   Recall that from a malicious client's perspective, the adversary wins
+   if they can distinguish the OPRF interaction from a protocol that
+   computes the ideal functionality provided by the PRF.
+
+8.1.3.  Implications for ciphersuite choices
+
+   The OPRF instantiations that we recommend in this document are
+   informed by the cryptanalytic discussion above.  In particular,
+   choosing elliptic curves configurations that describe 128-bit group
+   instantiations would appear to in fact instantiate an OPRF with
+   128-log_2(Q) bits of security.
+
+   While it would require an informed and persistent attacker to launch
+   a highly expensive attack to reduce security to anything much below
+   100 bits of security, we see this possbility as something that may
+   result in problems in the future.  Therefore, all of our ciphersuites
+   in Section 7 come with a minimum group instantiation corresponding to
+   196 bits of security.  This would require an adversary to launch a
+   minimum of Q = 2^(68) queries to reduce security to 128 bits using
+   the Q-sDH attacks.  As a result, it appears prohibitively expensive
+   to launch credible attacks on these parameters with our current
+   understanding of the attack surface.
+
+8.2.  Hashing to curve
+
+   A critical aspect of implementing this protocol using elliptic curve
+   group instantiations is a method of instantiating the function H1,
+   that maps inputs to group elements.  In the elliptic curve setting,
+   this must be a deterministic function that maps arbitrary inputs x
+   (as bytes) to uniformly chosen points in the curve.
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 26]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+   In the security proof of the construction H1 is modelled as a random
+   oracle.  This implies that any instantiation of H1 must be pre-image
+   and collision resistant.  In Section 7 we give instantiations of this
+   functionality based on the functions described in
+   [I-D.irtf-cfrg-hash-to-curve].  Consequently, any OPRF implementation
+   must adhere to the implementation and security considerations
+   discussed in [I-D.irtf-cfrg-hash-to-curve] when instantiating the
+   function H1.
+
+8.3.  Timing Leaks
 
    To ensure no information is leaked during protocol execution, all
    operations that use secret data MUST be constant time.  Operations
    that SHOULD be constant time include: H_1() (hashing arbitrary
-   strings to curves) and DLEQ_Generate().
+   strings to curves) and DLEQ_Generate().  As mentioned previously,
    [I-D.irtf-cfrg-hash-to-curve] describes various algorithms for
    constant-time implementations of H_1.
 
+8.4.  User segregation
+
+   The aim of the OPRF functionality is to allow clients receive
+   pseudorandom function evaluations on their own inputs, without
+   compromising their own privacy with respect to the server.  In many
+   applications (for example, [PrivacyPass]) the client may choose to
+   reveal their original input, after an invocation of the OPRF
+   protocol, along with their OPRF output.  This can prove to the server
+   that it has received a valid OPRF output in the past.  Since the
+   server does not reveal learn anything about the OPRF output, it
+   should not be able to link the client to any previous protocol
+   instantiation.
+
+   Consider a malicious server that manages to segregate the user base
+   into different sets.  Then this reduces the effective privacy of all
+   of the clients involved, since the client above belongs to a smaller
+   set of users than previously hoped.  In general, if the user-base of
+   the OPRF functionality is quite small, then the obliviousness of
+   clients is limited.  That is, smaller user-bases mean that the server
+   is able to identify client's with higher certainty.
+
+   In summary, an OPRF instantiation effectively comes with an
+   additional privacy parameter pp.  If all clients of the OPRF make one
+   query and then subsequently reveal their OPRF input afterwards, then
+   the server should be link the revealed input to a protocol
+   instantiation with probability 1/pp.
+
+   Below, we provide a few techniques that could be used to abuse
+   client-privacy in the OPRF construction by segregating the user-base,
+   along with some mitigations.
 
 
 
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 23]
+Davidson, et al.           Expires May 6, 2020                 [Page 27]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
-8.2.  Hashing to curves
+8.4.1.  Linkage patterns
 
-   We choose different encodings in relation to the elliptic curve that
-   is used, all methods are illuminated precisely in
-   [I-D.irtf-cfrg-hash-to-curve].  In summary, we use the simplified
-   Shallue-Woestijne-Ulas algorithm for hashing binary strings to the
-   P-256 curve; the Icart algorithm for hashing binary strings to P384;
-   the Elligator2 algorithm for hashing binary strings to CURVE25519 and
-   CURVE448.
+   If the server is able to ascertain patterns of usage for some clients
+   - such as timings associated with usage - then the effective privacy
+   of the clients is reduced to the number of users that fit each usage
+   pattern.  Along with early registration patterns, where early
+   adopters initially have less privacy due to a low number of
+   registered users, such problems are inherent to any anonymity-
+   preserving system.
 
-8.3.  Verifiability (key consistency)
+8.4.2.  Evaluation on multiple keys
 
-   DLEQ proofs are essential to the protocol to allow V to check that
-   P's designated private key was used in the computation.  A side
-   effect of this property is that it prevents P from using a unique key
-   for select verifiers as a way of "tagging" them.  If all verifiers
-   expect use of a certain private key, e.g., by locating P's public key
-   published from a trusted registry, then P cannot present unique keys
-   to an individual verifier.
+   Such an attack consists of the server evaluating the OPRF on multiple
+   different keys related to the number of clients that use the
+   functionality.  As an extreme, the server could evaluate the OPRF
+   with a different key for each client.  If the client then revealed
+   their hidden information at a later date then the server would
+   immediately know which initial request they launched.
 
-   For this side effect to hold, P must also be prevented from using
-   other techniques to manipulate their public key within the trusted
-   registry to reduce client anonymity.  For example, if P's public key
-   is rotated too frequently then this may stratify the user base into
-   small anonymity groups (those with VOPRF_Eval outputs taken from a
-   given key epoch).  In this case, it may become practical to link
-   VOPRF sessions for a given user and thus compromise their privacy.
+   The VOPRF variant helps mitigate this attack since each server
+   evaluation can be bound to a known public key.  However, there are
+   still ways that the VOPRF construction can be abused.  In particular:
 
-   Similarly, if P can publish N public keys to a trusted registry then
-   P may be able to control presentation of these keys in such a way
-   that V is retroactively identified by V's key choice across multiple
-   requests.
+   o  If the server successfully provisions a large number of keys that
+      are trusted by clients, then the server can divide the user-base
+      by the number of keys that are currently in use.  As such, clients
+      should only trust a small number (2 or 3 ideally) of server keys
+      at any one time.  Additionally, a tamper-proof audit log system
+      akin to existing work on Key Transparency [keytrans] could be used
+      to ensure that a server is abiding by the key policy.  This would
+      force the server to be held accountable for their key updates, and
+      thus higher key update frequencies can be better managed on the
+      client-side.
+
+   o  If the server rotates their key frequently, then this may result
+      in client's holding out-of-date information from a past
+      interaction.  Such information can also be used to segregate the
+      user-base based on the last time that they accessed the OPRF
+      protocol.  Similarly to the above, server key rotations must be
+      kept to relatively infrequent intervals (such as once per month).
+      This will prevent too many clients from being segregated into
+      different groups related to the time that they accessed the
+      functionality.  There are viable reasons for rotating the server
+      key (for protecting against malicious clients) that we address
+      more closely in Section 8.5.
+
+   Since key provisioning requires careful handling, all public keys
+   should be accessible from a client-trusted registry with a way of
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 28]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+   auditing the history of key updates.  We also recommend that public
+   keys have a corresponding expiry date that clients can use to prevent
+   the server from using keys that have been provisioned for a long
+   period of time.
+
+8.5.  Key rotation
+
+   Since the server's key is critical to security, the longer it is
+   exposed by performing (V)OPRF operations on client inputs, the longer
+   it is possible that the key can be compromised.  For instance, if the
+   key is kept in production for a long period of time, then this may
+   grant the client the ability to hoard large numbers of tokens.  This
+   has negative impacts for some of the applications that we consider in
+   Section 9.  As another example, if the key is kept in circulation for
+   a long period of time, then it also allows the clients to make enough
+   queries to launch more powerful variants of the Q-sDH attacks from
+   Section 8.1.2.
+
+   To combat attacks of this nature, regular key rotation should be
+   employed on the server-side.  A suitable key-cycle for a key used to
+   compute (V)OPRF evaluations would be between one week and six months.
+
+   As we discussed in Section 8.4.2, key rotation cycles that are too
+   frequent (in the order of days) can lead to large segregation of the
+   wider user base.  As such, the length of the key cycles represent a
+   trade-off between greater server key security (for shorter cycles),
+   and better client privacy (for longer cycles).  In situations where
+   client privacy is paramount, longer key cycles should be employed.
+   Otherwise, shorter key cycles can be managed if the server uses a Key
+   Transparency-type system [keytrans]; this allows clients to publicly
+   audit their rotations.
 
 9.  Applications
 
@@ -1338,15 +1617,15 @@ Internet-Draft                    OPRFs                     October 2019
    blinded points, which are then returned to C along with a batched
    DLEQ proof.  C stores the tokens if the batched proof verifies
    correctly.  When C attempts to connect to E again and is prompted
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 24]
-
-Internet-Draft                    OPRFs                     October 2019
-
-
    with a CAPTCHA, C uses one of the unblinded and signed points, or
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 29]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
    tokens, to derive a shared symmetric key sk used to MAC the CAPTCHA
    challenge.  C sends the CAPTCHA, MAC, and token input x to E, who can
    use x to derive sk and verify the CAPTCHA MAC.  Thus, each token is
@@ -1397,14 +1676,21 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 25]
+
+Davidson, et al.           Expires May 6, 2020                 [Page 30]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
 11.  References
 
 11.1.  Normative References
+
+   [BB04]     "Short Signatures Without Random Oracles", n.d.,
+              <http://ai.stanford.edu/~xb/eurocrypt04a/bbsigs.pdf>.
+
+   [BG04]     "The Static Diffie-Hellman Problem", n.d.,
+              <https://eprint.iacr.org/2004/306>.
 
    [ChaumBlindSignature]
               "Blind Signatures for Untraceable Payments", n.d.,
@@ -1414,6 +1700,10 @@ Internet-Draft                    OPRFs                     October 2019
    [ChaumPedersen]
               "Wallet Databases with Observers", n.d.,
               <https://chaum.com/publications/Wallet_Databases.pdf>.
+
+   [Cheon06]  "Security Analysis of the Strong Diffie-Hellman Problem",
+              n.d., <https://www.iacr.org/archive/
+              eurocrypt2006/40040001/40040001.pdf>.
 
    [DECAF]    "Decaf, Eliminating cofactors through point compression",
               n.d., <https://www.shiftleft.org/papers/decaf/decaf.pdf>.
@@ -1440,6 +1730,19 @@ Internet-Draft                    OPRFs                     October 2019
               based on Threshold OPRF", n.d.,
               <https://eprint.iacr.org/2017/363>.
 
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 31]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
+   [keytrans]
+              "Security Through Transparency", n.d.,
+              <https://security.googleblog.com/2017/01/security-through-
+              transparency.html>.
+
    [NIST]     "Keylength - NIST Report on Cryptographic Key Length and
               Cryptoperiod (2016)", n.d.,
               <https://www.keylength.com/en/4/>.
@@ -1447,16 +1750,6 @@ Internet-Draft                    OPRFs                     October 2019
    [OPAQUE]   "The OPAQUE Asymmetric PAKE Protocol", n.d.,
               <https://tools.ietf.org/html/draft-krawczyk-cfrg-opaque-
               02>.
-
-
-
-
-
-
-Davidson, et al.         Expires April 12, 2020                [Page 26]
-
-Internet-Draft                    OPRFs                     October 2019
-
 
    [PrivacyPass]
               "Privacy Pass", n.d.,
@@ -1494,6 +1787,13 @@ Internet-Draft                    OPRFs                     October 2019
    [SJKS17]   "SPHINX, A Password Store that Perfectly Hides from
               Itself", n.d., <https://eprint.iacr.org/2018/695>.
 
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 32]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 11.2.  URIs
 
    [1] https://tools.ietf.org/html/draft-irtf-cfrg-voprf-00
@@ -1509,9 +1809,45 @@ Appendix A.  Test Vectors
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 27]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davidson, et al.           Expires May 6, 2020                 [Page 33]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
 P-256
@@ -1565,9 +1901,9 @@ Authors' Addresses
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 28]
+Davidson, et al.           Expires May 6, 2020                 [Page 34]
 
-Internet-Draft                    OPRFs                     October 2019
+Internet-Draft                    OPRFs                    November 2019
 
 
    Alex Davidson
@@ -1621,4 +1957,4 @@ Internet-Draft                    OPRFs                     October 2019
 
 
 
-Davidson, et al.         Expires April 12, 2020                [Page 29]
+Davidson, et al.           Expires May 6, 2020                 [Page 35]
