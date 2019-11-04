@@ -328,24 +328,36 @@ ul.toc li {
 <link href="#rfc.section.6.1" rel="Chapter" title="6.1 VOPRF-curve448-HKDF-SHA512-ELL2:">
 <link href="#rfc.section.6.2" rel="Chapter" title="6.2 VOPRF-p384-HKDF-SHA512-ICART:">
 <link href="#rfc.section.6.3" rel="Chapter" title="6.3 VOPRF-p521-HKDF-SHA512-SSWU:">
-<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations">
-<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Cryptographic security">
-<link href="#rfc.section.7.1.1" rel="Chapter" title="7.1.1 Computational hardness assumptions">
-<link href="#rfc.section.7.1.2" rel="Chapter" title="7.1.2 Protocol security">
-<link href="#rfc.section.7.1.3" rel="Chapter" title="7.1.3 Q-strong-DH oracle">
-<link href="#rfc.section.7.1.4" rel="Chapter" title="7.1.4 Implications for ciphersuite choices">
-<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Hashing to curve">
-<link href="#rfc.section.7.3" rel="Chapter" title="7.3 Timing Leaks">
-<link href="#rfc.section.7.4" rel="Chapter" title="7.4 User segregation">
-<link href="#rfc.section.7.4.1" rel="Chapter" title="7.4.1 Linkage patterns">
-<link href="#rfc.section.7.4.2" rel="Chapter" title="7.4.2 Evaluation on multiple keys">
-<link href="#rfc.section.7.5" rel="Chapter" title="7.5 Key rotation">
-<link href="#rfc.section.8" rel="Chapter" title="8 Applications">
-<link href="#rfc.section.8.1" rel="Chapter" title="8.1 Privacy Pass">
-<link href="#rfc.section.8.2" rel="Chapter" title="8.2 Private Password Checker">
-<link href="#rfc.section.8.2.1" rel="Chapter" title="8.2.1 Parameter Commitments">
-<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgements">
-<link href="#rfc.references" rel="Chapter" title="10 Normative References">
+<link href="#rfc.section.7" rel="Chapter" title="7 Recommended protocol integration">
+<link href="#rfc.section.7.1" rel="Chapter" title="7.1 Setup phase">
+<link href="#rfc.section.7.2" rel="Chapter" title="7.2 Evaluation phase">
+<link href="#rfc.section.7.3" rel="Chapter" title="7.3 Client-specific considerations">
+<link href="#rfc.section.7.3.1" rel="Chapter" title="7.3.1 Inputs">
+<link href="#rfc.section.7.3.2" rel="Chapter" title="7.3.2 Output">
+<link href="#rfc.section.7.3.3" rel="Chapter" title="7.3.3 Messages">
+<link href="#rfc.section.7.4" rel="Chapter" title="7.4 Server-specific considerations">
+<link href="#rfc.section.7.4.1" rel="Chapter" title="7.4.1 Setup">
+<link href="#rfc.section.7.4.2" rel="Chapter" title="7.4.2 Inputs">
+<link href="#rfc.section.7.4.3" rel="Chapter" title="7.4.3 Outputs">
+<link href="#rfc.section.7.4.4" rel="Chapter" title="7.4.4 Messages">
+<link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations">
+<link href="#rfc.section.8.1" rel="Chapter" title="8.1 Cryptographic security">
+<link href="#rfc.section.8.1.1" rel="Chapter" title="8.1.1 Computational hardness assumptions">
+<link href="#rfc.section.8.1.2" rel="Chapter" title="8.1.2 Protocol security">
+<link href="#rfc.section.8.1.3" rel="Chapter" title="8.1.3 Q-strong-DH oracle">
+<link href="#rfc.section.8.1.4" rel="Chapter" title="8.1.4 Implications for ciphersuite choices">
+<link href="#rfc.section.8.2" rel="Chapter" title="8.2 Hashing to curve">
+<link href="#rfc.section.8.3" rel="Chapter" title="8.3 Timing Leaks">
+<link href="#rfc.section.8.4" rel="Chapter" title="8.4 User segregation">
+<link href="#rfc.section.8.4.1" rel="Chapter" title="8.4.1 Linkage patterns">
+<link href="#rfc.section.8.4.2" rel="Chapter" title="8.4.2 Evaluation on multiple keys">
+<link href="#rfc.section.8.5" rel="Chapter" title="8.5 Key rotation">
+<link href="#rfc.section.9" rel="Chapter" title="9 Applications">
+<link href="#rfc.section.9.1" rel="Chapter" title="9.1 Privacy Pass">
+<link href="#rfc.section.9.2" rel="Chapter" title="9.2 Private Password Checker">
+<link href="#rfc.section.9.2.1" rel="Chapter" title="9.2.1 Parameter Commitments">
+<link href="#rfc.section.10" rel="Chapter" title="10 Acknowledgements">
+<link href="#rfc.references" rel="Chapter" title="11 Normative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Test Vectors">
 <link href="#rfc.authors" rel="Chapter">
 
@@ -355,7 +367,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Davidson, A., Sullivan, N., and C. Wood" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-irtf-cfrg-voprf-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-10-29" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-11-04" />
   <meta name="dct.abstract" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
   <meta name="description" content="An Oblivious Pseudorandom Function (OPRF) is a two-party protocol for computing the output of a PRF. One party (the server) holds the PRF secret key, and the other (the client) holds the PRF input. The &#8216;obliviousness&#8217; property ensures that the server does not learn anything about the client&#8217;s input during the evaluation. The client should also not learn anything about the server&#8217;s secret PRF key. Optionally, OPRFs can also satisfy a notion &#8216;verifiability&#8217; (VOPRF). In this setting, the client can verify that the server&#8217;s output is indeed the result of evaluating the underlying PRF with just a public key. This document specifies OPRF and VOPRF constructions instantiated within prime-order groups, including elliptic curves." />
 
@@ -379,7 +391,7 @@ ul.toc li {
 <td class="right">Cloudflare</td>
 </tr>
 <tr>
-<td class="left">Expires: May 1, 2020</td>
+<td class="left">Expires: May 7, 2020</td>
 <td class="right">C. Wood</td>
 </tr>
 <tr>
@@ -388,7 +400,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">October 29, 2019</td>
+<td class="right">November 04, 2019</td>
 </tr>
 
     	
@@ -404,7 +416,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 1, 2020.</p>
+<p>This Internet-Draft will expire on May 7, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -506,41 +518,65 @@ ul.toc li {
 </li>
 <li>6.3.   <a href="#rfc.section.6.3">VOPRF-p521-HKDF-SHA512-SSWU:</a>
 </li>
-</ul><li>7.   <a href="#rfc.section.7">Security Considerations</a>
+</ul><li>7.   <a href="#rfc.section.7">Recommended protocol integration</a>
 </li>
-<ul><li>7.1.   <a href="#rfc.section.7.1">Cryptographic security</a>
+<ul><li>7.1.   <a href="#rfc.section.7.1">Setup phase</a>
 </li>
-<ul><li>7.1.1.   <a href="#rfc.section.7.1.1">Computational hardness assumptions</a>
+<li>7.2.   <a href="#rfc.section.7.2">Evaluation phase</a>
 </li>
-<li>7.1.2.   <a href="#rfc.section.7.1.2">Protocol security</a>
+<li>7.3.   <a href="#rfc.section.7.3">Client-specific considerations</a>
 </li>
-<li>7.1.3.   <a href="#rfc.section.7.1.3">Q-strong-DH oracle</a>
+<ul><li>7.3.1.   <a href="#rfc.section.7.3.1">Inputs</a>
 </li>
-<li>7.1.4.   <a href="#rfc.section.7.1.4">Implications for ciphersuite choices</a>
+<li>7.3.2.   <a href="#rfc.section.7.3.2">Output</a>
 </li>
-</ul><li>7.2.   <a href="#rfc.section.7.2">Hashing to curve</a>
+<li>7.3.3.   <a href="#rfc.section.7.3.3">Messages</a>
 </li>
-<li>7.3.   <a href="#rfc.section.7.3">Timing Leaks</a>
+</ul><li>7.4.   <a href="#rfc.section.7.4">Server-specific considerations</a>
 </li>
-<li>7.4.   <a href="#rfc.section.7.4">User segregation</a>
+<ul><li>7.4.1.   <a href="#rfc.section.7.4.1">Setup</a>
 </li>
-<ul><li>7.4.1.   <a href="#rfc.section.7.4.1">Linkage patterns</a>
+<li>7.4.2.   <a href="#rfc.section.7.4.2">Inputs</a>
 </li>
-<li>7.4.2.   <a href="#rfc.section.7.4.2">Evaluation on multiple keys</a>
+<li>7.4.3.   <a href="#rfc.section.7.4.3">Outputs</a>
 </li>
-</ul><li>7.5.   <a href="#rfc.section.7.5">Key rotation</a>
+<li>7.4.4.   <a href="#rfc.section.7.4.4">Messages</a>
 </li>
-</ul><li>8.   <a href="#rfc.section.8">Applications</a>
+</ul></ul><li>8.   <a href="#rfc.section.8">Security Considerations</a>
 </li>
-<ul><li>8.1.   <a href="#rfc.section.8.1">Privacy Pass</a>
+<ul><li>8.1.   <a href="#rfc.section.8.1">Cryptographic security</a>
 </li>
-<li>8.2.   <a href="#rfc.section.8.2">Private Password Checker</a>
+<ul><li>8.1.1.   <a href="#rfc.section.8.1.1">Computational hardness assumptions</a>
 </li>
-<ul><li>8.2.1.   <a href="#rfc.section.8.2.1">Parameter Commitments</a>
+<li>8.1.2.   <a href="#rfc.section.8.1.2">Protocol security</a>
 </li>
-</ul></ul><li>9.   <a href="#rfc.section.9">Acknowledgements</a>
+<li>8.1.3.   <a href="#rfc.section.8.1.3">Q-strong-DH oracle</a>
 </li>
-<li>10.   <a href="#rfc.references">Normative References</a>
+<li>8.1.4.   <a href="#rfc.section.8.1.4">Implications for ciphersuite choices</a>
+</li>
+</ul><li>8.2.   <a href="#rfc.section.8.2">Hashing to curve</a>
+</li>
+<li>8.3.   <a href="#rfc.section.8.3">Timing Leaks</a>
+</li>
+<li>8.4.   <a href="#rfc.section.8.4">User segregation</a>
+</li>
+<ul><li>8.4.1.   <a href="#rfc.section.8.4.1">Linkage patterns</a>
+</li>
+<li>8.4.2.   <a href="#rfc.section.8.4.2">Evaluation on multiple keys</a>
+</li>
+</ul><li>8.5.   <a href="#rfc.section.8.5">Key rotation</a>
+</li>
+</ul><li>9.   <a href="#rfc.section.9">Applications</a>
+</li>
+<ul><li>9.1.   <a href="#rfc.section.9.1">Privacy Pass</a>
+</li>
+<li>9.2.   <a href="#rfc.section.9.2">Private Password Checker</a>
+</li>
+<ul><li>9.2.1.   <a href="#rfc.section.9.2.1">Parameter Commitments</a>
+</li>
+</ul></ul><li>10.   <a href="#rfc.section.10">Acknowledgements</a>
+</li>
+<li>11.   <a href="#rfc.references">Normative References</a>
 </li>
 <li>Appendix A.   <a href="#rfc.appendix.A">Test Vectors</a>
 </li>
@@ -572,9 +608,9 @@ ul.toc li {
 <li>
 <a href="#ciphersuites" class="xref">Section 6</a>: Considers explicit instantiations of the protocol in the elliptic curve setting.</li>
 <li>
-<a href="#sec" class="xref">Section 7</a>: Discusses the security considerations for the OPRF and VOPRF protocol.</li>
+<a href="#sec" class="xref">Section 8</a>: Discusses the security considerations for the OPRF and VOPRF protocol.</li>
 <li>
-<a href="#apps" class="xref">Section 8</a>: Discusses some existing applications of OPRF and VOPRF protocols.</li>
+<a href="#apps" class="xref">Section 9</a>: Discusses some existing applications of OPRF and VOPRF protocols.</li>
 <li>
 <a href="#testvecs" class="xref">Appendix A</a>: Specifies test vectors for implementations in the elliptic curve setting.</li>
 </ul>
@@ -641,7 +677,8 @@ ul.toc li {
 </h1>
 <p id="rfc.section.4.p.1">In this section we describe the OPRF and VOPRF protocols. Recall that such a protocol takes place between a verifier (V) and a prover (P). Commonly, V is a client and P is a server, and so we use these names interchangeably throughout.  think of the verifier as the client, and the prover as the server in the interaction (we will use these names interchangeably throughout). The server holds a secret key k for a PRF. The protocol allows the client to learn PRF evaluations on chosen inputs x in such a way that the server learns nothing of x.</p>
 <p id="rfc.section.4.p.2">Our OPRF construction is based on the VOPRF construction known as 2HashDH-NIZK given by <a href="#JKK14" class="xref">[JKK14]</a>; essentially without providing zero-knowledge proofs that verify that the output is correct. Our VOPRF construction (including the NIZK DLEQ proofs from <a href="#dleq" class="xref">Section 5</a>) is identical to the <a href="#JKK14" class="xref">[JKK14]</a> construction. With batched proofs (<a href="#batch" class="xref">Section 5.3</a>) our construction differs slightly in that we can perform multiple VOPRF evaluations in one go, whilst only constructing one NIZK proof object.</p>
-<p id="rfc.section.4.p.3">We highlight the computational assumptions that are necessary for proving the security of this construction in <a href="#assumptions" class="xref">Section 7.1.1</a>.</p>
+<p id="rfc.section.4.p.3">In this section we describe the OPRF and VOPRF protocols. Recall that such a protocol takes place between a verifier (V) and a prover (P). We may commonly think of the verifier as the client, and the prover as the server in the interaction (we will use these names interchangeably throughout). The server holds a key k for a PRF. The protocol allows the client to learn PRF evaluations on chosen inputs x without revealing x to the server.</p>
+<p id="rfc.section.4.p.4">Our OPRF construction is based on the VOPRF construction known as 2HashDH-NIZK given by <a href="#JKK14" class="xref">[JKK14]</a>; essentially without providing zero-knowledge proofs that verify that the output is correct. Our VOPRF construction (including the NIZK DLEQ proofs from <a href="#dleq" class="xref">Section 5</a>) is identical to the <a href="#JKK14" class="xref">[JKK14]</a> construction. With batched proofs (<a href="#batch" class="xref">Section 5.3</a>) our construction differs slightly in that we can perform multiple VOPRF evaluations in one go, whilst only constructing one NIZK proof object.</p>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#design" id="design">Design</a>
 </h1>
@@ -660,7 +697,7 @@ ul.toc li {
                         &lt;-------
     [b = DLEQ_Verify(G,Y,M,Z,D)]
     N = Zr^(-1) mod p
-    Output H_2(DST, x .. N) mod p [if b=1, else "error"]
+    Output H_2(lbl, x .. N) mod p [if b=1, else "error"]
 </pre>
 <p id="rfc.section.4.1.p.3">Steps that are enclosed in square brackets (DLEQ_Generate and DLEQ_Verify) are optional for achieving verifiability. These are described in <a href="#dleq" class="xref">Section 5</a>. In the verifiable mode, we assume that P has previously committed to their choice of key k with some values (G,Y=kG) and these are publicly known by V. Notice that revealing (G,Y) does not reveal k by the well-known hardness of the discrete log problem.</p>
 <p id="rfc.section.4.1.p.4">Strictly speaking, the actual PRF function that is computed is:</p>
@@ -668,7 +705,7 @@ ul.toc li {
 F(k, x) = N = kH_1(x)
 </pre>
 <p id="rfc.section.4.1.p.5">It is clear that this is a PRF H_1(x) maps x to a random element in GG, and GG is cyclic. This output is computed when the client computes Zr^(-1) by the commutativity of the multiplication. The client finishes the computation by outputting H_2(x,N). Note that the output from P is not the PRF value because the actual input x is blinded by r.</p>
-<p id="rfc.section.4.1.p.6">The security of our construction is discussed in more detail in <a href="#protocol-sec" class="xref">Section 7.1.2</a>. We discuss the considerations that should be made when embedding (V)OPRF protocols into wider protocols in <a href="#embed" class="xref">Section 4.8</a>.</p>
+<p id="rfc.section.4.1.p.6">The security of our construction is discussed in more detail in <a href="#protocol-sec" class="xref">Section 8.1.2</a>. We discuss the considerations that should be made when embedding (V)OPRF protocols into wider protocols in <a href="#embed" class="xref">Section 4.8</a>.</p>
 <h1 id="rfc.section.4.2">
 <a href="#rfc.section.4.2">4.2.</a> <a href="#protocol-functionality" id="protocol-functionality">Protocol functionality</a>
 </h1>
@@ -680,7 +717,7 @@ F(k, x) = N = kH_1(x)
 <li>OPRF_Blind(x): Compute and return a blind, r, and blinded representation of x in GG, denoted M.</li>
 <li>OPRF_Eval(k,M,h?): Evaluates on input M using secret key k to produce Z, the input h is optional and equal to the cofactor of an elliptic curve. If h is not provided then it defaults to 1.</li>
 <li>OPRF_Unblind(r,Z): Unblind blinded OPRF evaluation Z with blind r, yielding N and output N.</li>
-<li>OPRF_Finalize(x,N): Finalize N to produce the output H_2(DST,x,N) for some fixed label denoted by DST.</li>
+<li>OPRF_Finalize(x,N,aux): Finalize N by first computing dk := H_2(DST, x .. N).  Subsequently output y := H_2(dk, aux), where aux is some auxiliary data.</li>
 </ul>
 <p id="rfc.section.4.2.p.3">For verifiability (VOPRF) we modify the algorithms of VOPRF_Setup, VOPRF_Eval and VOPRF_Unblind to be the following:</p>
 <p></p>
@@ -692,29 +729,32 @@ F(k, x) = N = kH_1(x)
 </ul>
 <p id="rfc.section.4.2.p.5">We leave the rest of the OPRF algorithms unmodified. When referring explicitly to VOPRF execution, we replace &#8216;OPRF&#8217; in all method names with &#8216;VOPRF&#8217;. We describe explicit instantiations of these functions in <a href="#oprf" class="xref">Section 4.5</a> and <a href="#voprf" class="xref">Section 4.6</a>.</p>
 <h1 id="rfc.section.4.2.1">
-<a href="#rfc.section.4.2.1">4.2.1.</a> <a href="#generalized-oprf" id="generalized-oprf">Generalized OPRF</a>
+<a href="#rfc.section.4.2.1">4.2.1.</a> <a href="#general-oprf" id="general-oprf">Generalized OPRF</a>
 </h1>
 <p id="rfc.section.4.2.1.p.1">Using the API provided by the functions above, we can restate the OPRF protocol using the following descriptions. The first protocol refers to the OPRF setup phase that is run by the server. This generates the secret input used by the server and the public information that is given to the client.</p>
 <p id="rfc.section.4.2.1.p.2">OPRF setup phase: ~~~ Verifier()                   Prover(l) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (k,p) = OPRF_Setup(l) p &lt;&#8212;&#8212;- ~~~</p>
-<p id="rfc.section.4.2.1.p.3">OPRF evaluation phase: ~~~ Verifier(x)                   Prover(k) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (r, M) = OPRF_Blind(x) M &#8212;&#8212;-&gt; Z = OPRF_Eval(k,M) Z &lt;&#8212;&#8212;- N = OPRF_Unblind(r,Z) Output OPRF_Finalize(x,N) ~~~</p>
+<p id="rfc.section.4.2.1.p.3">OPRF evaluation phase: ~~~ Verifier(x,aux)                   Prover(k) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (r, M) = OPRF_Blind(x) M &#8212;&#8212;-&gt; Z = OPRF_Eval(k,M) Z &lt;&#8212;&#8212;- N = OPRF_Unblind(r,Z) Output OPRF_Finalize(x,N,aux) ~~~</p>
+<p id="rfc.section.4.2.1.p.4">Note that in the final output, the client computes OPRF_Finalize over some auxiliary input data aux.</p>
 <h1 id="rfc.section.4.2.2">
-<a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#generalized-voprf" id="generalized-voprf">Generalized VOPRF</a>
+<a href="#rfc.section.4.2.2">4.2.2.</a> <a href="#general-voprf" id="general-voprf">Generalized VOPRF</a>
 </h1>
 <p id="rfc.section.4.2.2.p.1">The generalized VOPRF functionality differs slightly from the OPRF protocol above. Firstly, the server sends over an extra commitment value Y = kG, where G is a common generator known to both participants. Secondly, the server sends over both outputs from VOPRF_Eval in the evaluation phase, and the client also verifies the server&#8217;s output.</p>
 <p id="rfc.section.4.2.2.p.2">VOPRF setup phase: ~~~ Verifier()                   Prover(l) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (k,p,Y) = VOPRF_Setup(l) (p,Y) &lt;&#8212;&#8212;- ~~~</p>
-<p id="rfc.section.4.2.2.p.3">VOPRF evaluation phase: ~~~ Verifier(x,Y)                   Prover(k) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (r, M) = VOPRF_Blind(x) M &#8212;&#8212;-&gt; (Z,D) = VOPRF_Eval(k,G,Y,M) (Z,D) &lt;&#8212;&#8212;- N = VOPRF_Unblind(r,G,Y,M,Z,D) Output VOPRF_Finalize(x,N) ~~~</p>
+<p id="rfc.section.4.2.2.p.3">VOPRF evaluation phase: ~~~ Verifier(x,Y,aux)                   Prover(k) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;- (r, M) = VOPRF_Blind(x) M &#8212;&#8212;-&gt; (Z,D) = VOPRF_Eval(k,G,Y,M) (Z,D) &lt;&#8212;&#8212;- N = VOPRF_Unblind(r,G,Y,M,Z,D) Output VOPRF_Finalize(x,N,aux) ~~~</p>
 <h1 id="rfc.section.4.3">
 <a href="#rfc.section.4.3">4.3.</a> <a href="#protocol-correctness" id="protocol-correctness">Protocol correctness</a>
 </h1>
 <p id="rfc.section.4.3.p.1">Protocol correctness requires that, for any key k, input x, and (r, M) = OPRF_Blind(x), it must be true that:</p>
 <pre>
-OPRF_Finalize(x, OPRF_Unblind(r,M,OPRF_Eval(k,M))) = H_2(DST, x .. F(k,x))
+OPRF_Finalize(x, OPRF_Unblind(r,M,OPRF_Eval(k,M)), aux)
+    == H_2(H_2(DST, x .. F(k,x)), aux)
 </pre>
 <p id="rfc.section.4.3.p.2">with overwhelming probability. Likewise, in the verifiable setting, we require that:</p>
 <pre>
-VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Eval(k,G,Y,M)))) = H_2(DST, x .. F(k,x))
+VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Eval(k,G,Y,M))), aux)
+    == H_2(H_2(DST, x .. F(k,x)), aux)
 </pre>
-<p id="rfc.section.4.3.p.3">with overwhelming probability, where (r, M) = VOPRF_Blind(x).</p>
+<p id="rfc.section.4.3.p.3">with overwhelming probability, where (r, M) = VOPRF_Blind(x). In other words, the inner H_2 invocation effectively derives a key, dk, from the input data lbl, x, N. The outer invocation derives the output y by evaluating H_2 over dk and auxiliary data aux.</p>
 <h1 id="rfc.section.4.4">
 <a href="#rfc.section.4.4">4.4.</a> <a href="#instantiations-of-gg" id="instantiations-of-gg">Instantiations of GG</a>
 </h1>
@@ -725,20 +765,8 @@ VOPRF_Finalize(x, VOPRF_Unblind(r,G,Y,M,(VOPRF_Eval(k,G,Y,M)))) = H_2(DST, x .. 
 <h1 id="rfc.section.4.5">
 <a href="#rfc.section.4.5">4.5.</a> <a href="#oprf" id="oprf">OPRF algorithms</a>
 </h1>
-<p id="rfc.section.4.5.p.1">This section provides algorithms for each step in the OPRF protocol. We describe the VOPRF analogues in <a href="#voprf" class="xref">Section 4.6</a>.</p>
-<p></p>
-
-<ol>
-<li>P samples a uniformly random key k &lt;- {0,1}^l for sufficient length l, and interprets it as an integer.</li>
-<li>V computes X = H_1(x) and a random element r (blinding factor) from GF(p), and computes M = rX.</li>
-<li>V sends M to P.</li>
-<li>P computes Z = kM = rkX.</li>
-<li>In the elliptic curve setting, P multiplies Z by the cofactor (denoted h) of the elliptic curve.</li>
-<li>P sends Z to V.</li>
-<li>V unblinds Z to compute N = r^(-1)Z = kX.</li>
-<li>V outputs y = H_2(DST, x .. N), where DST is a fixed domain separating label.  Recall that x .. N refers to the concatenation of the bytes of x and N.</li>
-</ol>
-<p id="rfc.section.4.5.p.3">We note here that the blinding mechanism that we use can be modified slightly with the opportunity for making performance gains in some scenarios. We detail these modifications in Section <a href="#blinding" class="xref">Section 4.7</a>.</p>
+<p id="rfc.section.4.5.p.1">This section provides descriptions of the algorithms used in the generalized protocols from <a href="#general-oprf" class="xref">Section 4.2.1</a>. We describe the VOPRF analogues for the protocols in <a href="#general-voprf" class="xref">Section 4.2.2</a> later in <a href="#voprf" class="xref">Section 4.6</a>.</p>
+<p id="rfc.section.4.5.p.2">We note here that the blinding mechanism that we use can be modified slightly with the opportunity for making performance gains in some scenarios. We detail these modifications in Section <a href="#blinding" class="xref">Section 4.7</a>.</p>
 <h1 id="rfc.section.4.5.1">
 <a href="#rfc.section.4.5.1">4.5.1.</a> <a href="#oprfsetup" id="oprfsetup">OPRF_Setup</a>
 </h1>
@@ -823,6 +851,7 @@ Input:
 
  x: PRF input string.
  N: An element in GG.
+ aux: Arbitrary auxiliary data
 
 Output:
 
@@ -830,27 +859,15 @@ Output:
 
 Steps:
 
- 1. DST := "oprf_derive_output"
- 2. y := H_2(DST, x .. N)
- 3. Output y
+ 1. lbl := "oprf_derive_output"
+ 2. dk := H_2(lbl, x .. N)
+ 3. y := H_2(dk, aux)
+ 4. Output y
 </pre>
 <h1 id="rfc.section.4.6">
 <a href="#rfc.section.4.6">4.6.</a> <a href="#voprf" id="voprf">VOPRF algorithms</a>
 </h1>
-<p id="rfc.section.4.6.p.1">The steps in the VOPRF setting are written as:</p>
-<p></p>
-
-<ol>
-<li>P samples a uniformly random key k &lt;- {0,1}^l for sufficient length l, and interprets it as an integer.</li>
-<li>P commits to k by computing (G,Y) for Y=kG, where G is the fixed generator of GG. P makes the pair (G,Y) publicly available.</li>
-<li>V computes X = H_1(x) and a random element r (blinding factor) from GF(p), and computes M = rX.</li>
-<li>V sends M to P.</li>
-<li>P computes Z = kM = rkX, and D = DLEQ_Generate(k,G,Y,M,Z).</li>
-<li>P sends (Z, D) to V.</li>
-<li>V ensures that 1 = DLEQ_Verify(G,Y,M,Z,D). If not, V outputs an error.</li>
-<li>V unblinds Z to compute N = r^(-1)Z = kX.</li>
-<li>V outputs the pair H_2(DST, x .. N).</li>
-</ol>
+<p id="rfc.section.4.6.p.1">We make modifications to the aforementioned algorithms in the VOPRF setting.</p>
 <h1 id="rfc.section.4.6.1">
 <a href="#rfc.section.4.6.1">4.6.1.</a> <a href="#voprfsetup" id="voprfsetup">VOPRF_Setup</a>
 </h1>
@@ -945,6 +962,7 @@ Input:
 
  x: PRF input string.
  N: An element in GG, or "error".
+ aux: Arbitrary auxiliary data.
 
 Output:
 
@@ -954,8 +972,9 @@ Steps:
 
  1. If N == "error", output "error".
  2. DST := "voprf_derive_output"
- 3. y := H_2(DST, x .. N)
- 4. Output y
+ 3. dk := H_2(DST, x .. N)
+ 4. y := H_2(dk, aux)
+ 5. Output y
 </pre>
 <h1 id="rfc.section.4.7">
 <a href="#rfc.section.4.7">4.7.</a> <a href="#blinding" id="blinding">Efficiency gains with pre-processing and fixed-base blinding</a>
@@ -1198,7 +1217,7 @@ Steps:
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> <a href="#ciphersuites" id="ciphersuites">Supported ciphersuites</a>
 </h1>
-<p id="rfc.section.6.p.1">This section specifies supported VOPRF group and hash function instantiations.  We only provide ciphersuites in the EC setting as these provide the most efficient way of instantiating the OPRF. Our instantiation includes considerations for providing the DLEQ proofs that make the instantiation a VOPRF. Supporting OPRF operations alone can be allowed by simply dropping the relevant components. For reasons that are detailed in <a href="#cryptanalysis" class="xref">Section 7.1</a>, we only consider ciphersuites that provide strictly greater than 128 bits of security <a href="#NIST" class="xref">[NIST]</a>.</p>
+<p id="rfc.section.6.p.1">This section specifies supported VOPRF group and hash function instantiations.  We only provide ciphersuites in the EC setting as these provide the most efficient way of instantiating the OPRF. Our instantiation includes considerations for providing the DLEQ proofs that make the instantiation a VOPRF. Supporting OPRF operations alone can be allowed by simply dropping the relevant components. For reasons that are detailed in <a href="#cryptanalysis" class="xref">Section 8.1</a>, we only consider ciphersuites that provide strictly greater than 128 bits of security <a href="#NIST" class="xref">[NIST]</a>.</p>
 <h1 id="rfc.section.6.1">
 <a href="#rfc.section.6.1">6.1.</a> <a href="#voprf-curve448-hkdf-sha512-ell2" id="voprf-curve448-hkdf-sha512-ell2">VOPRF-curve448-HKDF-SHA512-ELL2:</a>
 </h1>
@@ -1249,26 +1268,105 @@ Steps:
 </ul>
 <p id="rfc.section.6.3.p.2">We remark that the &#8216;label&#8217; field is necessary for domain separation of the hash-to-curve functionality.</p>
 <h1 id="rfc.section.7">
-<a href="#rfc.section.7">7.</a> <a href="#sec" id="sec">Security Considerations</a>
+<a href="#rfc.section.7">7.</a> <a href="#recommended-protocol-integration" id="recommended-protocol-integration">Recommended protocol integration</a>
 </h1>
-<p id="rfc.section.7.p.1">This section discusses the cryptographic security of our protocol, along with some suggestions and trade-offs that arise from the implementation of the implementation of an OPRF.</p>
+<p id="rfc.section.7.p.1">We describe some recommendations and suggestions on the topic of integrating the (V)OPRF protocol from <a href="#protocol" class="xref">Section 4</a> into wider protocols. It should be noted that since <a href="#JKK14" class="xref">[JKK14]</a> provides a security proof of the VPRF construction in the UC security model, then any UC-secure protocol that uses the OPRF construction as an atomic instantiation will remain UC-secure.</p>
+<p id="rfc.section.7.p.2">As a result we recommend that any protocol that wishes to include an OPRF stage does so by implementing all OPRF evaluation functionality as a contiguous block of operations during the protocol. This does not include the OPRF setup phase, which should be run before the entire protocol interaction. For example, such an instantiation for a wider protocol W would look like the following.</p>
+<pre>
+    ================================================================
+                           OPRF setup phase
+    ================================================================
+
+    &gt; ...
+    &gt; BEGIN(protocol W)
+    &gt; ...
+    &gt; PAUSE(protocol W)
+
+    ================================================================
+                         OPRF evaluation phase
+    ================================================================
+
+    &gt; RESTART(protocol W)
+    &gt; ...
+    &gt; END(protocol W)
+</pre>
+<p id="rfc.section.7.p.3">In other words, no messages from protocol W should take place during the OPRF protocol instantiation. This DOES NOT preclude the participants in protocol W from using the outputs of the OPRF evaluation, once the OPRF protocol is complete. Note that the OPRF protocol can involve batched evaluations, as well as single evaluations.</p>
 <h1 id="rfc.section.7.1">
-<a href="#rfc.section.7.1">7.1.</a> <a href="#cryptanalysis" id="cryptanalysis">Cryptographic security</a>
+<a href="#rfc.section.7.1">7.1.</a> <a href="#setup-phase-1" id="setup-phase-1">Setup phase</a>
 </h1>
-<p id="rfc.section.7.1.p.1">We discuss the cryptographic security of the OPRF protocol from <a href="#protocol" class="xref">Section 4</a>, relative to the necessary cryptographic assumptions that need to be made.</p>
-<h1 id="rfc.section.7.1.1">
-<a href="#rfc.section.7.1.1">7.1.1.</a> <a href="#assumptions" id="assumptions">Computational hardness assumptions</a>
+<p id="rfc.section.7.1.p.1">In the VOPRF setting, the server must send to the client (p,Y) where p is the prime used in instantiating the group used for the VOPRF operations, and Y is a commitment to the server key k. From this information, the client and server must agree on a generator G for the group description. It is important that the generator G of GG is not chosen by the server, and that it is agreed upon before the protocol starts. In the elliptic curve setting, we recommend that G is chosen as the standard generator for the curve.</p>
+<p id="rfc.section.7.1.p.2">As we mentioned above, if an implementer wants to embed OPRF evaluation as part of a wider protocol, then we recommend that this setup phase should occur before all communication takes place; including all communication required for the wider protocol. We recommend that any server implementation only implements one group instantiation at any one time. This means that the client does not have to pick a specific instantiation when it sends the first evaluation message.</p>
+<h1 id="rfc.section.7.2">
+<a href="#rfc.section.7.2">7.2.</a> <a href="#evaluation-phase-1" id="evaluation-phase-1">Evaluation phase</a>
 </h1>
-<p id="rfc.section.7.1.1.p.1">Each assumption states that the problems specified below are computationally difficult to solve in relation to sp (the security parameter). In other words, the probability that an adversary has in solving the problem is bounded by a function negl(sp), where negl(sp) &lt; 1/f(sp) for all polynomial functions f().</p>
-<p id="rfc.section.7.1.1.p.2">Let GG = GG(sp) be a group with prime-order p, and let FFp be the finite field of order p.</p>
-<h1 id="rfc.section.7.1.1.1">
-<a href="#rfc.section.7.1.1.1">7.1.1.1.</a> <a href="#dl" id="dl">Discrete-log (DL) problem</a>
+<p id="rfc.section.7.2.p.1">The evaluation phase of the OPRF results in a client receiving pseudorandom function evaluations from the server. It is important that the client is able to link the computation that it performs in the first step, with the output that it receives from the server. In other words, the client must store the data (r,M) output by OPRF_Blind(x). When it receives Z from the server, it must then use (r,M) as inputs to OPRF_Blind.</p>
+<p id="rfc.section.7.2.p.2">In the batched setting, the client stores multiple values (ri,Mi) and sends each Mi to the server. Both client and server should preserve this ordering throughout the evaluation phase so that the client can successfully finalize the output in the final step.</p>
+<h1 id="rfc.section.7.3">
+<a href="#rfc.section.7.3">7.3.</a> <a href="#client-specific-considerations" id="client-specific-considerations">Client-specific considerations</a>
 </h1>
-<p id="rfc.section.7.1.1.1.p.1">Given G, a generator of GG, and H = h*G for some h in FFp; output h.</p>
-<h1 id="rfc.section.7.1.1.2">
-<a href="#rfc.section.7.1.1.2">7.1.1.2.</a> <a href="#ddh" id="ddh">Decisional Diffie-Hellman (DDH) problem</a>
+<h1 id="rfc.section.7.3.1">
+<a href="#rfc.section.7.3.1">7.3.1.</a> <a href="#inputs" id="inputs">Inputs</a>
 </h1>
-<p id="rfc.section.7.1.1.2.p.1">Sample a uniformly random bit d in {0,1}. Given (G, a*G, b*G, C), where:</p>
+<p id="rfc.section.7.3.1.p.1">The client input to the OPRF evaluation phase is a set of bytes x. These bytes do not have to be uniformly distributed. However, we should note that if the bytes are sampled from a predictable distribution, then it is likely that the server will also be able to predict the client&#8217;s input to the OPRF. Therefore the utility of client privacy is reduced somewhat.</p>
+<h1 id="rfc.section.7.3.2">
+<a href="#rfc.section.7.3.2">7.3.2.</a> <a href="#output" id="output">Output</a>
+</h1>
+<p id="rfc.section.7.3.2.p.1">The client receives y = H_2(lbl, x .. N) at the end of the protocol. We suggest that clients store the pair (x, y) as bytes. This allows the client to use the the output of the protocol in conjunction with the input used to create it later.</p>
+<h1 id="rfc.section.7.3.3">
+<a href="#rfc.section.7.3.3">7.3.3.</a> <a href="#messages" id="messages">Messages</a>
+</h1>
+<p id="rfc.section.7.3.3.p.1">The client message contains a group element and should be encoded as bytes. In the elliptic curve setting this corresponds to an encoded curve point. Both compressed and uncompressed point encodings should be supported by the server.  The length of the point encoding should be enough to determine the encoding of the point.</p>
+<h1 id="rfc.section.7.4">
+<a href="#rfc.section.7.4">7.4.</a> <a href="#server-specific-considerations" id="server-specific-considerations">Server-specific considerations</a>
+</h1>
+<h1 id="rfc.section.7.4.1">
+<a href="#rfc.section.7.4.1">7.4.1.</a> <a href="#setup" id="setup">Setup</a>
+</h1>
+<p id="rfc.section.7.4.1.p.1">As mentioned previously, the server should pick a single group instantiation and advertise this as the only way of evaluating the OPRF.</p>
+<h1 id="rfc.section.7.4.2">
+<a href="#rfc.section.7.4.2">7.4.2.</a> <a href="#inputs-1" id="inputs-1">Inputs</a>
+</h1>
+<p id="rfc.section.7.4.2.p.1">The server input to the evaluation phase is a key k. This key can be stored simply as bytes. The key must be protected at all times. If the server ever suspects that the key has been compromised then it must be rotated immediately.  In addition, the key should be rotated somewhat frequently for security reasons to reduce the impact of an unknown compromise. For more information on appropriate key schedules, see <a href="#key-rotation" class="xref">Section 8.5</a>.</p>
+<p id="rfc.section.7.4.2.p.2">Every time the server key is rotated, a new setup phase will have to be run. The server should publish public key commitments (Y) to a public, trusted registry to avoid notifying all client&#8217;s individually. The registry should be considered tamper-proof from the client perspective and should retain a history of all edits. We recommend that all commitments come with an expiry date to enforce rotation policies, and optionally a signature using a long-term signing key (with public verification key made available via another public beacon). The signature is only necessary to prevent active attackers that may be able to route the client to an untrusted registry.</p>
+<p id="rfc.section.7.4.2.p.3">Below, we recommend the following proposed JSON structure for holding public commitment data.</p>
+<pre>
+{
+  "Y": &lt;bytes_of_commitment&gt;,
+  "expiry": &lt;date-of-expiry&gt;,
+  "sig": &lt;commitment_signature&gt;
+}
+</pre>
+<p id="rfc.section.7.4.2.p.4">This data should be retrieved and validated by the client when verifying VOPRF messages from the server. For efficiency reasons, the client may want to cache the value of &#8220;Y&#8221; and &#8220;expiry&#8221;. Any commitment that has expired should not be used by the client.</p>
+<p id="rfc.section.7.4.2.p.5">Each commitment should be versioned according to some obvious convention. After a key rotation the server should append a new commitment object with a new version tag.</p>
+<h1 id="rfc.section.7.4.3">
+<a href="#rfc.section.7.4.3">7.4.3.</a> <a href="#outputs" id="outputs">Outputs</a>
+</h1>
+<p id="rfc.section.7.4.3.p.1">The server need not not preserve any information during the evaluation exchange.  For efficiency and client-privacy reasons, we recommend that all data received from the client in the evaluation phase is destroyed after the server has responded.</p>
+<h1 id="rfc.section.7.4.4">
+<a href="#rfc.section.7.4.4">7.4.4.</a> <a href="#messages-1" id="messages-1">Messages</a>
+</h1>
+<p id="rfc.section.7.4.4.p.1">In the VOPRF setting, when the server sends the response, it needs to indicate which version of key that it has used. This enables the client to retrieve the correct commitment from the public registry. We recommend that the server sends it&#8217;s response as a JSON object that specifies separate members for the values Z and D, along with the key version that is used.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#sec" id="sec">Security Considerations</a>
+</h1>
+<p id="rfc.section.8.p.1">This section discusses the cryptographic security of our protocol, along with some suggestions and trade-offs that arise from the implementation of the implementation of an OPRF.</p>
+<h1 id="rfc.section.8.1">
+<a href="#rfc.section.8.1">8.1.</a> <a href="#cryptanalysis" id="cryptanalysis">Cryptographic security</a>
+</h1>
+<p id="rfc.section.8.1.p.1">We discuss the cryptographic security of the OPRF protocol from <a href="#protocol" class="xref">Section 4</a>, relative to the necessary cryptographic assumptions that need to be made.</p>
+<h1 id="rfc.section.8.1.1">
+<a href="#rfc.section.8.1.1">8.1.1.</a> <a href="#assumptions" id="assumptions">Computational hardness assumptions</a>
+</h1>
+<p id="rfc.section.8.1.1.p.1">Each assumption states that the problems specified below are computationally difficult to solve in relation to sp (the security parameter). In other words, the probability that an adversary has in solving the problem is bounded by a function negl(sp), where negl(sp) &lt; 1/f(sp) for all polynomial functions f().</p>
+<p id="rfc.section.8.1.1.p.2">Let GG = GG(sp) be a group with prime-order p, and let FFp be the finite field of order p.</p>
+<h1 id="rfc.section.8.1.1.1">
+<a href="#rfc.section.8.1.1.1">8.1.1.1.</a> <a href="#dl" id="dl">Discrete-log (DL) problem</a>
+</h1>
+<p id="rfc.section.8.1.1.1.p.1">Given G, a generator of GG, and H = h*G for some h in FFp; output h.</p>
+<h1 id="rfc.section.8.1.1.2">
+<a href="#rfc.section.8.1.1.2">8.1.1.2.</a> <a href="#ddh" id="ddh">Decisional Diffie-Hellman (DDH) problem</a>
+</h1>
+<p id="rfc.section.8.1.1.2.p.1">Sample a uniformly random bit d in {0,1}. Given (G, a*G, b*G, C), where:</p>
 <p></p>
 
 <ul>
@@ -1276,12 +1374,12 @@ Steps:
 <li>a,b are elements of FFp;</li>
 <li>if d == 0: C = ab*G; else: C is sampled uniformly GG(sp).</li>
 </ul>
-<p id="rfc.section.7.1.1.2.p.3">Output d&#8217; == d.</p>
-<h1 id="rfc.section.7.1.2">
-<a href="#rfc.section.7.1.2">7.1.2.</a> <a href="#protocol-sec" id="protocol-sec">Protocol security</a>
+<p id="rfc.section.8.1.1.2.p.3">Output d&#8217; == d.</p>
+<h1 id="rfc.section.8.1.2">
+<a href="#rfc.section.8.1.2">8.1.2.</a> <a href="#protocol-sec" id="protocol-sec">Protocol security</a>
 </h1>
-<p id="rfc.section.7.1.2.p.1">As aforementioned, our OPRF and VOPRF constructions are based heavily on the 2HashDH-NIZK construction given in <a href="#JKK14" class="xref">[JKK14]</a>, except for considerations on how we instantiate the NIZK DLEQ proof system. This means that the cryptographic security of our construction is also based on the assumption that the One-More Gap DH is computationally difficult to solve.</p>
-<p id="rfc.section.7.1.2.p.2">The (N,Q)-One-More Gap DH (OMDH) problem asks the following.</p>
+<p id="rfc.section.8.1.2.p.1">As aforementioned, our OPRF and VOPRF constructions are based heavily on the 2HashDH-NIZK construction given in <a href="#JKK14" class="xref">[JKK14]</a>, except for considerations on how we instantiate the NIZK DLEQ proof system. This means that the cryptographic security of our construction is also based on the assumption that the One-More Gap DH is computationally difficult to solve.</p>
+<p id="rfc.section.8.1.2.p.2">The (N,Q)-One-More Gap DH (OMDH) problem asks the following.</p>
 <pre>
     Given:
     - G, kG, G_1, ... , G_N where G, G1, ... GN are elements of the group GG;
@@ -1297,77 +1395,77 @@ Steps:
       - j_s is a number between 1 and N for each s;
       - Q is the number of allowed queries.
 </pre>
-<p id="rfc.section.7.1.2.p.3">The original paper <a href="#JKK14" class="xref">[JKK14]</a> gives a security proof that the 2HashDH-NIZK construction satisfies the security guarantees of a VOPRF protocol <a href="#properties" class="xref">Section 3.1</a> under the OMDH assumption in the universal composability (UC) security model. Without the NIZK proof system, the protocol instantiates an OPRF protocol only. See the paper for further details.</p>
-<h1 id="rfc.section.7.1.3">
-<a href="#rfc.section.7.1.3">7.1.3.</a> <a href="#qsdh" id="qsdh">Q-strong-DH oracle</a>
+<p id="rfc.section.8.1.2.p.3">The original paper <a href="#JKK14" class="xref">[JKK14]</a> gives a security proof that the 2HashDH-NIZK construction satisfies the security guarantees of a VOPRF protocol <a href="#properties" class="xref">Section 3.1</a> under the OMDH assumption in the universal composability (UC) security model. Without the NIZK proof system, the protocol instantiates an OPRF protocol only. See the paper for further details.</p>
+<h1 id="rfc.section.8.1.3">
+<a href="#rfc.section.8.1.3">8.1.3.</a> <a href="#qsdh" id="qsdh">Q-strong-DH oracle</a>
 </h1>
-<p id="rfc.section.7.1.3.p.1">A side-effect of our OPRF design is that it allows instantiation of a oracle for constructing Q-strong-DH (Q-sDH) samples. The Q-Strong-DH problem asks the following.</p>
+<p id="rfc.section.8.1.3.p.1">A side-effect of our OPRF design is that it allows instantiation of a oracle for constructing Q-strong-DH (Q-sDH) samples. The Q-Strong-DH problem asks the following.</p>
 <pre>
     Given G1, G2, h*G2, (h^2)*G2, ..., (h^Q)*G2; for G1 and G2 generators of GG.
 
     Output ( (1/(k+c))*G1, c ) where c is an element of FFp
 </pre>
-<p id="rfc.section.7.1.3.p.2">The assumption that this problem is hard was first introduced in <a href="#BB04" class="xref">[BB04]</a>. Since then, there have been a number of cryptanalytic studies that have reduced the security of the assumption below that implied by the group instantiation (for example, <a href="#BG04" class="xref">[BG04]</a> and <a href="#Cheon06" class="xref">[Cheon06]</a>). In summary, the attacks reduce the security of the group instantiation by log_2(Q) bits.</p>
-<p id="rfc.section.7.1.3.p.3">As an example, suppose that a group instantiation is used that provides 128 bits of security. Then an adversary with access to a Q-sDH oracle and makes Q=2^20 queries can reduce the security of the instantiation by log_2(2^20) = 20 bits.</p>
-<p id="rfc.section.7.1.3.p.4">Notice that it is easy to instantiate a Q-sDH oracle using the OPRF functionality that we provide. A client can just submit sequential queries of the form (G, k<em>G, (k^2)</em>G, &#8230;, (k^(Q-1))*G), where each query is the output of the previous interaction. This means that any client that submit Q queries to the OPRF can use the aforementioned attacks to reduce security of the group instantiation by log_2(Q) bits.</p>
-<p id="rfc.section.7.1.3.p.5">Recall that from a malicious client&#8217;s perspective, the adversary wins if they can distinguish the OPRF interaction from a protocol that computes the ideal functionality provided by the PRF.</p>
-<h1 id="rfc.section.7.1.4">
-<a href="#rfc.section.7.1.4">7.1.4.</a> <a href="#implications-for-ciphersuite-choices" id="implications-for-ciphersuite-choices">Implications for ciphersuite choices</a>
+<p id="rfc.section.8.1.3.p.2">The assumption that this problem is hard was first introduced in <a href="#BB04" class="xref">[BB04]</a>. Since then, there have been a number of cryptanalytic studies that have reduced the security of the assumption below that implied by the group instantiation (for example, <a href="#BG04" class="xref">[BG04]</a> and <a href="#Cheon06" class="xref">[Cheon06]</a>). In summary, the attacks reduce the security of the group instantiation by log_2(Q) bits.</p>
+<p id="rfc.section.8.1.3.p.3">As an example, suppose that a group instantiation is used that provides 128 bits of security. Then an adversary with access to a Q-sDH oracle and makes Q=2^20 queries can reduce the security of the instantiation by log_2(2^20) = 20 bits.</p>
+<p id="rfc.section.8.1.3.p.4">Notice that it is easy to instantiate a Q-sDH oracle using the OPRF functionality that we provide. A client can just submit sequential queries of the form (G, k<em>G, (k^2)</em>G, &#8230;, (k^(Q-1))*G), where each query is the output of the previous interaction. This means that any client that submit Q queries to the OPRF can use the aforementioned attacks to reduce security of the group instantiation by log_2(Q) bits.</p>
+<p id="rfc.section.8.1.3.p.5">Recall that from a malicious client&#8217;s perspective, the adversary wins if they can distinguish the OPRF interaction from a protocol that computes the ideal functionality provided by the PRF.</p>
+<h1 id="rfc.section.8.1.4">
+<a href="#rfc.section.8.1.4">8.1.4.</a> <a href="#implications-for-ciphersuite-choices" id="implications-for-ciphersuite-choices">Implications for ciphersuite choices</a>
 </h1>
-<p id="rfc.section.7.1.4.p.1">The OPRF instantiations that we recommend in this document are informed by the cryptanalytic discussion above. In particular, choosing elliptic curves configurations that describe 128-bit group instantiations would appear to in fact instantiate an OPRF with 128-log_2(Q) bits of security.</p>
-<p id="rfc.section.7.1.4.p.2">While it would require an informed and persistent attacker to launch a highly expensive attack to reduce security to anything much below 100 bits of security, we see this possibility as something that may result in problems in the future.  Therefore, all of our ciphersuites in <a href="#ciphersuites" class="xref">Section 6</a> come with a minimum group instantiation corresponding to 196 bits of security. This would require an adversary to launch a minimum of Q = 2^(68) queries to reduce security to 128 bits using the Q-sDH attacks. As a result, it appears prohibitively expensive to launch credible attacks on these parameters with our current understanding of the attack surface.</p>
-<h1 id="rfc.section.7.2">
-<a href="#rfc.section.7.2">7.2.</a> <a href="#hashing-to-curve" id="hashing-to-curve">Hashing to curve</a>
+<p id="rfc.section.8.1.4.p.1">The OPRF instantiations that we recommend in this document are informed by the cryptanalytic discussion above. In particular, choosing elliptic curves configurations that describe 128-bit group instantiations would appear to in fact instantiate an OPRF with 128-log_2(Q) bits of security.</p>
+<p id="rfc.section.8.1.4.p.2">While it would require an informed and persistent attacker to launch a highly expensive attack to reduce security to anything much below 100 bits of security, we see this possibility as something that may result in problems in the future.  Therefore, all of our ciphersuites in <a href="#ciphersuites" class="xref">Section 6</a> come with a minimum group instantiation corresponding to 196 bits of security. This would require an adversary to launch a minimum of Q = 2^(68) queries to reduce security to 128 bits using the Q-sDH attacks. As a result, it appears prohibitively expensive to launch credible attacks on these parameters with our current understanding of the attack surface.</p>
+<h1 id="rfc.section.8.2">
+<a href="#rfc.section.8.2">8.2.</a> <a href="#hashing-to-curve" id="hashing-to-curve">Hashing to curve</a>
 </h1>
-<p id="rfc.section.7.2.p.1">A critical aspect of implementing this protocol using elliptic curve group instantiations is a method of instantiating the function H1, that maps inputs to group elements. In the elliptic curve setting, this must be a deterministic function that maps arbitrary inputs x (as bytes) to uniformly chosen points in the curve.</p>
-<p id="rfc.section.7.2.p.2">In the security proof of the construction H1 is modeled as a random oracle. This implies that any instantiation of H1 must be pre-image and collision resistant.  In <a href="#ciphersuites" class="xref">Section 6</a> we give instantiations of this functionality based on the functions described in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>. Consequently, any OPRF implementation must adhere to the implementation and security considerations discussed in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> when instantiating the function H1.</p>
-<h1 id="rfc.section.7.3">
-<a href="#rfc.section.7.3">7.3.</a> <a href="#timing-leaks" id="timing-leaks">Timing Leaks</a>
+<p id="rfc.section.8.2.p.1">A critical aspect of implementing this protocol using elliptic curve group instantiations is a method of instantiating the function H1, that maps inputs to group elements. In the elliptic curve setting, this must be a deterministic function that maps arbitrary inputs x (as bytes) to uniformly chosen points in the curve.</p>
+<p id="rfc.section.8.2.p.2">In the security proof of the construction H1 is modeled as a random oracle. This implies that any instantiation of H1 must be pre-image and collision resistant.  In <a href="#ciphersuites" class="xref">Section 6</a> we give instantiations of this functionality based on the functions described in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a>. Consequently, any OPRF implementation must adhere to the implementation and security considerations discussed in <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> when instantiating the function H1.</p>
+<h1 id="rfc.section.8.3">
+<a href="#rfc.section.8.3">8.3.</a> <a href="#timing-leaks" id="timing-leaks">Timing Leaks</a>
 </h1>
-<p id="rfc.section.7.3.p.1">To ensure no information is leaked during protocol execution, all operations that use secret data MUST be constant time. Operations that SHOULD be constant time include: H_1() (hashing arbitrary strings to curves) and DLEQ_Generate().  As mentioned previously, <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> describes various algorithms for constant-time implementations of H_1.</p>
-<h1 id="rfc.section.7.4">
-<a href="#rfc.section.7.4">7.4.</a> <a href="#user-segregation" id="user-segregation">User segregation</a>
+<p id="rfc.section.8.3.p.1">To ensure no information is leaked during protocol execution, all operations that use secret data MUST be constant time. Operations that SHOULD be constant time include: H_1() (hashing arbitrary strings to curves) and DLEQ_Generate().  As mentioned previously, <a href="#I-D.irtf-cfrg-hash-to-curve" class="xref">[I-D.irtf-cfrg-hash-to-curve]</a> describes various algorithms for constant-time implementations of H_1.</p>
+<h1 id="rfc.section.8.4">
+<a href="#rfc.section.8.4">8.4.</a> <a href="#user-segregation" id="user-segregation">User segregation</a>
 </h1>
-<p id="rfc.section.7.4.p.1">The aim of the OPRF functionality is to allow clients receive pseudorandom function evaluations on their own inputs, without compromising their own privacy with respect to the server. In many applications (for example, <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>) the client may choose to reveal their original input, after an invocation of the OPRF protocol, along with their OPRF output. This can prove to the server that it has received a valid OPRF output in the past. Since the server does not reveal learn anything about the OPRF output, it should not be able to link the client to any previous protocol instantiation.</p>
-<p id="rfc.section.7.4.p.2">Consider a malicious server that manages to segregate the user base into different sets. Then this reduces the effective privacy of all of the clients involved, since the client above belongs to a smaller set of users than previously hoped. In general, if the user-base of the OPRF functionality is quite small, then the obliviousness of clients is limited. That is, smaller user-bases mean that the server is able to identify client&#8217;s with higher certainty.</p>
-<p id="rfc.section.7.4.p.3">In summary, an OPRF instantiation effectively comes with an additional privacy parameter pp. If all clients of the OPRF make one query and then subsequently reveal their OPRF input afterwards, then the server should be link the revealed input to a protocol instantiation with probability 1/pp.</p>
-<p id="rfc.section.7.4.p.4">Below, we provide a few techniques that could be used to abuse client-privacy in the OPRF construction by segregating the user-base, along with some mitigations.</p>
-<h1 id="rfc.section.7.4.1">
-<a href="#rfc.section.7.4.1">7.4.1.</a> <a href="#linkage-patterns" id="linkage-patterns">Linkage patterns</a>
+<p id="rfc.section.8.4.p.1">The aim of the OPRF functionality is to allow clients receive pseudorandom function evaluations on their own inputs, without compromising their own privacy with respect to the server. In many applications (for example, <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>) the client may choose to reveal their original input, after an invocation of the OPRF protocol, along with their OPRF output. This can prove to the server that it has received a valid OPRF output in the past. Since the server does not reveal learn anything about the OPRF output, it should not be able to link the client to any previous protocol instantiation.</p>
+<p id="rfc.section.8.4.p.2">Consider a malicious server that manages to segregate the user base into different sets. Then this reduces the effective privacy of all of the clients involved, since the client above belongs to a smaller set of users than previously hoped. In general, if the user-base of the OPRF functionality is quite small, then the obliviousness of clients is limited. That is, smaller user-bases mean that the server is able to identify client&#8217;s with higher certainty.</p>
+<p id="rfc.section.8.4.p.3">In summary, an OPRF instantiation effectively comes with an additional privacy parameter pp. If all clients of the OPRF make one query and then subsequently reveal their OPRF input afterwards, then the server should be link the revealed input to a protocol instantiation with probability 1/pp.</p>
+<p id="rfc.section.8.4.p.4">Below, we provide a few techniques that could be used to abuse client-privacy in the OPRF construction by segregating the user-base, along with some mitigations.</p>
+<h1 id="rfc.section.8.4.1">
+<a href="#rfc.section.8.4.1">8.4.1.</a> <a href="#linkage-patterns" id="linkage-patterns">Linkage patterns</a>
 </h1>
-<p id="rfc.section.7.4.1.p.1">If the server is able to ascertain patterns of usage for some clients &#8211; such as timings associated with usage &#8211; then the effective privacy of the clients is reduced to the number of users that fit each usage pattern. Along with early registration patterns, where early adopters initially have less privacy due to a low number of registered users, such problems are inherent to any anonymity-preserving system.</p>
-<h1 id="rfc.section.7.4.2">
-<a href="#rfc.section.7.4.2">7.4.2.</a> <a href="#multiple-keys" id="multiple-keys">Evaluation on multiple keys</a>
+<p id="rfc.section.8.4.1.p.1">If the server is able to ascertain patterns of usage for some clients &#8211; such as timings associated with usage &#8211; then the effective privacy of the clients is reduced to the number of users that fit each usage pattern. Along with early registration patterns, where early adopters initially have less privacy due to a low number of registered users, such problems are inherent to any anonymity-preserving system.</p>
+<h1 id="rfc.section.8.4.2">
+<a href="#rfc.section.8.4.2">8.4.2.</a> <a href="#multiple-keys" id="multiple-keys">Evaluation on multiple keys</a>
 </h1>
-<p id="rfc.section.7.4.2.p.1">Such an attack consists of the server evaluating the OPRF on multiple different keys related to the number of clients that use the functionality. As an extreme, the server could evaluate the OPRF with a different key for each client. If the client then revealed their hidden information at a later date then the server would immediately know which initial request they launched.</p>
-<p id="rfc.section.7.4.2.p.2">The VOPRF variant helps mitigate this attack since each server evaluation can be bound to a known public key. However, there are still ways that the VOPRF construction can be abused. In particular:</p>
+<p id="rfc.section.8.4.2.p.1">Such an attack consists of the server evaluating the OPRF on multiple different keys related to the number of clients that use the functionality. As an extreme, the server could evaluate the OPRF with a different key for each client. If the client then revealed their hidden information at a later date then the server would immediately know which initial request they launched.</p>
+<p id="rfc.section.8.4.2.p.2">The VOPRF variant helps mitigate this attack since each server evaluation can be bound to a known public key. However, there are still ways that the VOPRF construction can be abused. In particular:</p>
 <p></p>
 
 <ul>
 <li>If the server successfully provisions a large number of keys that are trusted by clients, then the server can divide the user-base by the number of keys that are currently in use. As such, clients should only trust a small number (2 or 3 ideally) of server keys at any one time. Additionally, a tamper-proof audit log system akin to existing work on Key Transparency <a href="#keytrans" class="xref">[keytrans]</a> could be used to ensure that a server is abiding by the key policy. This would force the server to be held accountable for their key updates, and thus higher key update frequencies can be better managed on the client-side.</li>
-<li>If the server rotates their key frequently, then this may result in client&#8217;s holding out-of-date information from a past interaction. Such information can also be used to segregate the user-base based on the last time that they accessed the OPRF protocol. Similarly to the above, server key rotations must be kept to relatively infrequent intervals (such as once per month). This will prevent too many clients from being segregated into different groups related to the time that they accessed the functionality. There are viable reasons for rotating the server key (for protecting against malicious clients) that we address more closely in <a href="#key-rotation" class="xref">Section 7.5</a>.</li>
+<li>If the server rotates their key frequently, then this may result in client&#8217;s holding out-of-date information from a past interaction. Such information can also be used to segregate the user-base based on the last time that they accessed the OPRF protocol. Similarly to the above, server key rotations must be kept to relatively infrequent intervals (such as once per month). This will prevent too many clients from being segregated into different groups related to the time that they accessed the functionality. There are viable reasons for rotating the server key (for protecting against malicious clients) that we address more closely in <a href="#key-rotation" class="xref">Section 8.5</a>.</li>
 </ul>
-<p id="rfc.section.7.4.2.p.4">Since key provisioning requires careful handling, all public keys should be accessible from a client-trusted registry with a way of auditing the history of key updates. We also recommend that public keys have a corresponding expiry date that clients can use to prevent the server from using keys that have been provisioned for a long period of time.</p>
-<h1 id="rfc.section.7.5">
-<a href="#rfc.section.7.5">7.5.</a> <a href="#key-rotation" id="key-rotation">Key rotation</a>
+<p id="rfc.section.8.4.2.p.4">Since key provisioning requires careful handling, all public keys should be accessible from a client-trusted registry with a way of auditing the history of key updates. We also recommend that public keys have a corresponding expiry date that clients can use to prevent the server from using keys that have been provisioned for a long period of time.</p>
+<h1 id="rfc.section.8.5">
+<a href="#rfc.section.8.5">8.5.</a> <a href="#key-rotation" id="key-rotation">Key rotation</a>
 </h1>
-<p id="rfc.section.7.5.p.1">Since the server&#8217;s key is critical to security, the longer it is exposed by performing (V)OPRF operations on client inputs, the longer it is possible that the key can be compromised. For instance, if the key is kept in production for a long period of time, then this may grant the client the ability to hoard large numbers of tokens. This has negative impacts for some of the applications that we consider in <a href="#apps" class="xref">Section 8</a>. As another example, if the key is kept in circulation for a long period of time, then it also allows the clients to make enough queries to launch more powerful variants of the Q-sDH attacks from <a href="#qsdh" class="xref">Section 7.1.3</a>.</p>
-<p id="rfc.section.7.5.p.2">To combat attacks of this nature, regular key rotation should be employed on the server-side. A suitable key-cycle for a key used to compute (V)OPRF evaluations would be between one week and six months.</p>
-<p id="rfc.section.7.5.p.3">As we discussed in <a href="#multiple-keys" class="xref">Section 7.4.2</a>, key rotation cycles that are too frequent (in the order of days) can lead to large segregation of the wider user base. As such, the length of the key cycles represent a trade-off between greater server key security (for shorter cycles), and better client privacy (for longer cycles). In situations where client privacy is paramount, longer key cycles should be employed. Otherwise, shorter key cycles can be managed if the server uses a Key Transparency-type system <a href="#keytrans" class="xref">[keytrans]</a>; this allows clients to publicly audit their rotations.</p>
-<h1 id="rfc.section.8">
-<a href="#rfc.section.8">8.</a> <a href="#apps" id="apps">Applications</a>
+<p id="rfc.section.8.5.p.1">Since the server&#8217;s key is critical to security, the longer it is exposed by performing (V)OPRF operations on client inputs, the longer it is possible that the key can be compromised. For instance, if the key is kept in production for a long period of time, then this may grant the client the ability to hoard large numbers of tokens. This has negative impacts for some of the applications that we consider in <a href="#apps" class="xref">Section 9</a>. As another example, if the key is kept in circulation for a long period of time, then it also allows the clients to make enough queries to launch more powerful variants of the Q-sDH attacks from <a href="#qsdh" class="xref">Section 8.1.3</a>.</p>
+<p id="rfc.section.8.5.p.2">To combat attacks of this nature, regular key rotation should be employed on the server-side. A suitable key-cycle for a key used to compute (V)OPRF evaluations would be between one week and six months.</p>
+<p id="rfc.section.8.5.p.3">As we discussed in <a href="#multiple-keys" class="xref">Section 8.4.2</a>, key rotation cycles that are too frequent (in the order of days) can lead to large segregation of the wider user base. As such, the length of the key cycles represent a trade-off between greater server key security (for shorter cycles), and better client privacy (for longer cycles). In situations where client privacy is paramount, longer key cycles should be employed. Otherwise, shorter key cycles can be managed if the server uses a Key Transparency-type system <a href="#keytrans" class="xref">[keytrans]</a>; this allows clients to publicly audit their rotations.</p>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#apps" id="apps">Applications</a>
 </h1>
-<p id="rfc.section.8.p.1">This section describes various applications of the VOPRF protocol.</p>
-<h1 id="rfc.section.8.1">
-<a href="#rfc.section.8.1">8.1.</a> <a href="#privacy-pass" id="privacy-pass">Privacy Pass</a>
+<p id="rfc.section.9.p.1">This section describes various applications of the VOPRF protocol.</p>
+<h1 id="rfc.section.9.1">
+<a href="#rfc.section.9.1">9.1.</a> <a href="#privacy-pass" id="privacy-pass">Privacy Pass</a>
 </h1>
-<p id="rfc.section.8.1.p.1">This VOPRF protocol is used by the Privacy Pass system <a href="#PrivacyPass" class="xref">[PrivacyPass]</a> to help Tor users bypass CAPTCHA challenges. Their system works as follows. Client C connects &#8211; through Tor &#8211; to an edge server E serving content. Upon receipt, E serves a CAPTCHA to C, who then solves the CAPTCHA and supplies, in response, n blinded points. E verifies the CAPTCHA response and, if valid, signs (at most) n blinded points, which are then returned to C along with a batched DLEQ proof. C stores the tokens if the batched proof verifies correctly. When C attempts to connect to E again and is prompted with a CAPTCHA, C uses one of the unblinded and signed points, or tokens, to derive a shared symmetric key sk used to MAC the CAPTCHA challenge. C sends the CAPTCHA, MAC, and token input x to E, who can use x to derive sk and verify the CAPTCHA MAC. Thus, each token is used at most once by the system.</p>
-<p id="rfc.section.8.1.p.2">The Privacy Pass implementation uses the P-256 instantiation of the VOPRF protocol. For more details, see <a href="#DGSTV18" class="xref">[DGSTV18]</a>.</p>
-<h1 id="rfc.section.8.2">
-<a href="#rfc.section.8.2">8.2.</a> <a href="#private-password-checker" id="private-password-checker">Private Password Checker</a>
+<p id="rfc.section.9.1.p.1">This VOPRF protocol is used by the Privacy Pass system <a href="#PrivacyPass" class="xref">[PrivacyPass]</a> to help Tor users bypass CAPTCHA challenges. Their system works as follows. Client C connects &#8211; through Tor &#8211; to an edge server E serving content. Upon receipt, E serves a CAPTCHA to C, who then solves the CAPTCHA and supplies, in response, n blinded points. E verifies the CAPTCHA response and, if valid, signs (at most) n blinded points, which are then returned to C along with a batched DLEQ proof. C stores the tokens if the batched proof verifies correctly. When C attempts to connect to E again and is prompted with a CAPTCHA, C uses one of the unblinded and signed points, or tokens, to derive a shared symmetric key sk used to MAC the CAPTCHA challenge. C sends the CAPTCHA, MAC, and token input x to E, who can use x to derive sk and verify the CAPTCHA MAC. Thus, each token is used at most once by the system.</p>
+<p id="rfc.section.9.1.p.2">The Privacy Pass implementation uses the P-256 instantiation of the VOPRF protocol. For more details, see <a href="#DGSTV18" class="xref">[DGSTV18]</a>.</p>
+<h1 id="rfc.section.9.2">
+<a href="#rfc.section.9.2">9.2.</a> <a href="#private-password-checker" id="private-password-checker">Private Password Checker</a>
 </h1>
-<p id="rfc.section.8.2.p.1">In this application, let D be a collection of plaintext passwords obtained by prover P. For each password p in D, P computes VOPRF_Eval on H_1(p), where H_1 is as described above, and stores the result in a separate collection D&#8217;. P then publishes D&#8217; with Y, its public key. If a client C wishes to query D&#8217; for a password p&#8217;, it runs the VOPRF protocol using p as input x to obtain output y.  By construction, y will be the OPRF evaluation of p hashed onto the curve. C can then search D&#8217; for y to determine if there is a match.</p>
-<p id="rfc.section.8.2.p.2">Concrete examples of important applications in the password domain include:</p>
+<p id="rfc.section.9.2.p.1">In this application, let D be a collection of plaintext passwords obtained by prover P. For each password p in D, P computes VOPRF_Eval on H_1(p), where H_1 is as described above, and stores the result in a separate collection D&#8217;. P then publishes D&#8217; with Y, its public key. If a client C wishes to query D&#8217; for a password p&#8217;, it runs the VOPRF protocol using p as input x to obtain output y.  By construction, y will be the OPRF evaluation of p hashed onto the curve. C can then search D&#8217; for y to determine if there is a match.</p>
+<p id="rfc.section.9.2.p.2">Concrete examples of important applications in the password domain include:</p>
 <p></p>
 
 <ul>
@@ -1375,16 +1473,16 @@ Steps:
 <li>perfectly-hiding password management <a href="#SJKS17" class="xref">[SJKS17]</a>;</li>
 <li>password-protected secret-sharing <a href="#JKKX17" class="xref">[JKKX17]</a>.</li>
 </ul>
-<h1 id="rfc.section.8.2.1">
-<a href="#rfc.section.8.2.1">8.2.1.</a> <a href="#parameter-commitments" id="parameter-commitments">Parameter Commitments</a>
+<h1 id="rfc.section.9.2.1">
+<a href="#rfc.section.9.2.1">9.2.1.</a> <a href="#parameter-commitments" id="parameter-commitments">Parameter Commitments</a>
 </h1>
-<p id="rfc.section.8.2.1.p.1">For some applications, it may be desirable for P to bind tokens to certain parameters, e.g., protocol versions, ciphersuites, etc. To accomplish this, P should use a distinct scalar for each parameter combination. Upon redemption of a token T from V, P can later verify that T was generated using the scalar associated with the corresponding parameters.</p>
-<h1 id="rfc.section.9">
-<a href="#rfc.section.9">9.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
+<p id="rfc.section.9.2.1.p.1">For some applications, it may be desirable for P to bind tokens to certain parameters, e.g., protocol versions, ciphersuites, etc. To accomplish this, P should use a distinct scalar for each parameter combination. Upon redemption of a token T from V, P can later verify that T was generated using the scalar associated with the corresponding parameters.</p>
+<h1 id="rfc.section.10">
+<a href="#rfc.section.10">10.</a> <a href="#acknowledgements" id="acknowledgements">Acknowledgements</a>
 </h1>
-<p id="rfc.section.9.p.1">This document resulted from the work of the Privacy Pass team <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>.  The authors would also like to acknowledge the helpful conversations with Hugo Krawczyk. Eli-Shaoul Khedouri provided additional review and comments on key consistency.</p>
+<p id="rfc.section.10.p.1">This document resulted from the work of the Privacy Pass team <a href="#PrivacyPass" class="xref">[PrivacyPass]</a>.  The authors would also like to acknowledge the helpful conversations with Hugo Krawczyk. Eli-Shaoul Khedouri provided additional review and comments on key consistency.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">10.</a> Normative References</h1>
+<a href="#rfc.references">11.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="BB04">[BB04]</b></td>
