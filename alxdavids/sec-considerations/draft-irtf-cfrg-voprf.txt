@@ -118,12 +118,12 @@ Internet-Draft                    OPRFs                    November 2019
      5.2.  DLEQ_Verify . . . . . . . . . . . . . . . . . . . . . . .  22
      5.3.  Batched VOPRF evaluation  . . . . . . . . . . . . . . . .  23
        5.3.1.  Batched_DLEQ_Generate . . . . . . . . . . . . . . . .  24
-       5.3.2.  Batched_DLEQ_Verify . . . . . . . . . . . . . . . . .  24
+       5.3.2.  DLEQ_Batched_Verify . . . . . . . . . . . . . . . . .  24
        5.3.3.  Modified protocol execution . . . . . . . . . . . . .  25
        5.3.4.  Random oracle instantiations for proofs . . . . . . .  25
    6.  Supported ciphersuites  . . . . . . . . . . . . . . . . . . .  26
      6.1.  VOPRF-curve448-HKDF-SHA512-ELL2:  . . . . . . . . . . . .  26
-     6.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  26
+     6.2.  VOPRF-p384-HKDF-SHA512-ICART: . . . . . . . . . . . . . .  27
      6.3.  VOPRF-p521-HKDF-SHA512-SSWU:  . . . . . . . . . . . . . .  27
    7.  Recommended protocol integration  . . . . . . . . . . . . . .  27
      7.1.  Setup phase . . . . . . . . . . . . . . . . . . . . . . .  28
@@ -1290,6 +1290,13 @@ Davidson, et al.           Expires May 7, 2020                 [Page 23]
 Internet-Draft                    OPRFs                    November 2019
 
 
+   We can instantiate the random oracle function H_4 using the same hash
+   function that is used for H_1,H_2,H_3.  For H_5, we can also use a
+   similar instantiation, or we can use a variable-length output
+   generator.  For example, for groups with an order of 256-bit, valid
+   instantiations include functions such as SHAKE-256 [SHAKE] or HKDF-
+   Expand-SHA256 [RFC5869].
+
 5.3.1.  Batched_DLEQ_Generate
 
 Input:
@@ -1317,14 +1324,7 @@ Steps:
  5. Z := c1Z1 + ... + cnZn
  6. Output D <- DLEQ_Generate(k,G,Y,M,Z)
 
-5.3.2.  Batched_DLEQ_Verify
-
-
-
-
-
-
-
+5.3.2.  DLEQ_Batched_Verify
 
 
 
@@ -1361,21 +1361,27 @@ Internet-Draft                    OPRFs                    November 2019
  Steps:
 
   1. seed <- H_4(G,Y,[Mi,Zi]))
-  2. for i in [n]: di <- H_5(seed,i,info)
-  3. c1,...,cn := (int)d1,...,(int)dn
-  4. M := c1M1 + ... + cnMn
-  5. Z := c1Z1 + ... + cnZn
-  6. Output DLEQ_Verify(G,Y,M,Z,D)
+  2. i' := i
+  3. for i in [n]:
+     1. di <- H_5(seed,i',info)
+     2. if di > p:
+        1. i' = i'+1
+        2. i = i-1 // decrement and try again
+        3. continue
+  4. c1,...,cn := (int)d1,...,(int)dn
+  5. M := c1M1 + ... + cnMn
+  6. Z := c1Z1 + ... + cnZn
+  7. Output DLEQ_Verify(G,Y,M,Z,D)
 
 5.3.3.  Modified protocol execution
 
    The VOPRF protocol from Section Section 4 changes to allow specifying
    multiple blinded PRF inputs [ Mi ] for i in 1...n.  P computes the
-   array [ Zi ] and replaces DLEQ_Generate with Batched_DLEQ_Generate
+   array [ Zi ] and replaces DLEQ_Generate with DLEQ_Batched_Generate
    over these arrays.  The same applies to the algorithm VOPRF_Eval.
-   The same applies for replacing DLEQ_Verify with Batched_DLEQ_Verify
+   The same applies for replacing DLEQ_Verify with DLEQ_Batched_Verify
    when V verifies the response from P and during the algorithm
-   VOPRF_Verify.
+   VOPRF_Unblind.
 
 5.3.4.  Random oracle instantiations for proofs
 
@@ -1385,12 +1391,6 @@ Internet-Draft                    OPRFs                    November 2019
    generator.  For example, for groups with an order of 256-bit, valid
    instantiations include functions such as SHAKE-256 [SHAKE] or HKDF-
    Expand-SHA256 [RFC5869].
-
-   In addition if a function with larger output than the order of the
-   base field is used, we note that the outputs of H_5 (d1,...,dn) must
-   be smaller than this order.  If any di that is sampled is larger than
-   then order, then we should resample until a di' is sampled that is
-   valid.
 
 
 
@@ -1402,11 +1402,24 @@ Davidson, et al.           Expires May 7, 2020                 [Page 25]
 Internet-Draft                    OPRFs                    November 2019
 
 
-   In these cases, the iterating integer i is increased monotonically to
-   i' until such di' is sampled.  When sampling the next value d(i+1),
-   the counter i+1 is started at i'+1.
+   Input:
 
-   TODO: Give a more detailed specification of this construction.
+    [ ri ]: Random scalars in [1, p - 1].
+    G: Public fixed generator of group GG.
+    Y: Evaluator public key.
+    [ Mi ]: Blinded elements of GG.
+    [ Zi ]: Server-generated elements in GG.
+    D: A batched DLEQ proof object.
+
+   Output:
+
+    N: element in GG, or "error".
+
+   Steps:
+
+    1. N := (r^(-1))Z
+    2. If 1 = DLEQ_Batched_Verify(G,Y,[ Mi ],[ Zi ],D), output N
+    3. Output "error"
 
 6.  Supported ciphersuites
 
@@ -1436,6 +1449,15 @@ Internet-Draft                    OPRFs                    November 2019
 
    o  H_5: HKDF-Expand-SHA512
 
+
+
+
+
+Davidson, et al.           Expires May 7, 2020                 [Page 26]
+
+Internet-Draft                    OPRFs                    November 2019
+
+
 6.2.  VOPRF-p384-HKDF-SHA512-ICART:
 
    o  GG: secp384r1 [SEC2]
@@ -1449,14 +1471,6 @@ Internet-Draft                    OPRFs                    November 2019
    o  H_3: SHA512
 
    o  H_4: SHA512
-
-
-
-
-Davidson, et al.           Expires May 7, 2020                 [Page 26]
-
-Internet-Draft                    OPRFs                    November 2019
-
 
    o  H_5: HKDF-Expand-SHA512
 
@@ -1492,20 +1506,6 @@ Internet-Draft                    OPRFs                    November 2019
    OPRF stage does so by implementing all OPRF evaluation functionality
    as a contiguous block of operations during the protocol.  This does
    not include the OPRF setup phase, which should be run before the
-   entire protocol interaction.  For example, such an instantiation for
-   a wider protocol W would look like the following.
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1513,6 +1513,9 @@ Davidson, et al.           Expires May 7, 2020                 [Page 27]
 
 Internet-Draft                    OPRFs                    November 2019
 
+
+   entire protocol interaction.  For example, such an instantiation for
+   a wider protocol W would look like the following.
 
        ================================================================
                               OPRF setup phase
@@ -1557,9 +1560,6 @@ Internet-Draft                    OPRFs                    November 2019
    instantiation at any one time.  This means that the client does not
    have to pick a specific instantiation when it sends the first
    evaluation message.
-
-
-
 
 
 
