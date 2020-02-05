@@ -388,11 +388,13 @@ In the following, we may also refer to this commitment as a public key.
 # OPRF Protocol {#protocol}
 
 In this section we describe the OPRF and VOPRF protocols. Recall that such a
-protocol takes place between a verifier (V) and a prover (P). Commonly, V is a client and P is a server, and so we use these names interchangeably throughout.
+protocol takes place between a verifier (V) and a prover (P). Commonly, V is a
+client and P is a server, and so we use these names interchangeably throughout.
 think of the verifier as the client, and the prover as the server in the
 interaction (we will use these names interchangeably throughout). The server
-holds a secret key k for a PRF. The protocol allows the client to learn PRF evaluations
-on chosen inputs x in such a way that the server learns nothing of x.
+holds a secret key k for a PRF. The protocol allows the client to learn PRF
+evaluations on chosen inputs x in such a way that the server learns nothing of
+x.
 
 Our OPRF construction is based on the VOPRF construction known as 2HashDH-NIZK
 given by {{JKK14}}; essentially without providing zero-knowledge proofs that
@@ -1537,9 +1539,9 @@ queries can reduce the security of the instantiation by log_2(2^20) = 20 bits.
 
 Notice that it is easy to instantiate a Q-sDH oracle using the OPRF
 functionality that we provide. A client can just submit sequential queries of
-the form (G, kG, (k^2)G, ..., (k^(Q-1))G), where each query is the output of
-the previous interaction. This means that any client that submit Q queries to
-the OPRF can use the aforementioned attacks to reduce security of the group
+the form (G, kG, (k^2)G, ..., (k^(Q-1))G), where each query is the output of the
+previous interaction. This means that any client that submit Q queries to the
+OPRF can use the aforementioned attacks to reduce security of the group
 instantiation by log_2(Q) bits.
 
 Recall that from a malicious client's perspective, the adversary wins if they
@@ -1740,445 +1742,885 @@ consistency.
 
 # Test Vectors {#testvecs}
 
-We provide test vectors for each of the supported VOPRF ciphersuites below. The
-test vectors are also available at
-https://github.com/alxdavids/voprf-poc/tree/master/test_vectors.
+Test vectors for verifying VOPRF interoperability. We do not provide
+OPRF-specific test vectors as the functionality is a subset of the VOPRF
+functionality. Test vectors are also available in the repository containing the
+public proof-of-concept implementations:
+<https://github.com/alxdavids/voprf-poc/blob/master/test-vectors/voprf-p384-hkdf-sha512-sswu-ro.json>.
 
 ## VOPRF-P384-HKDF-SHA512-SSWU-RO
 
-[
-    {
-        "key": "731eb0cbe382f110010d354e3fa36f6512bd056daf3f3d00996ae3ac642e
-        db4726d410db80c2321771a93f0308ded9c9",
-        "pub_key": "025f59ac8471663cc47be651b3e4315467aff9ec595a82d65fb7b11c
-        33ca0e387c0238299040e2c7ae852795b0696d987c",
-        "inputs": [
-            "00",
-            "01",
-            "0100010001000100",
-            "0001000100010001",
-            "0101010101010101",
-            "01000100010001000100010001000100",
-            "00010001000100010001000100010001",
-            "01010101010101010101010101010101"
-        ],
-        "blinds": [
-            "7b",
-            "04d2",
-            "3039",
-            "01e240",
-            "12d687",
-            "bc614e",
-            "075bcd15",
-            "499602d2"
-        ],
-        "dleq_scalar": "9d92c4cc962347d56c05e4b749b57e70461145af696ab61cdefb
-        29f8f88162980410d27fdebad4440431ca0efbffead2",
-        "expected": {
-            "outputs": [
-                "62862c10cc62001c0ead55317caf37fd66de419cab18bbaf9965989c269
-                d8717dcd09871ff7023b9f5ab118d9c47c87476b3217ddd30ac8a23373b9
-                55349f6ed",
-                "0f167282edf6cc354ba2adcf9df5b9819e4e08daf4cff5dc51848c75b83
-                fb12aea8def4a6963c5a651891aa2d71a4f963d42cd31dc61f5ab671ea37
-                8cf372e30",
-                "e2357a8e13c73fba80828c6c0760997c374918c9837b424ea0c4d15a825
-                b1dfd10a4a9646fd81b620714cb0dc1ea17c6871fac174b22e6b665b7e21
-                b6082cd1e",
-                "da1e53c0b880bded06ebd105e7bb60354b745c08b772232f53c50850ef1
-                798e81fc9461e26a9f9df40c17bfac0c7dd58a3bfceae0c0883c80bb7fdd
-                46c8bee7f",
-                "91acbbac2668f75ff231d862cd32a635f73b1f624b93ac9d36f13942752
-                0ca50d5f657533fa657ae1322eb19ed6a7f65d89281c59fcaa560d46121d
-                877981679",
-                "7b532ca7b02b5a531a4444e0c85f82ed7f8d9f073eb4979841cb843a385
-                11d16fa7724b78b2b7d656b12478d062b4ce21ed130f8b9b9db841bd67c9
-                f6bd87689",
-                "3271c215ddb5cf3d1ad3fe6513a2765905fd6be207c8fc9062e00430329
-                340ec285677aec5c7a8ed75348d92ff8086234ffcee88b626bfa0b4974d0
-                4e32556b7",
-                "f440b7bbb4e02a2088b70577b4d6fc523b4c6dbe14ab7d492a77115f93b
-                ea45a7fc12c9abc4ce6ece8a68bd0dd33ae9004e73573d70c8c1018b15e1
-                7394458df"
-            ],
-            "elems": [
-                "02650b114365827575dd44c4f5d969f946e2c2268b12b05bd3741743c26
-                11cf3bf61606ca0d3b6cec3ab70c4bd845f3a59",
-                "03d2a8d7a707ac847b01bd031ae37f60fd16a7be869eb0d79653d84b44b
-                df845abc233d7f7bc66152565574c46dfa085d6",
-                "02e92fdca59a89094862f7853fe7ce0c963d01ea67bdd10feebd3c9d98b
-                0734b1735d69b014a84f9ef9fe6eba2e18948ae",
-                "0389f765b94a34a794f047f85e8d46b3f17fd6461d4227278c607b92d0c
-                b64530117b1f7ede0daed2ddb43b347a3c0a583",
-                "0358a580794075880be347f0b006f13c497b612b2f2030602ed1c14b0fd
-                d520d1dbff8c0c9d15b0e703e57817d227b0736",
-                "03e916ee7f684cd9d735af868ae4e39bffa4cfe28bba6327444201afffa
-                4d431e4481b778a3454784bf4586a08db03e55e",
-                "026b8b35916b3217f7203fc96f51fb6fbabb17ff34f6fcc2548bbaa989a
-                f3f42de5ad58196cf9523a9052602ea2a8a88d1",
-                "023c70ab988399d3e7c7dc915444b3ed9ae1071e607c99a1e48df17a20
-                39b1f19a32ee1a90570ba5daf4744877bcf16fc4"
-            ],
-            "proof": [
-                "03b2c30d1477bb76b6904acb2ddc9d952295bade5648797c12e103db68db
-                54aa03e900bf75c0d24a59aaae6f832d9077",
-                "60baab33479cbf74bb946629d7befcbe415331d1a0584ff7e56abe73f5a2
-                e5aa93f563a3a1f1448538adda6f54ddd2f4"
-            ]
-        }
-    },
-    {
-        "key": "e03aa64d63cee2619a115eaa935078020a1c79634afaa163d867061a68b9
-        bd7eb821badf2d1a725263fc11e4c712c40a",
-        "pub_key": "030f290e5d9ec013f30968a4db66f36c20fd204a06bb8edf805a1936
-        af744acde2f906f7190f2c206516fc49d23c65a424",
-        "inputs": [
-            "00",
-            "01",
-            "0100010001000100",
-            "0001000100010001",
-            "0101010101010101",
-            "01000100010001000100010001000100",
-            "00010001000100010001000100010001",
-            "01010101010101010101010101010101"
-        ],
-        "blinds": [
-            "7b",
-            "04d2",
-            "3039",
-            "01e240",
-            "12d687",
-            "bc614e",
-            "075bcd15",
-            "499602d2"
-        ],
-        "dleq_scalar": "7e9d53e392518f0f7ec1ae1189ac5165288aa242849127a60764
-        fd72b7f394c5d2f014830c18359000eb0f3e50815ae6",
-        "expected": {
-            "outputs": [
-                "e7fb4f4619e5541e113bf0e68767086855072ff2cd1e3e222307ffe6f5a
-                f14f9cb4424fbbbb1e2eaec4631104d5645e58855e22c35509f647f72d3f
-                4b29d8373",
-                "3ae97f3b02ffe5d6c4d75dd6d77712ce6b817b8f827790e728e10e14b8b
-                4ca61266d737d1995499f1646c668d0273092de491864f6fef91abe0c50a
-                89d54faf7",
-                "565e61b03b1422701d782bf1935278591c00b200eb72ede7d8f7169e77c
-                336490183c2dc89fccebb62da0c43c34ef9d0d0824a42f5c5397563d5349
-                49044e248",
-                "42a63aceed782bd8b08b7fd12941c04e3baa7255dae026cc95c5d714f97
-                a25c0180239c21ab847f6dfcebb968e0c3f99cc1d84eb87cf413cc089e90
-                27c52a9d1",
-                "06c22db36f0876f53c6ff4b1875f609abddf7208e3e747b81f0c772292d
-                a60f0363d27c1b4caee154f76a0a39a7826bea0cee7882ed210ff3134ccf
-                89b6168ef",
-                "6b8784f44a66f46e30a0c24aee3abbec7f5a044a522f57261e3b3d3644c
-                a50d3c6450296058acc83355ec350261c40fcd7ac4dff6fcf59dac6dadab
-                2808ffd66",
-                "f88759ca0a7cf2ceab7ae80d6d8906e9bc0e2250f6170068e727cb92883
-                2da8f06c02f40b78d0f65402e3ad368f9520be59049eaea4ade7f792096a
-                7a9682afe",
-                "a3ff55d06b8639a297d243ed042b582ca44dc7085960bb0c8e3f6825608
-                c209acaae543f7376541beb5c68ed87b3118e3a1579a8f919f7aa245c901
-                1e06a2536"
-            ],
-            "elems": [
-                "0220a62ad299995beb3dc0ff790e168ba282f0ed8e18aa2508d3e0e8636
-                236db77a76ac1cceebd51c0b1f5f97506f4f938",
-                "03fbd3c7d896b794eee0e099ebfe3c17d38015d787d235e264d5284bcbc
-                0cd701323ced2cf83bfda3110d3df6465f00f2c",
-                "03b0ebebb7d92348e9e42d0645be49cebbcbbf4344faf677ddd35eb2ef4
-                473608fca28e98d34f6846f5d585af01ff68957",
-                "036d05eb00b87c438dce33afddb4cfac65c2d954507e7063afded3b424a
-                742e6f810af9b4e309d174d587da86286317d57",
-                "02d5257532756b69525f5984f4adbb3b16e1178d3a6a1498bbef84671f8
-                0dd8a2dcf8bbc0c25f59b631a017420061f020b",
-                "02fda5f164854a7e08c9b1e91e3ec8369caac04ac7cb21feae9f5a22218
-                5e150f14bf987efcbb674ff491795f4bb1ea490",
-                "02cc7734abaccc99eefbff344f5f018dc58788ccb816afd4be7545b284e
-                cbf709a8a5f27a3e229c8b8f5bb1c7acbb35c3b",
-                "03334b715f7f876bf8e45a359cd81ba51f8717fda6a96ea86c4260ad02
-                4f47a159315fbcce2fcfb15c212b1417de20f6f3"
-            ],
-            "proof": [
-                "bbc63167511afe845c7b6497e72db2ff200fc2d68017f79f8591b0f82f23
-                aea378cd5d22c1a0b0bb9fc8ac68b5fb112b",
-                "b10ff924f1b6a38f917583c1b1fc611a1cf42bdf7a31c7b8954f00ab012d
-                70dc29414e29020e12a969c8e3d9ea6b056d"
-            ]
-        }
-    },
-    {
-        "key": "add920962f2357f2a25e8a7598e61adddee59a6260bf6e7de812d275192a
-        c827e59cf4379b3394f5f32a0f69e9feae58",
-        "pub_key": "02212af8bde4c9992406b9537fe7c3d232b5fd8328eb4bbc5965f735
-        24cdf5d982c69ea565dcafd73f86f330fc64cfbefe",
-        "inputs": [
-            "00",
-            "01",
-            "0100010001000100",
-            "0001000100010001",
-            "0101010101010101",
-            "01000100010001000100010001000100",
-            "00010001000100010001000100010001",
-            "01010101010101010101010101010101"
-        ],
-        "blinds": [
-            "7b",
-            "04d2",
-            "3039",
-            "01e240",
-            "12d687",
-            "bc614e",
-            "075bcd15",
-            "499602d2"
-        ],
-        "dleq_scalar": "82fd80c3fe595bb7108bdbb3247736141c0b4575bcd04216ae6a
-        c988b6a001f80913ce0bfe639cd69a31f0f9739676b6",
-        "expected": {
-            "outputs": [
-                "81cc43d3192c0bcdd55f4835f92cc65cc42d6957a9480b50d33484b8779
-                341c96be34ad58adac00b20b8b661d594be3da0f0d255ec6ead2a23d7f0b
-                cbb6d77c2",
-                "29a0a4ea5f3920dba0f3be05e5f7918274289d53ccc5e514ac138bfd4e7
-                b8b29a27fbc68bb4cf0447afbb9201c3ff9bf294694905577bfc468a9103
-                f3efe7fc6",
-                "8e1a78d70858444282e7f7044aa60d75faaf0d36878a5bc8cc6ef7c11e8
-                d030a59356fb1b801b0505497988a9e9e31659bc69debedd1ed3edbd246c
-                8d23f1362",
-                "e374b45a66809de3613ca14342e5776ed10469e7c4bc51c97deb3c91b2d
-                419355b56d58b295894b0f151d5bf98ccefef378ab3f4204be47dc8fb9fd
-                2facdeb17",
-                "87dbaa98580b29d9c948e2c749d4db4dc7d190eb324d414d05c6f1580b5
-                499277da756e72fb57539ff9327df538b5871daa1e9ccc7f256c031a3508
-                271ddd754",
-                "303aa570854f0115e01ef6b6059619811f2344650a578942f3a11a7a3af
-                6e2606980e0af0eb5d940e4b87eed7aa7d15f3ede36084f242a0d3deecd6
-                2ef96740a",
-                "3d94987ae147f0e61148a9b0373b9e2cbab628aef6a625f3e406cfea4d9
-                9e6a71dfa34b8b741b522c8bd7f5972781f055f01e1d11665984406dd579
-                7cacc7b8e",
-                "c1a838ad9fd0cf835842badfbe0cf68a17eacba2ce26fe5ca8b76c7acef
-                1241103ce8a0ad487ae63492f8f51ffe5e207ff150767e200b7594dfb9e5
-                f4e6a6b5b"
-            ],
-            "elems": [
-                "0353c281491fc064dc3a94f519354e885048b8424161e0d9d296aac4c62
-                6a02ac84e99610853ba10b84edc33875dd12599",
-                "03c1729c9aa01a7ba5249054877f0fde1538c88ac962e974c0af138da8d
-                216e93cd9086bc269b39c24f3b02797ef451fd1",
-                "03817ab7c49061eaf67feb2e4f4af1e81d1a05db10620f9f56a76b52ce8
-                dad827ff81764eac236b892a5c485e27a166457",
-                "026a61d2690a9f6b56d5165f2aa76485eeef202b403b707451684ae8eb3
-                80d14f31bc1649719c3dbc84b39745ba305988a",
-                "034bd094d573498d6bf42fa2b9c79fdae00b3af2438a3c73be77922eedf
-                020b4bed8326136002ca86a0c1012cde4c93b91",
-                "0261bca0c977b096fb6d4dfdd45c6c58b0b33c12cc10bd1aa70fc277904
-                a7bdea498616ed038c327d147f68d7e93a0a79a",
-                "030f53c77480802aa5ee57b6cc8c9b44eae49f8ff2872c6d4a678c0baf6
-                c2c59ea39f2720fbde590e62eeb3031bfb77d32",
-                "022417e7f823c64c769851cad880c633c0d90fe94c3203fb8c458621ab
-                2536c89445eb9d3c4c8bb72e174f8939fdfde537"
-            ],
-            "proof": [
-                "c00d1ca2d523623158ba96c756f7ac154bf0a66f2af736699f5dbf38417d
-                fe3f100c13cedd356b23d90bbd1951e76847",
-                "7be22583c315fb855073d04f1fe4d42f1052a2cb48232a22ec6bd790093b
-                49753eafa4c3247a3222d833df44abce9914"
-            ]
-        }
-    },
-    {
-        "key": "45dbb94555268dec4da829517204d7ef091e5014ec0a3ec71da7eaf6377a
-        74c303c143ca79449543a5801beed9be8213",
-        "pub_key": "028b2a0de4e013318fc62a4f36adebb313de6692ea56787cf4a21590
-        bfb632390a9b16595eb39b34b88c40a50544b2c2df",
-        "inputs": [
-            "0100010001000100"
-        ],
-        "blinds": [
-            "499602d2"
-        ],
-        "dleq_scalar": "7341a6b54c0e52215b38deec13c05b9c9d6a12deda973a206815
-        75ef4971888dd8f8bc1eee970bd8dead370e542c5ebe",
-        "expected": {
-            "outputs": [
-                "01d699e0ef4628c9e8be646ed9b6ded78c9799f3b09afe1c57dbff6dd4e
-                3265952a5c8fcd329c40f70fe84a001952a071c60ff0e4b735f2c6f79bd8
-                160d561bc"
-            ],
-            "elems": [
-                "0315f23b8840f0ef58926e12de984b5d5cc3db0fea0e001f78229cdff33
-                1852d47888120ef8c0837796691ca6a523aab48"
-            ],
-            "proof": [
-                "d494b90b014ec77c34f41d0dffb21d717182d62c5c58fcaf5ec084d0904b
-                1a8a1fe6fa65a65b59eff0660e931bc24fb3",
-                "45b3b04b0bbdbf3884c0d48a4946d75c57fa509c3373acf5069844ceb6e6
-                0dfa90624a0576d4723b09c876e990976d2b"
-            ]
-        }
-    },
-    {
-        "key": "45dbb94555268dec4da829517204d7ef091e5014ec0a3ec71da7eaf6377a
-        74c303c143ca79449543a5801beed9be8213",
-        "pub_key": "028b2a0de4e013318fc62a4f36adebb313de6692ea56787cf4a21590
-        bfb632390a9b16595eb39b34b88c40a50544b2c2df",
-        "inputs": [
-            "01000100010001000100010001000100"
-        ],
-        "blinds": [
-            "075bcd15"
-        ],
-        "dleq_scalar": "7341a6b54c0e52215b38deec13c05b9c9d6a12deda973a206815
-        75ef4971888dd8f8bc1eee970bd8dead370e542c5ebe",
-        "expected": {
-            "outputs": [
-                "ef53462fbdee3cdb84a703fa350d16cd672bc6a96a63e65cf5196ee8973
-                8336e94a8e275e151435ef3bd199cac74bf2fecfb31aed41501e2ec4626a
-                130375ff4"
-            ],
-            "elems": [
-                "02345ccbedb2230e12bebb1274a90776e129cd0b29e13e38befe8a011f9
-                0277b27cf1a473b049fc879bc033c998c72b961"
-            ],
-            "proof": [
-                "018d8dec1c6d4cfbbbdd1c3cd2cf219c3515fdaa90b8a558478b59f8c0f7
-                df78d52ae81cca2f254e7d4a176884d744e3",
-                "9ef6939141fd402efc88ad66812cfced0e97d083b9a8d6eae7422773074c
-                673080f2d51955dd852e8f9fb8a2480f5aea"
-            ]
-        }
-    },
-    {
-        "key": "45dbb94555268dec4da829517204d7ef091e5014ec0a3ec71da7eaf6377a
-        74c303c143ca79449543a5801beed9be8213",
-        "pub_key": "028b2a0de4e013318fc62a4f36adebb313de6692ea56787cf4a21590
-        bfb632390a9b16595eb39b34b88c40a50544b2c2df",
-        "inputs": [
-            "00"
-        ],
-        "blinds": [
-            "bc614e"
-        ],
-        "dleq_scalar": "7341a6b54c0e52215b38deec13c05b9c9d6a12deda973a206815
-        75ef4971888dd8f8bc1eee970bd8dead370e542c5ebe",
-        "expected": {
-            "outputs": [
-                "988f7df7c7c9f5a274cd6662f91fe12092296d729828b5bf59d99bd3b66
-                aaf2461f912e4f84a0a22ce7f5286ee78b00eb228df301ef5e57cce81e91
-                ff9582bc1"
-            ],
-            "elems": [
-                "02f620116d4da317e40787a4761bd30f8336c259c1b14816bee7da85e4e
-                f3f8ba08a618622de76148a0ef47812bef88600"
-            ],
-            "proof": [
-                "ab3ce8f601a732fc2049abd6ebdccda37a1eea4fc27899ba2ec9d9eb9c70
-                8ae430ae22bdd84bbda6d6f1e5803dbc526b",
-                "f013292302443c28f502b86d99a06612d4a22a36443b70845b875e249411
-                5f57f10cb13e89e4c36a80318a419b09ff36"
-            ]
-        }
-    },
-    {
-        "key": "2a96a10ef8cf94bcc978736079c0771392e76d7b3d87085ef04752b2e8d4
-        e037965d233cc63ab10513294140ded230ae",
-        "pub_key": "035b266efc0c4277a09e0ba29e333f7c140b401ddc6f1ef99a9bc706
-        451098c4f50eac251243e0daaa5cf675aeadbb47e1",
-        "inputs": [
-            "0100010001000100"
-        ],
-        "blinds": [
-            "499602d2"
-        ],
-        "dleq_scalar": "ed0263634549a9f7618c32871f81080e036ccebb58f78d7d1d22
-        affece91a06775249f9ce3eeb6b8c61a0d6f66bce610",
-        "expected": {
-            "outputs": [
-                "e78e0ad1e24b4dca808634f5190b42c9a3ca129b83174fdeef6af8496ba
-                0b949e54fb0f64be3ad0cdeb0cf550a16a6e30b6aa1da8b4fb6508676963
-                28c8dbbed"
-            ],
-            "elems": [
-                "02828a27221d4e1f077c38a228f8674150b9bf1cb6527917ebcf3b0686c
-                4570878ae949c341126dd2c49df6b6baf23eedd"
-            ],
-            "proof": [
-                "1d9139062e2d6d0a974a60cea6544dead5411c8e9ac46ed789150c97268c
-                14504ede590ed823a970cc4939d97bd42d90",
-                "b6ddb0239170248b3ffef46f619aef9f33ba483c63adeb6c52a08a223142
-                9d59ec1e140049546c6ceb3a9d5cbb47f26b"
-            ]
-        }
-    },
-    {
-        "key": "2a96a10ef8cf94bcc978736079c0771392e76d7b3d87085ef04752b2e8d4
-        e037965d233cc63ab10513294140ded230ae",
-        "pub_key": "035b266efc0c4277a09e0ba29e333f7c140b401ddc6f1ef99a9bc706
-        451098c4f50eac251243e0daaa5cf675aeadbb47e1",
-        "inputs": [
-            "01000100010001000100010001000100"
-        ],
-        "blinds": [
-            "075bcd15"
-        ],
-        "dleq_scalar": "ed0263634549a9f7618c32871f81080e036ccebb58f78d7d1d22
-        affece91a06775249f9ce3eeb6b8c61a0d6f66bce610",
-        "expected": {
-            "outputs": [
-                "9cecf434b60237a22b05546764f73b61c31c207d961934566a734d6f55c
-                f0b7c133c62486947a3c5c820b0cee83d0d5fa159825f6b24af57cf43b21
-                bc3f78b1e"
-            ],
-            "elems": [
-                "0333726022a973c46964c2fb943adb298eade71609c594d04492c1d1a38
-                23d55b6e874f809cae86aa3726362a47b3eea56"
-            ],
-            "proof": [
-                "d8140109b9468e3e49e8adef611d15fab8eddbbbec32273665b35b35d46e
-                a223d41abc1ca5bd9a5be32decfb9905fe2c",
-                "aa43e41f83c2c59344b07637fb45f4934cf20608a97ad9c1be2d16dd949a
-                d0819d7a39ecc453c0386409aa4a7a5111bc"
-            ]
-        }
-    },
-    {
-        "key": "2a96a10ef8cf94bcc978736079c0771392e76d7b3d87085ef04752b2e8d4
-        e037965d233cc63ab10513294140ded230ae",
-        "pub_key": "035b266efc0c4277a09e0ba29e333f7c140b401ddc6f1ef99a9bc706
-        451098c4f50eac251243e0daaa5cf675aeadbb47e1",
-        "inputs": [
-            "00"
-        ],
-        "blinds": [
-            "bc614e"
-        ],
-        "dleq_scalar": "ed0263634549a9f7618c32871f81080e036ccebb58f78d7d1d22
-        affece91a06775249f9ce3eeb6b8c61a0d6f66bce610",
-        "expected": {
-            "outputs": [
-                "67f4c9221b309e4c1605eaba6e6ace091d8e8a80dda4662e4fd165ec4b1
-                04ba4428409dabaf7573fc58553aa5d19dae06dcd42532b84efbe94ec52c
-                205eeb85f"
-            ],
-            "elems": [
-                "03d8206a434fe2775c46894c05972015a8b8754b82f9e3e34a16371a3ae
-                7e31621d30d3199d87a5471b3769cc90a03b4c9"
-            ],
-            "proof": [
-                "5c888a6d080a4d143684c441c2e5399fa1ac1b7e779d62ddbd347232db5a
-                21a56ba5184f4782cbebdd462fbb7f8928f9",
-                "20c39f9a26a0af45a1448e3f2b1e842311c5a824b59350b4fedf0919c7b4
-                1ad8f4fb009029bfbd08fad3234a0cffc855"
-            ]
-        }
-    }
-]
+### TV_0
+
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+3f7e2a58d67406e16e75a853509ba20ed92a9f8264efb330df6e4f8f358c905e18c3b4fa24720f
+65cac6370cb325d61b086278962625700a35aa64d1d30867e9,
+0435394067ac4e46b3f347b9b1561a9ea0356803baaa5ffc2806430caa0dbddbe0cde1f2c7dd41
+ac05b18214718ab6a42ceea4ca69a43bd4ab17cd88f2ac6298,
+d46b006f9f8c3022ce0822f4c1a71174f006bae4f75ba29c030293a62caab3777f08806c6dbc38
+912d2ba91d3f8612cfeb66a0cee354c4b00b44c080ee74de2c,
+36306f60798674e64feaa7c24bb16e07c1d565e909d5e8149722043f8cc31d70d8cbd261822421
+b4991ed23ab06255c21aa65378c7fb38442267829b0cb1182d,
+c167f5828457b9f4e98dd5e34d8e5c0a28e17328b8b0fb605bf54ff72dddd8b46258b871643121
+71c0ffce019fca931d9e82036b44b0d5f8fa47d0a9dc27a933,
+540fb30045c29d190d740ab1fe5de82a3e88e5fe44348282f84932723df3a4d7dcd10a019a2980
+2c1eea5aa03b88d9b685cf8a641e1d06e3161b21aed735c5c2,
+8e2316b98e6d05b86f6def7702f80d1c780e63952abd8e198ed0d4fd86b71e6cc3e71a49f89f66
+06a531b042ca1960dcebbc4e438bd1c31644e7e74b4a0185c7,
+0cf8b10800abcea0a0e71f7ad1b316bcd5064c65e24fb470f96312f6491fcceda8f5a44dbde4f9
+8d87b1bb351655d5d0fa1c87051992bc93f13099cf222fd70c
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+0252ed6b793ec4accc5c6a0c1349493916ee39bd1f568b11cdb28ca1a0d9c503c3919a0b001dcb
+22b5ed1e46dee0d0438a,
+034a3c3b65172e016a3287c582b2c5ad63a3d568107702093a8f32ac34c7c852acee5907988cd9
+08f97a12a54ba80c17a0,
+03634d9098253d145d0781ed8d75c6e6625b5ebbe5c0e230421e4f1b9e5f95ffbbd788161c4816
+74ebbb87a294007dafca,
+0397e86580377eb897a2ee12348d2066014f1c46b6a6c18a23c1b8084548c4e4c50ecf21be7d12
+5ebce3b7e6ad4666f8dd,
+03b3f44cfa34c1d11016bfa6e5cb97a30ff8c711f170f44ea29df7249d604a9a2b7e76aa49b301
+cf5bfdacabcf7963376a,
+023162aa7194a6a8177687c4e5ff6f59176a57376f1586ecb112e90b5355ac02922e546add7bc6
+b94aa0c0ffcd1d7d4de5,
+034bc64f7b044d6aefbbf550db774ad972601e198a4954b5383696527fd6f618b658975927bb79
+0da448f200976aa7c30f,
+02f38b0e9f0e59ca8994028dc3317e4311097c786e815c91673e1935fb71a23d51c9f00fdadb51
+6accd8ad0860b86af5c5
+***********
+***********
+Proof values (Output of Batch_DLEQ_Generate)
+===========
+72b3cb082d72b367bbf01272ab7e623b5a6ce38012d76086de01c3cf418398f852edfeeaba2726
+94eb0bc28811c68c8f,
+ccbc3e376e000846413e5f7ff2e395993c18a2d0821d0f9cc93273755e374b70ed1ffb8caff6e5
+0295f77b0f3b05e4db
+***********
+~~~
+
+### TV_1
+
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+0cf754250ada1af6d65bc01de944e25862a8b0ce81d79e2bf67f8143356c7126d00d084bb38409
+9d436171500080ef314d43bb9e6575b9139c541713a6d7ef34,
+8ea771275e7485d9d4c4909c622ff7f108475a693ec042975c5bc7d66667a978f4f033cb8541cf
+2101c77af9278c1c43b2d27fea33fa7989f6201991047345b9,
+5a9ca4625ede23631021bbb8540684066dde23b3bb90d4966881fb5358fc666c794e5477220522
+7094780701680c16d95355709f45693e1495f1b596431be845,
+e98d9a33bb588beec370c593344151fc39c61522bd3476aa51d33fb95949a4718ca65555436e68
+4886be8336c9b8f4ba6ac39f498dfbd57a123f8ca4d3bcfa40,
+e5e4aa81af0b84d747e6b03c9643cb77bcc32f5eea6bc1d5cc9a16b89c85269becc9806fd438c1
+90c3a0a51666b8293115610dd7c93745c3cb7b0b7023b8a7a9,
+553d703e4fdea5a3574c785994c17b29a9f840f1340fa0fa2451483e51f2e6881afbfde9ecae27
+8f47566254164b489c57d7b8443c5f186f70a4e653c95ab672,
+046f558106f4c99b7583c24c8138819d4a483d960ce29c9fea57afe7f07b44d558fa1a1afe52b0
+c755f3b6e947cdb69dbce77c06dca6f900ce4b4764cd5d3d7a,
+4d17e33e9f654bf106a08b3d5b6bb3b7e2d3b8bc1e486bcd1d6085f33035d6aedd1587edd8ea27
+e971f58afe83ee52ab41b4df6c7143820552c111ae014f5297
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+020de3169192d97fc8e08a3fa2d988e5cab8abdecff47da139abee98e48644a2434a4dafd596fd
+7844bbc91313911cd5e9,
+039ddab5a57f8f6a6619a59e59b0b3ac4a1a3ec83c84454a861afb318db482757ecc9bac179d69
+269199a280a92e301c68,
+033fd8b73095f063547a04f31eaccaa2682d57d9fe8af4218a20f69fc106a016b4a9bf6cb86a32
+0f0ce1665c95bbd313ad,
+0223c17036521d45b62e2b8e42a2cb055367647a19a3a2791534be767ca772780db591c8c8e962
+ef46c0faa5250f47861e,
+020a42c5c4449a6c3ce6a797a29e53876ed70acb86bb6a42f77290c82737b0f99edf1934a4d0cc
+9b12eb9bd1ab112d6a96,
+0277dcd821cbc5b6072fbfcae64faba4da664ed5fd35e354f0daf6efcc289ad3eb7d57caf98139
+bdb2ebf76046d7756caf,
+03065ac7a3cea5775e11b4b4774ca5721be77c9ef4e724953f1616fd646faf403603db10e191f2
+bc8b93377b4368a7af89,
+032cfc0fd449ddf6e8127eb49ad0e0199abdbb7f9f20e78422bdbd7df48ce4d51bc1524b2e02d7
+d372858eb6dfa3535e05
+***********
+***********
+Proof values (Output of Batch_DLEQ_Generate)
+===========
+fa45e9f9ee55172825d909a3053d98fa37d25ddac1d9f2d31af1580122c3962490554ed4b8a2d1
+7b158fd0d70310afba,
+3af6881c36604f0f3d51d1cda41da28c36275808d83c2c78a3c7f719d667be9a06c80163f1a5af
+ebc7fe2a7066e8071f
+***********
+~~~
+
+### TV_2
+
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+44c26cf211201ee7f459d4d53a5fee2e5d7ec3348ba602b1e3ecf2810c8cf39e677fe287ad1400
+9f7066470a8357051fa4817aa939b76e52fb3b18dc66cf819a,
+a330fc41095acd81a8fc834773eded585721f9eafabaeb7d85e95de293c3fbd95cbe70627de332
+b433f1af8219b1d89ea165161a864a9282350271016610c233,
+d61836c6a27d6e08cf440c629db10734fc16394bf3da5b3e2fcd4262bd615a43ea4941c550e942
+671514c8a1b2d8e5c3dcf773d3a781f11fd1c226f09bf0f1a3,
+915bb7d54159e3a925a0ab31d7ab55aaef672528893a38c081a63591b51ed53f35badbe27b3128
+a54a69c886b89c8c9aeacf85eff98dda81f6fb77385894d0ab,
+21e88f6b54088f2a498dfab512f2c344de54b4a5a5489ba4f0db21a8d1b6a750220e8ea7808001
+bfb483af258796b31baf7052694754f785df7d2598b6eb7009,
+51211f2ff829b81851567646bdbf7e1c0384906bfce69108edcb8869e99e8f5d3c4f53cdae020f
+67def3c4b3af5d717e1120518e91d33fdf0d79a4582969acd3,
+10b292d5e0aef1fe1dbecf39a6dc296129d217df2c2445bea2a40693e2eb883e5c30376747969d
+68a66877e07e77385dff634f0b1d8d903cd80d3f7ed2602b64,
+828026f2355ea6841dabfeaf73c6b4aa3c773a2b0c3a6434f500b90f69256729bc2a24065ac21a
+c0bed0b552056bd4836731d6112a81c2b3466958c8c4dd7fba
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+02300c7e060e1e3ff78eb37f4d6faadefff67c0c15cee9ecd475220d4768e2b858bcbeddbf3cd9
+f8fbba992617a549cc86,
+024b9e6bc2d41d3feb146f3c9097ee4552fdd2cd31e7c85f4536c69809160c883a3f17a85fd1e8
+75f0d4b2c8be4e1ee6e9,
+0385f70b3e08f70434f0b21e804082581fbd6872af51d7e60967b0a28889c20a323867e635930e
+526cb5ba0961b79f6bcd,
+03ca1fac4f9d5817e47dc32dbe0409dbeddf3da1bb0825bba91d80f9733dd3af46fe717de1ec00
+92da23f287834d657e01,
+02844cabc58c06502d405bf7a25fb77aa6238e054817a25ce8d4de061ae8788f1a213d4ea7bae7
+eca32fb9fb08c183ac73,
+03afab35b49c2936b5627051042026f110cdc8f10677c433872da2a8fac33da57698d8a089b59c
+959bbd2981042a4d7c57,
+0325410ebe07f468cfbfc7beaab84154b027cdc9c82d16f44771a667425a7a911b7aad3620d45b
+92bd69508ec1634f6cfa,
+02b50a35d6bec54b09930ea81e74ced355fd87143a65527bc9fa570a8869b3372f4b5952b183df
+0c0f8bb421c6c366bae9
+***********
+***********
+Proof values (Output of Batch_DLEQ_Generate)
+===========
+688fab70c0b4d0d276f977188ff4c9d8d3e18509b772588e8c63a368a6585b4ad5683462515b90
+c430412b36bb019ebe,
+12d9787fe36bf8e1319d1b65a0afc7721b869d124cdb30c4e81049011bdca02ff4e9c0d58f45e5
+de9d5a37571517e50a
+***********
+~~~
+
+### TV_3
+
+~~~
+***********
+Inputs
+===========
+0100010001000100
+***********
+***********
+Blinds
+===========
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+dc4904d034a446b970ca78c91ca2ffa944ab2fb9f22f998302b564b2d18059178bbdbf450e17ae
+d37549c4e11151414cd908cf4740d53a141af027eed3b17bb4
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+0292b735c386df2ad67322cafd8c28f79321c5f39ac2ca6ad1f4eff699ce13f88ea0d935dfb744
+38dfe64a2feebfcaa1e1
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+eaf71b3a1253b092fe430016c5a4352cbbe3844c8efea14ef52f22b0b70c2faa907b4fc08a76de
+7d02a89686cb9df0a6,
+3887e2ae5ed546512eda769d5313df7121584d0955551477b7d7f7351303fd2d5e298dc13f7f65
+271e3c762dc45295c1
+***********
+~~~
+
+### TV_4
+
+~~~
+***********
+Inputs
+===========
+01000100010001000100010001000100
+***********
+***********
+Blinds
+===========
+075bcd15
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+36ea8a2d34e37cb1b33e75266fdf73efd316c7103c66ba8b15fde1565c84d20fc4f78705315c1a
+f14c0b1b548a939839a3d78e802789e9031a01a2ee3b386a38
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+028826054c0e2a27181343dc9f8914e4b1db497f499dfe008591d25e84440be928549fb3dabd6b
+a69d73f08643a1fa95b9
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+45001dc1ba6a729ef68db78706dd4d9bfbfc7877f125a4963ac0bee04e96527c5eddee46fd9125
+9f34f396c0c75ce76a,
+b738431867c9873da1d4c4c68f3f94d5637a22a924766e0a96905f56c3af2383201113f95f94d4
+3a5a20ae5d73b01048
+***********
+~~~
+
+### TV_5
+
+~~~
+***********
+Inputs
+===========
+00
+***********
+***********
+Blinds
+===========
+bc614e
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+77fa8ae9b11d3e81b9206233402d1e170ac1671f4920ca775fb2b3c42e98150c3c80ca739055b5
+bab2448d8ff3234c486f60208d8cbdc826c32667c2f2fab942
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+03807b46cef133ff1354d7d03bc02a6dc6950e6753552e4cf6d73eb221d1d2c7d25bd39b8bbef7
+30913ea02d98580757b9
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+980fc8ebb47afbce5b6e0d180d880c4c55051cded3fde5f5e6a1849cb78076e9606f26a4847f07
+afc69db7fb0c758fd7,
+81b2c1fb3b9f0608e80103e7d21519a83e048c6d26bb328605e09c134d4ec98160f1664229d260
+03571534c94c6aad99
+***********
+~~~
+
+### TV_6
+
+~~~
+***********
+Inputs
+===========
+0100010001000100
+***********
+***********
+Blinds
+===========
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+f112516ddc6f9f938036b695e78946ce6b6983d211e9f4263311fe4d454f64ed5b7aee89d459ac
+aa8bc9392e27c63f2389f83f0b7a09fa36d0e20c89be5a28fd
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+022dd65bf069048a5a44ce8dd27a6f8f3204f756aa444e09a6b880d99fef8e182df60ebac9e757
+c5d93cf13283c959c9f1
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+acd48f19b025e6ee0c84c4af3f2df6f041a17117a41d7f151f2986de03ddf45d5758ad26e826d1
+f33be7431b7ad35954,
+7161010c5f67f27a9294d922a9ec24f17563d650f5ec1523fe2c420676a44eb837c91f87c562bc
+472a7259c47e7a6547
+***********
+~~~
+
+### TV_7
+
+~~~
+***********
+Inputs
+===========
+01000100010001000100010001000100
+***********
+***********
+Blinds
+===========
+075bcd15
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+681414ee7f1707751e6c930ed8dab48d847d7633a976f0f03397b37831d013ed1059b130d2c36f
+1104577e7c0e60345980367df5bf31bcf27e2559bf58926df7
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+028476abd0cd2253c0a109e57aeddb5bbc5cac56d67f94c3062dcc9b487d6bd5d23fb84f62ab09
+3f9ec6cfbd9e75d48160
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+a3ae64e742a2eba25823aaeae02cb89805ff2347ed4ae7fc6ee5ce44cbf4c3eff059104d90b7b7
+b2aab32d48f59da882,
+6a5117e4ec2c2a7744833845c06f545f6deb93e1451906ba049b56a582be6a003d447bdc431d49
+d5766075d8c065a58d
+***********
+~~~
+
+### TV_8
+
+~~~
+***********
+Inputs
+===========
+00
+***********
+***********
+Blinds
+===========
+bc614e
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+1a999cad56ee7667dc9eb8ef0ae9438264e3eebc10b4dc06bf5fe7ab11399fe241f85f0199b4bd
+6936a6410abeed5286ae92ee07020aa3fa13c97185d5687c0f
+***********
+***********
+Evaluated elements (Outputs of VOPRF_Eval)
+===========
+036c2599c2a4ccc79efe7d7b25ef2ca6281c20798aa5216d74488363fe85bb7c9971e88b81cadf
+1e7a209b2264a71c8b3c
+***********
+***********
+Proof values (Output of DLEQ_Generate)
+===========
+ea113132ca3a3e874aa01ae4c39fc34da8ae45a28cde04d0d29056d178d0d0357b743dde652452
+9c99d9d44d11ced40e,
+46037e772abfcde45da3b2f42ed1272d375a667bbb996aeee8bd6c83967b4fe4b8e99d791e0570
+d41f57e79bc0c5931a
+***********
+~~~
 
 ## VOPRF-P521-HKDF-SHA512-SSWU-RO
 
-TODO: P521 test vectors
+### TV_0
 
-## VOPRF-curve448-HKDF-SHA512-ELL2-RO
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+311504d9f3a8552d79ec118d81535a2e1f506a661a7bde24e7829d9af2f2a6bf15e2462e7a8279
+6d80eed656ed39618eb89e88f659efe3d90430adf4cb8d0d5b,
+e46726e653134b45a2cec057006c826becc0345c34e0388433ea27dbaec9c40f849c9d37a50a7c
+7cc95bc231b64420994099681ebdf11c6db29ec30decc44bdc,
+e3693f7dd36a5479a3d7478106aceac21be6f35701490d287fed46eb013db8e8e5eb0d8fd7edcb
+3e0fd8baa0aa15af980e658c99ad8c73e1204765c54880e768,
+e9706bcfb488e163472747d41573060c5cdfe5a5c0df69b4b68d02e02ba1bbc63f39c176cdcac6
+762ed0c0f6081cee333e60fd095d5233ee780f7fd72a78afe7,
+083425c700814171e5b474901f4ed8db31b797ff1285e1400c64bc2fcee33fa20e33528c230bc2
+afbf324285ae809ef60508ccc519c4fd2cd4583b16cbd86745,
+6895c0e37410b7edac495be5031b9674c1853512bcb3fe87e40b7fae125eaa8a144c1eb2f73117
+de87b3e84923580192ce80c1766ad1027133748740d0ec4307,
+df791c2c37aba786162e35820fb8f47d73b42fd282ac8aeb16f3abc16e80df9200cd6d1e43b45a
+a5bb12b5bcaff073eb314b22e6ddc63bff3f91e7cf658c83fb,
+011c0dce19513a182a7659ff513e97b368d6f088d772e86369b59cc57a1a87a422bbcd3fa54924
+576f90532a29bbf5fe7afeb7b7b56a247a88ae902c0f2bb997
+***********
+***********
+Evaluated Elements
+===========
+0201d03b51cd85fdf33296652cd8e68b8cf52483d871e22a9d5e96bbccbabe09522c352ef524ed
+4043335b824ff14de8decc5df100e769ef9fac62513b1df3ed10c249,"
+0300c4d2aabdbe9feaced304ee45e0affb5c4f21876c74f109cd042c7118a8f480194d32439326
+0ee8d357fe98f1d9d19e86a2c0637ff3a60c23692b30785da76f9c77,"
+020181e87b02e3b562e35b2ea3ad3616fcdafbab1cd085cd3e7f6e6110923bbd5e3a3e12f5551c
+aeb1ee39f1d059eb380b6a864f24ff8a2fd6297f7faa6cee2e762fba,"
+0300b8bbaf3fb114aa986cf5fdaa083c6fdab78379ad2b6e48cef0d146af902350acec87b47ba6
+2771d0b80efb32bb48b230916df2cc345f23980937e90bc69ba1193e,"
+0301718b3d92d1abf787cb65508444f0990155aa71c919e937b8304a11ce59478d51b73abbe727
+c892901b6b8015f204d30c50144a45cdb0dd06de56992a8ba08e0ec2,"
+0301c2f2bafea55c8cf0fe95b426934426728fd491a7b8efc8199a67a8b97f0e71e62063185fcd
+51b0ac49191a525160561d62162b65e16670c45e9a8e4a31a26cd051,"
+020027c309c68d22f87cce7c4f6f7f0f68bdafc01ee03a1dedbef80f4f96da544c563487601308
+455f83dbf6f65914767b00084b3a5d216344144aa79d9eb84e0ad985,"
+03013a21128f0b7e164cb372ecfc01d2db0c63a7ab1041976f57bb1cb1998221b38463aec15cd0
+ad8676b0afd01df4c545da8ed65377b6dae6533e1dd59d10190688a1
+***********
+Proof values
+===========
+01bfe207273b1de738efebd868fad83d7dfb09368d437ae7f4066b291defcff362daf3b06a38fc
+b47f59e83053fc60f54dac663dadb5b70e169a6f5b3d1fd670bf89,
+011fa190d6bfd0bdded89bf20f5422cbb32b6eedb0c9ce21325ee97e372a00ba5598a83b9db20d
+a88cc0f23fa227e958ab5abb281d6357631ea1ba499fe1475bebf4
+***********
+~~~
 
-TODO: curve448 test vectors
+### TV_1
+
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+22c883405baf28fe4d59fa9b69e967362a7275183f14820c178530830d6dcaa6e281c87e297419
+f0e376c32b0b5355add9df274076fb6d2a2d842092bcd7d0e8,
+cd2b0dc2de6b5f978cfcab81f8ee415debc09fa2e40af0497fc969118901f01888956ff7112a20
+1769a0522443ffdfbb0d960c215cd8c1bcaea003ef2a82b38e,
+3c203790f5938294610fb068dd9a2b9408a2fd374b1104fbe026f205579a6af7e339f4dc0d01e3
+e1f3d3d3394e23089c1fc4b88d0538f2d94df054e8e8a7cea9,
+e0fb6cc3a0883b81e4d0c3c0b6f065bcf5aec98c1a4ea3df7f5ae6d3b6b056499996784b4262d4
+a24545e2de9cff95abe852dfb0134d2bb8814a6f5f3d684d74,
+976bfda758c6563e66ef74cc437e93f8718b13d92682ecebf5c20ae3aa1a1b8a4d5e2e8e51a40a
+dd43e143079e20dc6e405f3b0d3ac909b4c269987904d53fea,
+f5f8d324e4d1f8d84f9e0f65782d59510e2645a378e4fdf8645351502f17c37b3e2f859f229226
+b441ed21cabf3eae98e913264a568f82974169a662bcdf5c31,
+7c325eae55f94ebc72f50e393c0b396ca4bf364ecaa53ffae468ace08bc23a144ce2bfc26b18d3
+8d1dcc198a9a3969c7277f2550989f135284ddda156c22cb9c,
+9049f64811bfc62066eaa86b6c55c419f590cc85ef8295409610f7f3b4e20e0ef255b58a6a239a
+c770d8b32c69cccd8616cac4f5bdfbb2b2dcacc98bb83996ed
+***********
+***********
+Evaluated Elements
+===========
+020129f4f00938afcf0a82b49c5352db53bfe9d9653a99e7506e95c57d1f6441b166e102ea0837
+33b6904520884f4ab0b5f30fc046d939803697a194ba5ca9e496a6c4,
+020155994a6dc28b99f37933a08feb496e69ce9ed8e2585fac29f8745af33927696d99273faa4a
+8f98e25fb3a0238f069bfce936ca7919393e19721bacc26638af433a,
+030094eb2c29bb437f3f23dbe593ea0d3d1a89423985bc0655834aec17fa9b9f395bca6220854c
+b3476a87bdab716ea7d88c81daa666f480e5268f19bb115089e901c9,
+02018fbfd7cb304c98466cca51009eed2ea566bdfc23bd8195fcb41fed4267682522ab06566f40
+1b53ac4a5082431e103ed1d84ea79610713fa2ff71cb5714f5e8ac56,
+0200d9d75b83194c6e9bfdb61d47ce5c06330ab2ba9ee491c048f9529ce0e46c395adc5589eb41
+d256af9723663c2a8db6912ce172f2ed42475e539fa94da8c15d6a87,
+02008941a06a90e7004754fb43ac273f85bf488bfb29122ef634689ccc5eab690b96f12b355b64
+01ac92bc386403a8f28f69126148214003c90281418551a2d71271fc,
+030107a4863b08821ce1e29b6ea61af72a14d827c4a9c4f60f49db94803b75f56e8a39f0357e8f
+b5acc22c4d8b923fecfb3aa877a62f3a6b860bfa251bb19e3be7c96e,
+0201aff79ccaba2fba1765fdd36842a941bf2f46d3aad38d99703820eb44214aec464f284883a8
+1bd10aaae312fbecc195ddfc006c527db0c59688cac26d33d19abc4d
+***********
+Proof values
+===========
+7f5afdbf8bd3d3d619118a3b010778e04bb20b5aa4dabe20c68ec96a72b1d4525e59376345c1c9
+b1980e4ab2feea41f86e01a90a6db0eee871bdd72a5d4e941336,
+f7219034d5e5064a8de8e1aa29f1a1f1a775587810915ad624a74a1c75fa0ce78e9ebb2fb0cb18
+3b7d9e35e76ba2019e9d592ff8f90ee454e64a230e4ed3571a93
+***********
+~~~
+
+### TV_2
+
+~~~
+***********
+Inputs ([ xi ])
+===========
+00,
+01,
+0100010001000100,
+0001000100010001,
+0101010101010101,
+01000100010001000100010001000100,
+00010001000100010001000100010001,
+01010101010101010101010101010101
+***********
+***********
+Blinds ([ ri ])
+===========
+7b,
+04d2,
+3039,
+01e240,
+12d687,
+bc614e,
+075bcd15,
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+ab54e7e884a6bce888f83582da3ad7452c8ce1fdbee479fd68467034d195a31c3ee4425ec9502b
+e736457c99e7ad0a2f37dc54075a984ea50b6c9fae3ac04715,
+8aa9817109249699ff28a06165d415880af181497ee51c86443481efce512252859a1f17a80a41
+66dc1471db4fb1a90d818b46dc39f621fd53cff4aad45c821e,
+7473c6fa86029c8dad90b6658866ebeb507f4f58012c27fd81db245fefdd81a6ec76ac92c2fde4
+375a349cb5cd84b2218b25232b2d497d14caa10c8643ebaa27,
+daec44675ddc03a3ad45b72952b3ffecf5f29b3f6b4bbe1c759ec27e1e751bcac4286e125e6bb5
+0a81c189c7c6039c6d5021fe09502a5a48fb61e8e6eed438a1,
+61bc70931aa556e053c39f6283381a160c35f4053d52ec12b243197540ba603156b90fc06a5b3d
+3cb7f3dae6a2c1a7e0c4fa380581e270d717fc4ad4220c4d54,
+f0299158c5b23c36954b783192819e2f17dabc772c117246abbdc1abcf61a2f30f23d6f9277dbd
+dba64254b309b516e4ee5ad795ad0463493b71b38a5faf5699,
+6c84becb606403ae77c4d73a4f86f5a8a0b0a78d38e84a298be77d6d93c5a853a3b692c22fb833
+604dd5d52ac32ec8e68430c9a51b530bc8a88175b24a303d4d,
+48f39980174280894454a2dbb48a9fe1982f7fa9b3cf8cafc45a8e762a8224892300d308a1295d
+dca35959993f9a95c3059c1816483ec591dd82cffe5ead1e57
+***********
+***********
+Evaluated Elements
+===========
+020039802019cbe676c04e7bb45d3d8046c20f8b56b43157f8f14fc14bf42acc57d24717ebaedf
+3ae4130009daa6d8f8dc3a54f3e6273f71acc4d2e0a2b12cc96ec51a,
+03017fe9835bd80730bc63a30436c356b1d2d9d9b0c5e15638af82996bb4ce17645ea95aa6d9df
+02b3d3dadfc6ad29283f1bd23dde064aa711ebe96561e9c0044350ef,
+03011d4af3b787f338a595cd5d8d89dc0d3c8cf09f9f6dbb3ff0472b0af5a87d951e501d2b3b56
+43b89b27ea99ffe59ed340b1d60a362b3be9c505fa825111824fa9de,
+0301f10643c873d09dbee17daab65b1812de557547acd0b8f6c3d9d43abbd19b9dad901f31ed64
+36e809f0d4f91d04d1f12c60413c478e2a55a6f829b72007430eb11b,
+03018d39842b5357e3a46dbfd8379dae686aed7fdb4755511e3843318efee9255c606e43fd4bda
+e0278025f0ea941769833c2f71a2b89deb54696699714258d7e995c8,
+0301b05fb7aac399bd48f45f759330c8072646d0afeefcd427c71b4ae7d5124c57b705e655e655
+da3111f561e4d6911e005d2b2ca5439ae995d8ed0c8c376596b044bb,
+02006b8ef1c6794dcae3f0f58fe18e05335267a48366b433e6d47898578151ab52c2fd40e4d338
+c422f56e3b01ddb9b43e5df948e722d675ec1a671d457e8145fcbd3a,
+0300c269713af6a6d73bdcaf35e6bf46d4cc09e94c338649da56988241bf2a06c12adab5d2d801
+313b03c273026dcf8b85ee30e0b0dbf40946d7c94fa2395271bc3e13
+***********
+Proof values
+===========
+015b663c97018b58713915546637cb56cee3fe66df41755116ee3b4eb51f122d27ba6e9c183cbf
+cc9349f7a2a6ad5a39553b2cc3b68cc05143c021c2f05c88f748,
+694c5ec10016faf4a579ccb63578a2000e840f61741fb1be4435598570ed73ab278ededbc6c15e
+51eff7680fcc6849f6073d88786785f15634ac023f5615749e20
+***********
+~~~
+
+### TV_3
+
+~~~
+***********
+Inputs
+===========
+0100010001000100
+***********
+***********
+Blinds
+===========
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+6de5cf4bdd071467f40ac4705f927e33935df9fa4dfcded632c8b0c1f4551b541a2c7c31091ca7
+e9c95ab69c3a99df7344197c431949d567dd6e0a092f4d8bca
+***********
+***********
+Evaluated Elements
+===========
+020119c888270bdda028963448ac29d754e565a6e9afe3ae1a1d56969cad2ce51c753fb5bf7e0f
+0c9a74af5c347e0f1134028751ee9101e20b74e6ad2e52b3fd5070e8
+***********
+Proof values
+===========
+"afa2e74f82f7305dd312c1f75a5a41e57f6c5f0c48234867b7bfccc5957c68e17242aef97cc3c
+84063fef2b72ecf477a9de1ed69a04197e02537425970566db30e",
+"01f88beb10e6724a926bd3cf6715c30ab0f27f092d88a8bc2f0d24163bbb4dec256df44882771
+b36b2168d8df327812f377f3e5f5d942907e48516fb1d267befca0d",
+**********
+~~~
+
+### TV_4
+
+~~~
+***********
+Inputs
+===========
+01000100010001000100010001000100
+***********
+***********
+Blinds
+===========
+075bcd15
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+438ff35831f87c05f2702fd26130a872f6feaa0f161daa0e5402ff32ad12cb930898cfbcf72542
+65a4f318b38e3fb54044fa39aa6dba7b9b7dbf8bb1d3718513
+***********
+***********
+Evaluated Elements
+===========
+0201c4f3d1fdcdfa33e0dbdf186b133daae446aecd845ee47a3a51d9c14a5c124e04bda8ad4f1f
+abc57109bfd17399fa5c359db1cbc35f863395ca6983046dc5d32cb8
+***********
+Proof values
+===========
+019bc2c98e379fd9b203194363074be0e621e0b0c1119944a48e26a24f6054632404b48c58a8b9
+ccd4e3956b22f59d21e282b21600de9e2581a4046c05aee233c826,
+01e15d541841aaf7244228be444e91e7db4f440e9ef0bc5da0fcb24681989794710a3bee04b6e0
+b661ae64919beb68a2859f387e33e0f6d65599ecce5095e3717439
+***********
+~~~
+
+### TV_5
+
+~~~
+***********
+Inputs
+===========
+00
+***********
+***********
+Blinds
+===========
+bc614e
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+aaadc31e4621df9a79e63cfcc284c989f0cd115806b3b992c7a1b8e17ce6e90d1767bdb39e355f
+198d9bc08dfdc802b61d3ef6d5ff6f12f66cda33ddaf52038b
+***********
+***********
+Evaluated Elements
+===========
+03012690f64d8938455183639874c764d8bf3755ea097694610c65531e2b15fb1dd4ca41ac264b
+08744fc9756c773bd8684f94f717ea3f387199aa6add402979e13f9d
+***********
+Proof values
+===========
+013d1ef2ec9b8a9d57f25a2c0eceaeabc413cdda6209e8daa5d57d3f3efadf25b49a82bdc2227a
+e8783b91a6a802ba764c05eb41cc0bf2636240ce38daa6df4ff4,
+82158f49fdf7de079edd93e0b1dc1c6f854ec721a229f3120eaa6a9f77a74cde42b72e5acfecb6
+4ea5798ec02e7091325c156aaadc5914dc9ce133920a718b02b9
+***********
+~~~
+
+### TV_6
+
+~~~
+***********
+Inputs
+===========
+0100010001000100
+***********
+***********
+Blinds
+===========
+499602d2
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+2d4ed44164545f338ef9c8559a8b22c851fca99a29c247a02a4c3cf365d9168d9e8837a459862c
+bbc9d0840fe6ebeac06a19425551324c2852cd3e34f215b31a
+***********
+***********
+Evaluated Elements
+===========
+020034a45b808ae28d020f9337ca39ac7dc02db95a8d7f17296c9bb07905e1ec41e43240e84a64
+fdae0e7d7b018dd945fa88443bfaf6f6325c645b16929339eb4ee142
+***********
+Proof values
+===========
+0199142b4549d6cc38dbe891aaf99918ff70397a53d8fb6fe5625f6c22ebc03f852fb63125927a
+ce5f8c84e0c458ee220d337db428894499b4375577a2d861e33019,
+011e3741e0af9ea507aae87b81dc82e1fc132117bbf9b6f3874af1ef1edc8b861bb39975951519
+39b41d6f44d01afead55d72b921ead725b2300dc4bbdd3e35132da
+***********
+~~~
+
+### TV_7
+
+~~~
+***********
+Inputs
+===========
+01000100010001000100010001000100
+***********
+***********
+Blinds
+===========
+075bcd15
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+347304a781ffd6a71e68220b2207075a1214b265e9b05a9e7298637f4160668f9b35849ddbbc33
+c479ab9b29bff721ca783f2df7ec4e9a9fddef60de256aa4ef
+***********
+***********
+Evaluated Elements
+===========
+02018f172d191622eaf6df4e67af22216ab3a7ba2725364c00c0c5bf78d79befb957017cb335be
+cf55c08830d88de0664f6e1e4720b8b00fe435ea8b8c2c229dfbd2a0
+***********
+Proof values
+===========
+8b5ac1ce7166390864432474f7847c7745d008064a7fc1ea704593ce5c5fdc323da77c3832c417
+0e518234521889022ab6385555aa1728b7d35e62926c466e6833,
+01557b99c93d672ed3d04c5f16ce2e174ca7ae010015ee3444562dfe1d12ba78cc2c9360accebc
+d667b4b5d49cddf316322efc24b0c287ecd983de24a5b0bc24adf1,
+**********
+~~~
+
+### TV_8
+
+~~~
+***********
+Inputs
+===========
+00
+***********
+***********
+Blinds
+===========
+bc614e
+***********
+***********
+Outputs (Outputs of VOPRF_Finalize)
+===========
+2da05e2a2d9a8154f259ab195873a7e48016dcf81d62d7af587bed480602597f841b1b5e87d42a
+39b01cc6dcfca9d5f06e7a822b341381caf1dc1c0e5478cf14
+***********
+***********
+Evaluated Elements
+===========
+0301b33b1616997515b072438e3c3bee7662bb949bad7c27fc151c0dfc527d0e5eed041f95e626
+ca9c6cdb71f7d8ee44be891d480ece6fbafdbce8a8e1112c37a3889c
+***********
+Proof values
+===========
+01ec45955ccbba7e752c31fbc23438a4fe4f51c4cf92fb7cb5774b27ce808c0809bf6fbc029f9a
+92afc9b7a168350e165b8b28bdc28e913a2bfc159c44f0a6867421,
+016b2052b232342911ffd541417aca4ab6eae2c82081d565efa07057d96ef400c686a3366673b7
+ad22bcc0752fd085eb354cc893e91c3427ccc7dcf6f1e1112bc790
+***********
+~~~
