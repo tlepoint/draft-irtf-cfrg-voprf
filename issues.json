@@ -1,6 +1,200 @@
 [
 
   {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/63",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/63/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/63/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/63/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/63",
+    "id": 560345594,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzcxMzUxNjEx",
+    "number": 63,
+    "title": "Specify modifications in batching paradigm",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-02-05T12:38:59Z",
+    "updated_at": "2020-02-05T13:39:15Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/63",
+      "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/63",
+      "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/63.diff",
+      "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/63.patch"
+    },
+    "body": "Fixes #62.\r\n\r\n- Previously batched versions of VOPRF_Eval, VOPRF_Blind and VOPRF_Unblind were not specified.\r\n- This change provides descriptions accepting with a modified API to allow for batched inputs/outputs.\r\n- Also change the way that we describe inputs and outputs to be more generic.\r\n- Describe conventions around the way that we talk about groups.\r\n- Provide some more context for notation that is used."
+  },
+  {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/62",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/62/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/62/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/62/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/issues/62",
+    "id": 545038433,
+    "node_id": "MDU6SXNzdWU1NDUwMzg0MzM=",
+    "number": 62,
+    "title": "Batched algorithms for blinding/unblinding",
+    "user": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": {
+      "login": "alxdavids",
+      "id": 7470539,
+      "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/alxdavids",
+      "html_url": "https://github.com/alxdavids",
+      "followers_url": "https://api.github.com/users/alxdavids/followers",
+      "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+      "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+      "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+      "repos_url": "https://api.github.com/users/alxdavids/repos",
+      "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "assignees": [
+      {
+        "login": "alxdavids",
+        "id": 7470539,
+        "node_id": "MDQ6VXNlcjc0NzA1Mzk=",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/7470539?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/alxdavids",
+        "html_url": "https://github.com/alxdavids",
+        "followers_url": "https://api.github.com/users/alxdavids/followers",
+        "following_url": "https://api.github.com/users/alxdavids/following{/other_user}",
+        "gists_url": "https://api.github.com/users/alxdavids/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/alxdavids/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/alxdavids/subscriptions",
+        "organizations_url": "https://api.github.com/users/alxdavids/orgs",
+        "repos_url": "https://api.github.com/users/alxdavids/repos",
+        "events_url": "https://api.github.com/users/alxdavids/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/alxdavids/received_events",
+        "type": "User",
+        "site_admin": false
+      }
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-03T15:27:57Z",
+    "updated_at": "2020-01-03T15:27:57Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "body": "We need to concretely lay out the modified versions of VOPRF_Blind and VOPRF_Unblind in the batched execution mode. We should also provide better instructions for modifying the protocol in Section 5.3.3."
+  },
+  {
+    "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/61",
+    "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
+    "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/61/labels{/name}",
+    "comments_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/61/comments",
+    "events_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/61/events",
+    "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/61",
+    "id": 517383114,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzM2NDYyNTEw",
+    "number": 61,
+    "title": "Alxdavids/sec considerations",
+    "user": {
+      "login": "chris-wood",
+      "id": 2172048,
+      "node_id": "MDQ6VXNlcjIxNzIwNDg=",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2172048?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/chris-wood",
+      "html_url": "https://github.com/chris-wood",
+      "followers_url": "https://api.github.com/users/chris-wood/followers",
+      "following_url": "https://api.github.com/users/chris-wood/following{/other_user}",
+      "gists_url": "https://api.github.com/users/chris-wood/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/chris-wood/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/chris-wood/subscriptions",
+      "organizations_url": "https://api.github.com/users/chris-wood/orgs",
+      "repos_url": "https://api.github.com/users/chris-wood/repos",
+      "events_url": "https://api.github.com/users/chris-wood/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/chris-wood/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2019-11-04T20:28:21Z",
+    "updated_at": "2019-11-04T20:30:33Z",
+    "closed_at": "2019-11-04T20:30:33Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/61",
+      "html_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/61",
+      "diff_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/61.diff",
+      "patch_url": "https://github.com/cfrg/draft-irtf-cfrg-voprf/pull/61.patch"
+    },
+    "body": ""
+  },
+  {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
     "labels_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/60/labels{/name}",
@@ -142,7 +336,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -187,10 +381,10 @@
       }
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-10-08T16:17:00Z",
-    "updated_at": "2019-10-08T16:17:00Z",
-    "closed_at": null,
+    "updated_at": "2019-11-14T17:34:36Z",
+    "closed_at": "2019-11-14T17:34:35Z",
     "author_association": "COLLABORATOR",
     "body": "We should modify the OPRF_Finalize procedure to run:\r\n\r\n```\r\ndk = H_2(lbl, x .. N)\r\ny = H_2(dk, aux)\r\n```\r\n\r\nwhere aux is arbitrary auxiliary data that is also stored by the client. This is closer to current implementations of the Privacy Pass protocol and likely to be useful in applications where there is a later redemption step that needs to be bound to specific request data."
   },
@@ -228,7 +422,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -237,8 +431,8 @@
     "milestone": null,
     "comments": 2,
     "created_at": "2019-10-07T14:12:04Z",
-    "updated_at": "2019-11-04T20:24:06Z",
-    "closed_at": null,
+    "updated_at": "2019-11-04T20:27:00Z",
+    "closed_at": "2019-11-04T20:27:00Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
       "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/pulls/57",
@@ -282,7 +476,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -329,8 +523,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2019-10-04T15:31:50Z",
-    "updated_at": "2019-10-04T15:31:50Z",
-    "closed_at": null,
+    "updated_at": "2019-11-14T17:33:26Z",
+    "closed_at": "2019-11-14T17:33:26Z",
     "author_association": "COLLABORATOR",
     "body": "We need to specify the random oracle instantiation in Section 6.3 more concretely."
   },
@@ -422,7 +616,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -467,10 +661,10 @@
       }
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-09-30T13:12:53Z",
-    "updated_at": "2019-09-30T13:12:53Z",
-    "closed_at": null,
+    "updated_at": "2019-11-14T17:34:06Z",
+    "closed_at": "2019-11-14T17:34:06Z",
     "author_association": "COLLABORATOR",
     "body": "We should add a section that discusses the OPRF API that should be used when using OPRFs as part of another protocol. We should present both descriptions and suggestions around how the functionality should be integrated.\r\n"
   },
@@ -594,7 +788,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -641,8 +835,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2019-09-30T13:01:29Z",
-    "updated_at": "2019-09-30T13:01:29Z",
-    "closed_at": null,
+    "updated_at": "2019-11-14T17:34:46Z",
+    "closed_at": "2019-11-14T17:34:46Z",
     "author_association": "COLLABORATOR",
     "body": "Since OPRFs can be used to instantiate q-Strong-DH oracles, they are susceptible to attacks that reduce security by log_2(m), where m is the number of queries.\r\n\r\nWe should establish new ciphersuites that use underlying curves with > 128 bits of security (e.g. using Curve448) to protect against these attacks. Proposed ciphersuites:\r\n\r\nP384:\r\n```\r\n## ECVOPRF-P384-HKDF-SHA512:\r\n\r\n- GG: secp384r1 {{SEC2}}\r\n- H_1: P384-SHA512-ICART-RO {{I-D.irtf-cfrg-hash-to-curve}}\r\n  - label: voprf_h2c_p384\r\n- H_2: SHA512\r\n- H_3: SHA512\r\n- H_4: SHA512\r\n- H_5: HKDF-Expand-SHA512 {{RFC5869}}\r\n```\r\n\r\nCurve448:\r\n```\r\n## ECVOPRF-Curve448-HKDF-SHA512:\r\n\r\n- GG: curve448 {{RFC7748}}\r\n- H_1: curve448-SHA512-ICART-RO {{I-D.irtf-cfrg-hash-to-curve}}\r\n  - label: voprf_h2c_c448\r\n- H_2: SHA512\r\n- H_3: SHA512\r\n- H_4: SHA512\r\n- H_5: HKDF-Expand-SHA512 {{RFC5869}}\r\n```\r\n\r\nP521:\r\n```\r\n## ECVOPRF-P521-HKDF-SHA512:\r\n\r\n- GG: secp521r {{SEC2}}\r\n- H_1: P521-SHA512-SSWU-RO {{I-D.irtf-cfrg-hash-to-curve}}\r\n  - label: voprf_h2c_p521\r\n- H_2: SHA512\r\n- H_3: SHA512\r\n- H_4: SHA512\r\n- H_5: HKDF-Expand-SHA512 {{RFC5869}}\r\n```"
   },
@@ -725,9 +919,9 @@
       }
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2019-09-30T12:48:12Z",
-    "updated_at": "2019-09-30T12:48:12Z",
+    "updated_at": "2020-01-28T16:20:19Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "body": "- OPRF evaluations for new ciphersuites\r\n- DLEQ evaluations\r\n- Batched DLEQ evaluations"
@@ -766,7 +960,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -813,8 +1007,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2019-09-27T15:27:25Z",
-    "updated_at": "2019-09-30T13:01:43Z",
-    "closed_at": null,
+    "updated_at": "2019-11-14T17:34:54Z",
+    "closed_at": "2019-11-14T17:34:54Z",
     "author_association": "COLLABORATOR",
     "body": "- We need to discuss the effectiveness of using OPRFs as an oracle for producing q-Strong-DH samples\r\n- Go into more depth on key rotation and how it can be used to prevent token hoarding\r\n- Discuss the impact on client privacy from having small or segregated user bases"
   },
@@ -1809,7 +2003,10 @@
     "closed_at": "2019-07-05T13:46:59Z",
     "author_association": "COLLABORATOR",
     "body": "It may be more accurate to replace \"signing\" terminology with \"evaluation\". Signing is asymmetric terminology and so this may be confusing, since (V)OPRFs are essentially symmetric primitives.\r\n\r\nFrom Hugo:\r\n\r\n```\r\n   o  OPRF_Sign(k,M,h): Sign input M using secret key k to produce Z,\r\n      the input h is optional and equal to the cofactor of an elliptic\r\n      curve.  If h is not provided then it defaults to 1.\r\n\r\n> Using \"Sign\" may be confusing, especially in the non-verifiable OPRFs.\r\n> Maybe OPRF_Eval?  Signer/Verifier would be Server/Client (one can still \r\n> use signer/verifier in the context of V-OPRF).\r\n```"
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/33",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
@@ -2067,10 +2264,7 @@
     "closed_at": "2019-07-08T13:06:08Z",
     "author_association": "COLLABORATOR",
     "body": "From Hugo:\r\n\r\n```\r\n> This schemes does not work with RSA. You cannot compute the inverse of r\r\n> without knowing the factorization of N. Chaum's scheme uses multiplicative\r\n> blinding (see my comments on this issue).  \r\n```\r\n\r\nMaybe we should just remove this section, it's probably not that helpful anyway?"
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/30",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
@@ -2325,7 +2519,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": {
       "login": "alxdavids",
@@ -2372,8 +2566,8 @@
     "milestone": null,
     "comments": 1,
     "created_at": "2019-03-22T21:54:20Z",
-    "updated_at": "2019-07-24T13:45:01Z",
-    "closed_at": null,
+    "updated_at": "2020-01-30T17:51:43Z",
+    "closed_at": "2020-01-30T17:51:43Z",
     "author_association": "NONE",
     "body": "At section 5.1.  DLEQ_Generate\r\n~~~\r\n4. s := (r - ck) (mod p)  \r\n~~~\r\nIt must be reduced modulo the order of the curve.\r\n"
   },
@@ -3710,7 +3904,10 @@
     "closed_at": "2018-06-05T21:28:39Z",
     "author_association": "COLLABORATOR",
     "body": ""
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf/issues/3",
     "repository_url": "https://api.github.com/repos/cfrg/draft-irtf-cfrg-voprf",
