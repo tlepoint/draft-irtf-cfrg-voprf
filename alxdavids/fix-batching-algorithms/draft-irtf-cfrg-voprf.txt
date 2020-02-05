@@ -631,7 +631,7 @@ Internet-Draft                    OPRFs                    February 2020
         Verifier()                   Prover(l)
      ----------------------------------------------------------
                                      (k,GG) = OPRF_Setup(l)
-                               p
+                              GG
                            <-------
 
    OPRF evaluation phase:
@@ -664,7 +664,7 @@ Internet-Draft                    OPRFs                    February 2020
         Verifier()                   Prover(l)
      ----------------------------------------------------------
                                      (k,GG,Y) = VOPRF_Setup(l)
-                               Y
+                            (GG,Y)
                            <-------
 
 
@@ -708,7 +708,7 @@ Internet-Draft                    OPRFs                    February 2020
 
 4.4.  Instantiations of GG
 
-   As we remarked above, GG is a subgroup with associated prime-order p.
+   As we remarked above, GG is a group with associated prime-order p.
    While we choose to write operations in the setting where GG comes
    equipped with an additive operation, we could also define the
    operations in the multiplicative setting.  In the multiplicative
