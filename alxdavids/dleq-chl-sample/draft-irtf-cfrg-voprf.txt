@@ -2434,12 +2434,13 @@ A.1.  hash_to_field
 
    Steps:
 
-     1. info := I2osp(ctr,4) .. label;
-     2. d <- H_5(seed,info);
-     3. ctr = ctr+1;
-     4. if d > p:
-       1. continue;
-     5. Output (d, ctr);
+     1. d = null
+     2. if d > p or d == null:
+       1. info := I2osp(ctr,4) .. label;
+       2. d <- H_5(seed,info);
+       3. ctr = ctr+1;
+       4. continue;
+     3. Output (d, ctr);
 
    Internal functions:
 
@@ -2456,8 +2457,7 @@ Appendix B.  Test Vectors
 
 Authors' Addresses
 
-   Alex Davidson
-   Cloudflare
+
 
 
 
@@ -2466,6 +2466,8 @@ Davidson, et al.         Expires 13 August 2020                [Page 44]
 Internet-Draft                    OPRFs                    February 2020
 
 
+   Alex Davidson
+   Cloudflare
    County Hall
    London, SE1 7GP
    United Kingdom
@@ -2489,8 +2491,6 @@ Internet-Draft                    OPRFs                    February 2020
    United States of America
 
    Email: cawood@apple.com
-
-
 
 
 

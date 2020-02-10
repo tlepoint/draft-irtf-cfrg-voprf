@@ -3451,12 +3451,13 @@ Outputs:
 
 Steps:
 
-  1. info := I2osp(ctr,4) .. label;
-  2. d &lt;- H_5(seed,info);
-  3. ctr = ctr+1;
-  4. if d &gt; p:
-    1. continue;
-  5. Output (d, ctr);
+  1. d = null
+  2. if d &gt; p or d == null:
+    1. info := I2osp(ctr,4) .. label;
+    2. d &lt;- H_5(seed,info);
+    3. ctr = ctr+1;
+    4. continue;
+  3. Output (d, ctr);
 </pre><a href="#section-a.1-2" class="pilcrow">¶</a>
 </div>
 <p id="section-a.1-3">Internal functions:<a href="#section-a.1-3" class="pilcrow">¶</a></p>
